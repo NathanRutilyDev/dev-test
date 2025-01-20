@@ -1,4 +1,6 @@
 .featured-child-collections {
+  overflow: hidden;
+  
   .wrapper {
     padding: 48px 64px;
   }
@@ -8,9 +10,13 @@
     gap: 24px;
     flex-direction: column;
     padding: 40px 0px 32px;
-    overflow: hidden;
 
-    @include respond-to(md) {
+    @include respond-to(md, l){
+      flex-direction: column;
+      padding: 40px 64px 32px;
+    }
+
+    @include respond-to(l) {
       padding: 48px 64px;
       gap: 40px;
       flex-wrap: nowrap;
@@ -18,13 +24,22 @@
     }
   }
 
+  .homepage-collections-background > *:first-child {
+    @include respond-to(md, l){
+      flex: 1 0 50%;
+      max-width: 50%;
+    }
+
+    @include respond-to(l) {
+      flex: 1 0 300px;
+    }
+
+  }
+
   .section-title--wrapper {
     text-align: left;
     margin-bottom: 0;
-
-    @include respond-to(md) {
-      flex: 1 0 300px;
-    }
+    align-items: flex-start;
   }
 
   .section-description {
@@ -77,12 +92,11 @@
   .collection-parent-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
 
     @include respond-to(md) {
       flex-direction: row;
-      flex-wrap: nowrap;
-      max-width: calc(100% - 340px);
+      max-width: 100%;
 
       > *:first-child {
         position: relative;
@@ -99,6 +113,12 @@
           background: linear-gradient(270deg, #fff6eb 6.4%, rgba(255, 246, 235, 0) 100%);
         }
       }
+    }
+
+    @include respond-to(l) {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      max-width: calc(100% - 340px);
     }
   }
 
@@ -117,8 +137,15 @@
   .swiper {
     overflow: visible;
     padding-right: 24px;
+    max-width: 100%;
 
-    @include respond-to(md) {
+    @include respond-to(md, l) {
+      padding-right: 60px;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    @include respond-to(l) {
       padding-right: 60px;
     }
 
@@ -156,10 +183,14 @@
     flex-direction: column;
     justify-content: space-between;
 
-    @include respond-to(md) {
+    @include respond-to(md){
+      height: auto;
       min-width: 240px;
-      height: 100%;
       padding: 24px;
+    }
+
+    @include respond-to(l) {
+      height: 100%;
     }
 
     .collection-parent-pack-content {
