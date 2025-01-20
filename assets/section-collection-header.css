@@ -4,7 +4,12 @@
   grid-template-rows: auto;
   position: relative;
   min-height: var(--min-height-mobile);
-  overflow: hidden;
+  background: var(--background-color);
+}
+@media (min-width: 768px) {
+  .collection-header .page-width {
+    padding: 0;
+  }
 }
 .collection-header .responsive-image-wrapper {
   position: absolute;
@@ -61,7 +66,7 @@
   background-repeat: no-repeat;
 }
 .collection-header__text-content {
-  z-index: 2;
+  z-index: 1;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, var(--background-color)), color-stop(75%, transparent));
   background: linear-gradient(to bottom, var(--background-color) 50%, transparent 75%);
 }

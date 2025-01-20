@@ -1,8 +1,9 @@
 .featured-child-collections {
   overflow: hidden;
+  border-bottom: 1px solid rgb(var(--color-border));
 }
 .featured-child-collections .wrapper {
-  padding: 48px 64px;
+  padding: 48px 0px;
 }
 .featured-child-collections .homepage-collections-background {
   display: -webkit-box;
@@ -21,12 +22,12 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    padding: 40px 64px 32px;
+    padding: 40px 0px 32px;
   }
 }
 @media (min-width: 1080px) {
   .featured-child-collections .homepage-collections-background {
-    padding: 48px 64px;
+    padding: 48px 0;
     gap: 40px;
     -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;

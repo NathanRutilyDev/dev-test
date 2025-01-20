@@ -6,14 +6,16 @@
 
 <div
   class="collection-header collection-header--{{ section.id }} color-scheme--{{ section.settings.colors }}"
-  style="--caption-width-desktop: {{ section.settings.caption_width_desktop }}%;"
+  style="
+    --caption-width-desktop: {{ section.settings.caption_width_desktop }}%;
+    --background-color: {{ section.settings.caption_bg_color }}
+  "
 >
   {% comment %} Text content {% endcomment %}
 
   {% if section.settings.show_breadcrumbs or section.settings.show_title or section.settings.show_description %}
     <div
       class="collection-header__text-content page-width"
-      style="--background-color: {{ section.settings.caption_bg_color }}"
     >
       <div
         class="collection-header__text-content--inner collection-header__text--position-desktop-{{ section.settings.content_position }} collection-header__text--position-mobile-{{ section.settings.content_position_mobile }}{% if section.settings.section_width == 'full' %} width--content{% endif %}"

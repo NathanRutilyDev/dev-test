@@ -81,6 +81,12 @@
             "id": "shadow",
             "label": "t:settings_schema.colors.settings.shadow.label",
             "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "border",
+            "label": "Bordure",
+            "default": "#DDD6D0"
           }
         ],
         "role": {

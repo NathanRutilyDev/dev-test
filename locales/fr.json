@@ -205,7 +205,7 @@
       "clear_all": "Tout supprimer",
       "from": "De",
       "filter_and_sort": "Filtrer et trier",
-      "filter_by_label": "Filtre :",
+      "filter_by_label": "Filtrer par",
       "filter_button": "Filtrer",
       "filters_selected": {
         "one": "{{ count }} sélectionné",

@@ -7,6 +7,9 @@
   "[css]": {
     "editor.formatOnSave": true
   },
+  "[scss]": {
+    "editor.formatOnSave": true
+  },
   "[liquid]": {
     "editor.defaultFormatter": "Shopify.theme-check-vscode",
     "editor.formatOnSave": true

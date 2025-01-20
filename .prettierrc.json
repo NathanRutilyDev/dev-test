@@ -7,6 +7,12 @@
       "options": {
         "singleQuote": false
       }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "singleQuote": false
+      }
     }
   ]
 }

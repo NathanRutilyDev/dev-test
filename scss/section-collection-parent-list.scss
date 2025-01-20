@@ -1,8 +1,9 @@
 .featured-child-collections {
   overflow: hidden;
-  
+  border-bottom: 1px solid rgb(var(--color-border));
+
   .wrapper {
-    padding: 48px 64px;
+    padding: 48px 0px;
   }
 
   .homepage-collections-background {
@@ -11,13 +12,13 @@
     flex-direction: column;
     padding: 40px 0px 32px;
 
-    @include respond-to(md, l){
+    @include respond-to(md, l) {
       flex-direction: column;
-      padding: 40px 64px 32px;
+      padding: 40px 0px 32px;
     }
 
     @include respond-to(l) {
-      padding: 48px 64px;
+      padding: 48px 0;
       gap: 40px;
       flex-wrap: nowrap;
       flex-direction: row;
@@ -25,7 +26,7 @@
   }
 
   .homepage-collections-background > *:first-child {
-    @include respond-to(md, l){
+    @include respond-to(md, l) {
       flex: 1 0 50%;
       max-width: 50%;
     }
@@ -33,7 +34,6 @@
     @include respond-to(l) {
       flex: 1 0 300px;
     }
-
   }
 
   .section-title--wrapper {
@@ -57,7 +57,7 @@
 
     @include respond-to(md) {
       flex: 0 0 240px !important;
-      width: 240px
+      width: 240px;
     }
 
     .grid-item__content {
@@ -103,7 +103,7 @@
         overflow: hidden;
 
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           z-index: 8;
           right: 0px;
@@ -130,7 +130,6 @@
 
     @include respond-to(md) {
       height: 194px;
-  
     }
   }
 
@@ -159,7 +158,7 @@
         display: grid;
       }
 
-      &[aria-disabled='true'] {
+      &[aria-disabled="true"] {
         opacity: 0 !important;
         visibility: hidden;
         pointer-events: none;
@@ -183,7 +182,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    @include respond-to(md){
+    @include respond-to(md) {
       height: auto;
       min-width: 240px;
       padding: 24px;
@@ -212,7 +211,7 @@
     }
 
     .collection-parent-pack__title {
-      margin-block: 0
+      margin-block: 0;
     }
 
     .collection-parent-pack__title,
@@ -242,7 +241,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        color: var(--color-title); 
+        color: var(--color-title);
         text-align: center;
         font-size: 24px;
         font-weight: 600;
