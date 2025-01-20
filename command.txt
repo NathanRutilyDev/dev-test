@@ -1,0 +1,2 @@
+shopify theme pull -s oleassence
+shopify theme dev -s oleassence

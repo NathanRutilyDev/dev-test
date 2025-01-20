@@ -112,6 +112,30 @@
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
+        /* Heading Sizes */
+        {% assign min_heading_size = 16 %}
+
+        --h-hero-size: 56px;
+        --h-hero-line-height: 64px;
+
+        --h1-size: 40px;
+        --h1-line-height: 48px;
+
+        --h2-size: 32px;
+        --h2-line-height: 40px;
+
+        --h3-size: 24px;
+        --h3-line-height: 32px;
+
+        --h4-size: 20px;
+        --h4-line-height: 24px;
+
+        --h5-size: 16px;
+        --h5-line-height: 24px;
+
+        --h6-size: 14px;
+        --h6-line-height: 20px;
+
         --media-padding: {{ settings.media_padding }}px;
         --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
         --media-border-width: {{ settings.media_border_thickness }}px;
@@ -257,6 +281,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
@@ -291,14 +316,23 @@
       >
     {%- endif -%}
 
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    >
+
     <script>
       if (Shopify.designMode) {
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+
+    {% if settings.enable_animation %}
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    {% endif %}
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient aos-initialized{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -372,5 +406,16 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <script src="{{ 'swiper.js' | asset_url }}" defer="defer"></script>
+
+    <script
+      src="{{ 'animate.js' | asset_url }}"
+      defer="defer"
+    ></script>
+
+    {% if settings.enable_animation %}
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer="defer"></script>
+    {% endif %}
   </body>
 </html>

@@ -10,6 +10,22 @@
       "admin_link_html": "La boutique vous appartient-elle ? <a href=\"/admin\" class=\"link underlined-link\">Se connecter ici</a>",
       "powered_by_shopify_html": "Cette boutique sera propulsée par {{ shopify }}"
     },
+    "onboarding": {
+      "modal_title": "Presque là...",
+      "no_products_html": "Cet espace réservé apparaîtra jusqu'à ce que vous ajoutiez un produit à cette collection.",
+      "add_product": "Ajouter un produit",
+      "product_title": "Titre du produit",
+      "product_vendor": "Fournisseur",
+      "no_collections_html": "Vous n'avez aucune collection à afficher ici. <a href=\"\/admin\/custom_collections\">Ajoutez quelques collections<\/a> pour compléter la page d'accueil par défaut.",
+      "add_collection": "Ajouter une collection",
+      "collection_title": "Titre de la collection",
+      "no_content": "Cette section ne contient actuellement aucun contenu. Ajoutez du contenu à cette section en utilisant la barre latérale."
+    },
+    "breadcrumbs": {
+      "home": "Accueil",
+      "home_link_title": "Retour à la page d'accueil",
+      "shop": "Boutique"
+    },
     "social": {
       "alt_text": {
         "share_on_facebook": "Partager sur Facebook",

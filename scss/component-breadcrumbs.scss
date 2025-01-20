@@ -1,0 +1,36 @@
+#breadcrumbs {
+  &.wrapper-padded {
+    margin: 0;
+    padding: 15px 60px;
+  }
+
+  .breadcrumb {
+    font-size: 0;
+
+    > span {
+      font-size: 12px;
+    }
+
+    .breadcrumb-item {
+      display: inline-block;
+    }
+
+    .breadcrumb-divider:not(:last-child),
+    .breadcrumb-item:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    a {
+      color: var(--text-color);
+
+      span {
+        display: inline-block;
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .product-section & {
+    margin-bottom: 8px;
+  }
+}
