@@ -199,6 +199,12 @@
     "modal": {
       "label": "Galerie de supports multimédias"
     },
+    "details": {
+      "summary_heading": "Détails",
+      "zone": "Zone",
+      "need": "Besoin",
+      "type": "Type",
+    },
     "facets": {
       "apply": "Appliquer",
       "clear": "Effacer",

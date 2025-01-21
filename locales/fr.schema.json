@@ -6,6 +6,9 @@
         "background": {
           "label": "Arrière‑plan"
         },
+        "background_contrast": {
+          "label": "Arrière‑plan de contraste"
+        },
         "background_gradient": {
           "label": "Dégradé de l’arrière-plan",
           "info": "Le dégradé de l’arrière-plan remplace l’arrière-plan là où c’est possible."

@@ -35,7 +35,7 @@
     assign money_price_max = price_max | money_with_currency
   endif
 
-  if target == product and product.price_varies
+  if target == product and product.price_varies and false
     assign money_price = 'products.product.price.from_price_html' | t: price: money_price
   endif
 -%}

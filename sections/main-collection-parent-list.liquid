@@ -1,8 +1,8 @@
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
 {{ 'section-collection-parent-list.css' | asset_url | stylesheet_tag }}
 
-{% if settings.enable_animation %}
-  {% assign animation_delay = 150 %}
+{% if settings.animations_reveal_on_scroll %}
+  {% assign animation_index = 1 %}
 {% endif %}
 
 {% unless section.settings['content-position'] == 'below-image' %}
@@ -53,9 +53,10 @@
     {% comment %} Section title and description {% endcomment %}
     {% if settings.enable_animation %}
       <div
-        data-aos="fade-up"
-        data-aos-delay="{{ animation_delay }}"
-        {% assign animation_delay = animation_delay | plus: 150 %}
+        class="scroll-trigger animate--fade-in"
+        data-cascade
+        style="--animation-order: {{ animation_index }};"
+        {% assign animation_index = animation_index | plus: 1 %}
       >
     {% endif %}
     {% render 'dynamic-section-header' with section_title: section.settings.title, section_description: section.settings.description %}
@@ -90,11 +91,18 @@
             {% endif %}
 
             <div
-              class="swiper-slide homepage-collection-grid-item homepage-collection-grid-item--{{ section.settings.content-position }} block-section--{{ block.id }}"
-              {% if settings.enable_animation %}
-                data-aos="fade-up"
-                data-aos-delay="{{ animation_delay }}"
-                {% assign animation_delay = animation_delay | plus: 150 %}
+              class="swiper-slide homepage-collection-grid-item homepage-collection-grid-item--{{ section.settings.content-position }} block-section--{{ block.id }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+              {% comment %}
+                {% if settings.enable_animation %}
+                  data-aos="fade-up"
+                  data-aos-delay="{{ animation_delay }}"
+                  {% assign animation_delay = animation_delay | plus: 150 %}
+                {% endif %}
+              {% endcomment %}
+              {% if settings.animations_reveal_on_scroll %}
+                data-cascade
+                style="--animation-order: {{ animation_index }};"
+                {% assign animation_index = animation_index | plus: 1 %}
               {% endif %}
               {{ block.shopify_attributes }}
             >
@@ -239,12 +247,12 @@
 
       {% if section.settings.pack_image %}
         <div
-          class="collection-parent-pack"
+          class="collection-parent-pack scroll-trigger animate--fade-in"
           style="--color-title: {{ section.settings.pack_title_color }};"
           {% if settings.enable_animation %}
-            data-aos="fade-up"
-            data-aos-delay="{{ animation_delay }}"
-            {% assign animation_delay = animation_delay | plus: 150 %}
+            data-cascade
+            style="--animation-order: {{ animation_index }};"
+            {% assign animation_index = animation_index | plus: 1 %}
           {% endif %}
         >
           {{

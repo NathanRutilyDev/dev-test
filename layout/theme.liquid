@@ -67,20 +67,18 @@
           --gradient-background: {{ scheme.settings.background }};
         {% endif %}
 
-        {% liquid
-          assign background_color = scheme.settings.background
-          assign background_color_brightness = background_color | color_brightness
-          if background_color_brightness <= 26
-            assign background_color_contrast = background_color | color_lighten: 50
-          elsif background_color_brightness <= 65
-            assign background_color_contrast = background_color | color_lighten: 5
+        {%- liquid
+          assign text_contrast = scheme.settings.text | color_brightness
+          if text_contrast < 50
+            assign text_color_contrast = scheme.settings.text | color_darken: 25
           else
-            assign background_color_contrast = background_color | color_darken: 25
+            assign text_color_contrast = scheme.settings.text | color_lighten: 25
           endif
-        %}
+        -%}
 
         --color-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
-        --color-background-contrast: {{ background_color_contrast.red }},{{ background_color_contrast.green }},{{ background_color_contrast.blue }};
+        --color-foreground-contrast: {{ text_color_contrast.red }},{{ text_color_contrast.green }},{{ text_color_contrast.blue }};
+        --color-background-contrast: {{ scheme.settings.background_contrast.red }},{{ scheme.settings.background_contrast.green }},{{ scheme.settings.background_contrast.blue }};
         --color-shadow: {{ scheme.settings.shadow.red }},{{ scheme.settings.shadow.green }},{{ scheme.settings.shadow.blue }};
         --color-button: {{ scheme.settings.button.red }},{{ scheme.settings.button.green }},{{ scheme.settings.button.blue }};
         --color-button-text: {{ scheme.settings.button_label.red }},{{ scheme.settings.button_label.green }},{{ scheme.settings.button_label.blue }};
@@ -113,29 +111,42 @@
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
-        /* Heading Sizes */
-        {% assign min_heading_size = 16 %}
+        --font-xs-size: 12px;
+        --font-xs-line-height: 16px;
+        --font-xs-letter-spacing: 0.12px;
 
+        --font-sm-size: 14px;
+        --font-sm-line-height: 20px;
+        --font-sm-letter-spacing: 0.14px;
+
+        /* Heading Sizes */
         --h-hero-size: 56px;
         --h-hero-line-height: 64px;
+        --h-hero-letter-spacing: 0.56px;
 
         --h1-size: 40px;
         --h1-line-height: 48px;
+        --h1-letter-spacing: 0.4px;
 
         --h2-size: 32px;
         --h2-line-height: 40px;
+        --h2-letter-spacing: 0.32px;
 
         --h3-size: 24px;
         --h3-line-height: 32px;
+        --h3-letter-spacing: 0.24px;
 
         --h4-size: 20px;
         --h4-line-height: 24px;
+        --h4-letter-spacing: 0.2px;
 
         --h5-size: 16px;
         --h5-line-height: 24px;
+        --h5-letter-spacing: 0.16px;
 
         --h6-size: 14px;
         --h6-line-height: 20px;
+        --h6-letter-spacing: 0.14px;
 
         --media-padding: {{ settings.media_padding }}px;
         --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
@@ -328,12 +339,14 @@
       }
     </script>
 
-    {% if settings.enable_animation %}
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    {% endif %}
+    {% comment %}
+      {% if settings.enable_animation %}
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      {% endif %}
+    {% endcomment %}
   </head>
 
-  <body class="gradient aos-initialized{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient {% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -415,8 +428,10 @@
       defer="defer"
     ></script>
 
-    {% if settings.enable_animation %}
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer="defer"></script>
-    {% endif %}
+    {% comment %}
+      {% if settings.enable_animation %}
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer="defer"></script>
+      {% endif %}
+    {% endcomment %}
   </body>
 </html>

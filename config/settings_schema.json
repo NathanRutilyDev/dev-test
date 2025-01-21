@@ -47,6 +47,12 @@
             "default": "#FFFFFF"
           },
           {
+            "type": "color",
+            "id": "background_contrast",
+            "label": "t:settings_schema.colors.settings.background_contrast.label",
+            "default": "#FFFFFF"
+          },
+          {
             "type": "color_background",
             "id": "background_gradient",
             "label": "t:settings_schema.colors.settings.background_gradient.label",
@@ -552,6 +558,38 @@
         "id": "card_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-2"
+      },
+      {
+        "type": "header",
+        "content": "Promotion"
+      },
+      {
+        "type": "color",
+        "id": "card_promotion_background",
+        "label": "Arrière-plan",
+        "default": "#56A25A"
+      },
+      {
+        "type": "color",
+        "id": "card_promotion_color",
+        "label": "Couleur du texte",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "header",
+        "content": "Épuisé"
+      },
+      {
+        "type": "color",
+        "id": "card_sold_out_background",
+        "label": "Arrière-plan",
+        "default": "#A86060"
+      },
+      {
+        "type": "color",
+        "id": "card_sold_out_color",
+        "label": "Couleur du texte",
+        "default": "#FFFFFF"
       },
       {
         "type": "header",

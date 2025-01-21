@@ -1,7 +1,7 @@
 {{ 'section-collection-header.css' | asset_url | stylesheet_tag }}
 
-{% if settings.enable_animation %}
-  {% assign animation_delay = 150 %}
+{% if settings.animations_reveal_on_scroll %}
+  {% assign animation_index = 1 %}
 {% endif %}
 
 <div
@@ -32,11 +32,11 @@
           >
             {% if section.settings.show_breadcrumbs %}
               <div
-                class="collection-header__breadcrumbs"
-                {% if settings.enable_animation %}
-                  data-aos="fade-up"
-                  data-aos-delay="{{ animation_delay }}"
-                  {% assign animation_delay = animation_delay | plus: 150 %}
+                class="collection-header__breadcrumbs scroll-trigger animate--fade-in"
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ animation_index }};"
+                  {% assign animation_index = animation_index | plus: 1 %}
                 {% endif %}
               >
                 <div id="breadcrumbs" class="collection-header__text-item">
@@ -48,11 +48,11 @@
 
             {% if section.settings.show_title %}
               <div
-                class="collection-header__title"
-                {% if settings.enable_animation %}
-                  data-aos="fade-up"
-                  data-aos-delay="{{ animation_delay }}"
-                  {% assign animation_delay = animation_delay | plus: 150 %}
+                class="collection-header__title scroll-trigger animate--fade-in"
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ animation_index }};"
+                  {% assign animation_index = animation_index | plus: 1 %}
                 {% endif %}
               >
                 <h1 class="collection-header__text-item">{{ collection.title }}</h1>
@@ -61,11 +61,11 @@
 
             {% if section.settings.show_description and collection.description != empty %}
               <div
-                class="collection-header__description"
-                {% if settings.enable_animation %}
-                  data-aos="fade-up"
-                  data-aos-delay="{{ animation_delay }}"
-                  {% assign animation_delay = animation_delay | plus: 150 %}
+                class="collection-header__description scroll-trigger animate--fade-in"
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ animation_index }};"
+                  {% assign animation_index = animation_index | plus: 1 %}
                 {% endif %}
               >
                 <div class="collection-header__text-item text-link-animated">{{ collection.description }}</div>

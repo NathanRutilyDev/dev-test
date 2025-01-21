@@ -36,6 +36,10 @@
   }
 {%- endstyle -%}
 
+{% assign promo_block = section.blocks | where: 'type', 'promo' %}
+{% assign article_block = section.blocks | where: 'type', 'article' %}
+{% assign review_block = section.blocks | where: 'type', 'review' %}
+
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
@@ -133,7 +137,7 @@
           </facet-filters-form>
         {%- endif -%}
         <div
-          class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}{% if paginate.current_page == 1 %} first-collection-page{% endif %}"
           id="ProductGridContainer"
           {% if settings.animations_reveal_on_scroll %}
             data-cascade
@@ -174,13 +178,15 @@
                     {%- assign lazy_load = true -%}
                   {%- endif -%}
                   <li
-                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}{% if forloop.first and paginate.current_page == 1 %} product-featured{% endif %}"
                     {% if settings.animations_reveal_on_scroll %}
                       data-cascade
                       style="--animation-order: {{ forloop.index }};"
                     {% endif %}
                   >
-                    {% render 'card-product',
+                    {%
+                      render 'card-product',
+                      featured: forloop.first and paginate.current_page == 1,
                       card_product: product,
                       media_aspect_ratio: section.settings.image_ratio,
                       image_shape: section.settings.image_shape,
@@ -194,12 +200,26 @@
                     %}
                   </li>
                   {%- assign skip_card_product_styles = true -%}
+
+                  {% if forloop.index == 3 and paginate.current_page == 1 and promo_block.size > 0 %}
+                    <div class="collection__promo-featured"></div>
+                  {% endif %}
+
+                  {% if forloop.index == 7 and paginate.current_page == 1 and article_block.size > 0 %}
+                    <div class="collection__article-featured"></div>
+                  {% endif %}
+
+                  {% if forloop.index == 11 and paginate.current_page == 1 and review_block.size > 0 %}
+                    <div class="collection__review-featured"></div>
+                  {% endif %}
                 {%- endfor -%}
               </ul>
 
-              {%- if paginate.pages > 1 -%}
-                {% render 'pagination', paginate: paginate, anchor: '' %}
-              {%- endif -%}
+              {% comment %}
+                {%- if paginate.pages > 1 -%}
+                  {% render 'pagination', paginate: paginate, anchor: '' %}
+                {%- endif -%}
+              {% endcomment %}
             </div>
           {%- endif -%}
         </div>
@@ -222,7 +242,7 @@
       "min": 8,
       "max": 36,
       "step": 4,
-      "default": 16,
+      "default": 12,
       "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
     },
     {
@@ -427,6 +447,23 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promo",
+      "name": "Promo",
+      "settings": []
+    },
+    {
+      "type": "article",
+      "name": "Article",
+      "settings": []
+    },
+    {
+      "type": "review",
+      "name": "Avis",
+      "settings": []
     }
   ]
 }
