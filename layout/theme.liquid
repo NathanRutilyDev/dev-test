@@ -423,10 +423,12 @@
 
     <script src="{{ 'swiper.js' | asset_url }}" defer="defer"></script>
 
-    <script
-      src="{{ 'animate.js' | asset_url }}"
-      defer="defer"
-    ></script>
+    {% comment %}
+      <script
+        src="{{ 'animate.js' | asset_url }}"
+        defer="defer"
+      ></script>
+    {% endcomment %}
 
     {% comment %}
       {% if settings.enable_animation %}

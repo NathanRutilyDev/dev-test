@@ -32,7 +32,7 @@
           >
             {% if section.settings.show_breadcrumbs %}
               <div
-                class="collection-header__breadcrumbs scroll-trigger animate--fade-in"
+                class="collection-header__breadcrumbs scroll-trigger animate--slide-in"
                 {% if settings.animations_reveal_on_scroll %}
                   data-cascade
                   style="--animation-order: {{ animation_index }};"
@@ -48,7 +48,7 @@
 
             {% if section.settings.show_title %}
               <div
-                class="collection-header__title scroll-trigger animate--fade-in"
+                class="collection-header__title scroll-trigger animate--slide-in"
                 {% if settings.animations_reveal_on_scroll %}
                   data-cascade
                   style="--animation-order: {{ animation_index }};"
@@ -61,7 +61,7 @@
 
             {% if section.settings.show_description and collection.description != empty %}
               <div
-                class="collection-header__description scroll-trigger animate--fade-in"
+                class="collection-header__description scroll-trigger animate--slide-in"
                 {% if settings.animations_reveal_on_scroll %}
                   data-cascade
                   style="--animation-order: {{ animation_index }};"

@@ -155,7 +155,7 @@
   font-size: calc(var(--font-heading-scale) * 1.6rem);
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .footer-block__heading {
     font-size: calc(var(--font-heading-scale) * 1.8rem);
   }
@@ -358,7 +358,7 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 979px) {
   .footer-block__details-content .list-menu__item--link {
     padding-top: 1rem;
     padding-bottom: 1rem;

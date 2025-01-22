@@ -40,7 +40,7 @@ quick-order-list .quantity__button {
   content: none;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .quick-order-list__total {
     position: sticky;
     bottom: 0;
@@ -118,7 +118,7 @@ quick-order-list .quantity__button {
   object-fit: cover;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .variant-item__image {
     max-width: 100%;
   }
@@ -211,7 +211,7 @@ quick-order-list-remove-button {
   letter-spacing: 0.06rem;
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
+@media screen and (min-width: 750px) and (max-width: 979px) {
   quick-order-list-remove-button {
     width: 1.5rem;
     height: 1.5rem;
@@ -295,7 +295,7 @@ quick-order-list-remove-button .icon-remove {
   align-self: flex-start;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .variant-item .loading__spinner {
     padding-top: 3rem;
     bottom: auto;
@@ -310,7 +310,7 @@ quick-order-list-remove-button .icon-remove {
     top: 1.2rem;
   }
 
- .variant-remove-total--empty .loading__spinner {
+  .variant-remove-total--empty .loading__spinner {
     top: -1rem;
   }
 }
@@ -367,7 +367,7 @@ quick-order-list-remove-button:hover .icon-remove {
   border: 0;
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 979px) {
   .quick-order-list-total__info {
     flex-direction: column;
     align-items: center;
@@ -461,7 +461,7 @@ quick-order-list-remove-button:hover .icon-remove {
   margin-top: -2rem;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .quick-order-list__table {
     border-spacing: 0;
     border-collapse: separate;
@@ -520,7 +520,7 @@ quick-order-list-remove-button:hover .icon-remove {
   }
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .quick-order-list__table thead th:first-child,
   .quick-order-list-total__column {
     width: 37%;
@@ -580,7 +580,7 @@ quick-order-list-remove-button:hover .icon-remove {
   margin-right: 2rem;
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 979px) {
   .quick-order-list-total__price {
     justify-content: center;
     text-align: center;

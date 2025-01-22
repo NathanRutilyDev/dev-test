@@ -3439,9 +3439,11 @@
       }
     }
   },
+  
   "all": {
     "1": "1",
     "2": "2",
+    "Article": "Article",
     "Color_scheme": "Palette de couleurs",
     "color_scheme_width_info": "Visible uniquement lorsque la « largeur » est inférieure à 100 %",
     "Caption_color_scheme": "Palette de couleurs de la légende",

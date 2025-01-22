@@ -12,7 +12,7 @@
   overflow-y: auto;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 980px) {
   .facets-container > * + * {
     margin-top: 0;
   }
@@ -242,11 +242,6 @@
 
 .facets__summary span:first-of-type {
   transition: text-decoration var(--duration-short) ease;
-}
-
-.facets__summary:hover .facets__summary-label {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
 }
 
 .facets__and-helptext {
@@ -636,6 +631,11 @@ span.active-facets__button-inner {
   padding: 4px 12px;
   display: flex;
   align-items: center;
+  text-transform: initial;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.16px;
 }
 
 span.active-facets__button-inner:before,
@@ -1155,13 +1155,13 @@ input.mobile-facets__checkbox {
 .product-count-vertical .loading__spinner {
   position: absolute;
   padding-top: 0.6rem;
-  right: 0;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   width: 1.8rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 980px) {
   .facets-vertical {
     display: flex;
   }
@@ -1294,7 +1294,7 @@ input.mobile-facets__checkbox {
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1079px) {
+@media screen and (min-width: 980px) and (max-width: 1079px) {
   .facets-vertical .active-facets__button {
     padding: 1rem;
     margin-bottom: 0;
@@ -1303,5 +1303,49 @@ input.mobile-facets__checkbox {
 
   .facets-vertical .active-facets__button-remove {
     padding: 0 1rem 1rem;
+  }
+}
+
+.sorting {
+  margin-left: auto;
+  color: rgb(var(--color-foreground));
+  position: relative;
+
+  summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .facet-sorting__options {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 2;
+    background-color: rgb(var(--color-background));
+    border: 0.1rem solid rgba(var(--color-foreground), 0.1);
+    border-radius: 0.4rem;
+    padding-left: 0;
+    min-width: 340px;
+    list-style: none;
+    margin: 0;
+
+    li {
+      margin: 0;
+      padding: 8px 16px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover,
+      &.facet-sorting__link--active {
+        background-color: rgb(var(--color-background-contrast));
+      }
+    }
   }
 }

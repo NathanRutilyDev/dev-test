@@ -1,0 +1,86 @@
+.card__featured-article {
+  position: relative;
+  padding: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  overflow: hidden;
+  border-radius: 4px;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(transparent, 70%), to(100%));
+  background: linear-gradient(to bottom, 70% transparent, 100% rgba(0, 0, 0, 0.4));
+}
+.card__featured-article .card__featured-article--image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.card__featured-article .card__featured-article--image .responsive-image-wrapper {
+  height: 100%;
+}
+.card__featured-article .card__featured-article--image img {
+  height: 100%;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: -webkit-transform 0.4s ease;
+  transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, -webkit-transform 0.4s ease;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card__featured-article .card__featured-article--tags {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.card__featured-article .card__featured-article--tags .card__featured-article--tag {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 4px 8px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  background: var(--background-color);
+  color: var(--color);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+}
+.card__featured-article .card__featured-article--title {
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+.card__featured-article .card__featured-article--title,
+.card__featured-article .card__featured-article--excerpt {
+  color: white;
+}
+.card__featured-article:hover img {
+  -webkit-transform: scale(1.03);
+      -ms-transform: scale(1.03);
+          transform: scale(1.03);
+}

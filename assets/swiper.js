@@ -3,12 +3,11 @@ customElements.define(
   class SwiperSlider extends HTMLElement {
     constructor() {
       super();
-      this.swiper = null; // Instance de Swiper
-      this.config = null; // Configuration JSON
+      this.swiper = null;
+      this.config = null;
     }
 
     connectedCallback() {
-      console.log('ok');
       this.loadConfig();
       this.initSwiper();
       window.addEventListener('resize', this.handleResize.bind(this));
@@ -20,7 +19,6 @@ customElements.define(
     }
 
     loadConfig() {
-      // Récupère la configuration JSON
       const script = this.querySelector('script[type="application/json"]');
       if (script) {
         try {
@@ -29,12 +27,12 @@ customElements.define(
           console.error('Invalid JSON configuration in <swiper-slider>: ', e);
         }
       } else {
-        this.config = {}; // Configuration par défaut
+        this.config = {};
       }
     }
 
     initSwiper() {
-      if (this.swiper) return; // Évite les réinitialisations inutiles
+      if (this.swiper) return;
 
       const defaultConfig = {
         slidesPerView: 1,
@@ -47,8 +45,6 @@ customElements.define(
         ...defaultConfig,
         ...this.config,
       };
-
-      console.log('Swiper configuration:', swiperConfig);
 
       // Initialise Swiper.js
       this.swiper = new Swiper(this, swiperConfig);

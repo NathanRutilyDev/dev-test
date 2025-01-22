@@ -218,7 +218,9 @@
 }
 
 .country-filter__search-icon {
-  transition: opacity var(--duration-short) ease, visibility var(--duration-short) ease;
+  transition:
+    opacity var(--duration-short) ease,
+    visibility var(--duration-short) ease;
   opacity: 1;
   visibility: visible;
   pointer-events: none;
@@ -418,7 +420,7 @@
 }
 
 /* Menu drawer */
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .menu-drawer__localization {
     display: none;
   }

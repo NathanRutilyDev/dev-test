@@ -97,10 +97,6 @@
   font-style: normal;
   font-weight: 600;
   letter-spacing: 0.2px;
-  -webkit-text-decoration-line: underline;
-          text-decoration-line: underline;
-  -webkit-text-decoration-style: solid;
-          text-decoration-style: solid;
   margin-bottom: 0;
   margin-top: 12px;
 }
@@ -157,7 +153,8 @@
 }
 .featured-child-collections .responsive-image-wrapper {
   border-radius: 4px;
-  border: 1px solid var(--text-color, #443d36);
+  -webkit-box-shadow: 0 0 0 1px var(--text-color, #443d36);
+          box-shadow: 0 0 0 1px var(--text-color, #443d36);
   padding: 2px;
   height: 134px;
 }
@@ -170,6 +167,8 @@
   overflow: visible;
   padding-right: 24px;
   max-width: 100%;
+  padding-top: 2px;
+  padding-left: 2px;
 }
 @media (min-width: 768px) and (max-width: 1080px) {
   .featured-child-collections .swiper {

@@ -1,0 +1,39 @@
+<div class="card__featured-promo color-{{ color_scheme }}">
+  <div class="card__featured-promo--image">
+    {% render 'responsive-image' with image, sizes: '420px', loading: 'lazy', allow_stretch: true %}
+
+    {% if promo_text != blank or promo_heading != blank %}
+      <div class="card__featured-promo--macaron-content">
+        {% render 'icons', icon: 'macaron' %}
+        {% render 'icons', icon: 'tag' %}
+        <div class="card__featured-promo--macaron-texts">
+          {% if promo_text != blank %}
+            <div class="card__featured-promo--macaron-text">{{ promo_text }}</div>
+          {% endif %}
+          {% if promo_heading != blank %}
+            <p class="card__featured-promo--macaron-heading">{{ promo_heading }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <div class="card__featured-promo-content">
+    {% if heading != blank %}
+      <div class="card__featured-promo--title h2">{{ heading }}</div>
+    {% endif %}
+    {% if content != blank %}
+      <div class="card__featured-promo--text text-body">{{ content }}</div>
+    {% endif %}
+    {% if cta_label != blank %}
+      <a
+        href="{{ cta_link }}"
+        class="card__featured-promo--cta button button--primary button--full-width font-body-bold"
+        {% if cta_link == blank %}
+          disabled
+        {% endif %}
+      >
+        {{- cta_label -}}
+      </a>
+    {% endif %}
+  </div>
+</div>

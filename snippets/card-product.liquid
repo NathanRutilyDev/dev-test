@@ -32,7 +32,7 @@
   {%- liquid
     assign ratio = 1
     if card_product.featured_media and media_aspect_ratio == 'portrait'
-      assign ratio = 0.75
+      assign ratio = 0.78
     elsif card_product.featured_media and media_aspect_ratio == 'adapt'
       assign ratio = card_product.featured_media.aspect_ratio
     endif
@@ -65,7 +65,7 @@
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
         {%- if card_product.featured_media -%}
-          <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
+          <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}{%- if card_product.available == false %} opacity-70{% endif %}">
             <div class="media media--transparent media--hover-effect">
               {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
               <img
@@ -79,7 +79,7 @@
                   {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
                 "
                 src="{{ card_product.featured_media | image_url: width: 720 }}"
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: sizes_division }}px, (min-width: 990px) calc((100vw - 130px) / {{ sizes_division }}), (min-width: 750px) calc((100vw - 120px) / {{ sizes_division }}), calc((100vw - 35px) / {{ sizes_division_mobile }})"
+                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: sizes_division }}px, (min-width: 990px) calc((100vw - 130px) / {{ sizes_division }}), (min-width: 750px) calc((100vw - 120px) / 2), calc((100vw - 35px) / {{ sizes_division_mobile }})"
                 alt="{{ card_product.featured_media.alt | escape }}"
                 class="motion-reduce"
                 {% unless lazy_load == false %}
@@ -489,7 +489,7 @@
           </div>
         </div>
       </div>
-      <div class="card__content">
+      <div class="card__content{%- if card_product.available == false %} opacity-70{% endif %}">
         <div class="card__information">
           {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
             {% liquid

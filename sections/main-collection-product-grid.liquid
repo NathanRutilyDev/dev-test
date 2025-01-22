@@ -39,6 +39,9 @@
 {% assign promo_block = section.blocks | where: 'type', 'promo' %}
 {% assign article_block = section.blocks | where: 'type', 'article' %}
 {% assign review_block = section.blocks | where: 'type', 'review' %}
+{% if settings.animations_reveal_on_scroll %}
+  {% assign animation_index = 1 %}
+{% endif %}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
@@ -65,7 +68,7 @@
       <div class="product-grid-right-col">
         {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
         {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
-          <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
+          <facet-filters-form class="facets facets-vertical-sort page-width medium-down-hide">
             <form class="facets-vertical-form" id="FacetSortForm">
               {%- for filter in collection.filters -%}
                 {%- for value in filter.active_values -%}
@@ -90,49 +93,47 @@
                         'templates.search.results_with_count'
                         | t: terms: collection.terms, count: collection.results_count
                       }}
-                    {%- elsif collection.products_count == collection.all_products_count -%}
-                      {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
                     {%- else -%}
-                      {{
-                        'products.facets.product_count'
-                        | t: product_count: collection.products_count, count: collection.all_products_count
-                      }}
+                      {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
                     {%- endif -%}
                   </span>
                 </p>
                 {%- render 'loading-spinner' -%}
               </div>
 
-              <div class="facet-filters sorting caption">
-                <div class="facet-filters__field">
-                  <h2 class="facet-filters__label caption-large text-body">
-                    <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
-                  </h2>
-                  <div class="select">
-                    {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-                    <select
-                      name="sort_by"
-                      class="facet-filters__sort select__select caption-large"
-                      id="SortBy"
-                      aria-describedby="a11y-refresh-page-message"
-                    >
-                      {%- for option in collection.sort_options -%}
-                        <option
-                          value="{{ option.value | escape }}"
-                          {% if option.value == sort_by %}
-                            selected="selected"
-                          {% endif %}
-                        >
-                          {{ option.name | escape }}
-                        </option>
-                      {%- endfor -%}
-                    </select>
-                    <span class="svg-wrapper">
-                      {{- 'icon-caret.svg' | inline_asset_content -}}
+              <facet-sorting class="sorting">
+                <details>
+                  <summary class="text-body font-body-bold uppercase">
+                    <span>
+                      {% liquid
+                        assign sort_by = collection.sort_by | default: collection.default_sort_by | split: 'sort_by=' | last | split: '&' | first
+                        for option in collection.sort_options
+                          if option.value == sort_by
+                            echo option.name | escape
+                          endif
+                        endfor
+                      %}
                     </span>
-                  </div>
-                </div>
-              </div>
+                    {% render 'icons', icon: 'chevron' %}
+                  </summary>
+                  <ul class="facet-sorting__options">
+                    {%- for option in collection.sort_options -%}
+                      <li
+                        class="facet-sorting__option {% if option.value == sort_by %} facet-sorting__link--active{% endif %}"
+                        data-url="{{ option.value }}"
+                      >
+                        {{ option.name | escape }}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                  <input
+                    type="hidden"
+                    name="sort_by"
+                    id="SortByHidden"
+                    value="{{ collection.sort_by | default: collection.default_sort_by }}"
+                  >
+                </details>
+              </facet-sorting>
             </form>
           </facet-filters-form>
         {%- endif -%}
@@ -159,7 +160,7 @@
             </div>
           {%- else -%}
             <div
-              class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
+              class="collection center{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
             >
               <div class="loading-overlay gradient"></div>
               <ul
@@ -181,7 +182,8 @@
                     class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}{% if forloop.first and paginate.current_page == 1 %} product-featured{% endif %}"
                     {% if settings.animations_reveal_on_scroll %}
                       data-cascade
-                      style="--animation-order: {{ forloop.index }};"
+                      style="--animation-order: {{ animation_index }};"
+                      {% assign animation_index = animation_index | plus: 1 %}
                     {% endif %}
                   >
                     {%
@@ -201,20 +203,80 @@
                   </li>
                   {%- assign skip_card_product_styles = true -%}
 
-                  {% if forloop.index == 3 and paginate.current_page == 1 and promo_block.size > 0 %}
-                    <div class="collection__promo-featured"></div>
+                  {%- if forloop.index == 3 and paginate.current_page == 1 and promo_block.size > 0 %}
+                    <li
+                      class="grid__item collection__promo-block{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                      {% if settings.animations_reveal_on_scroll %}
+                        data-cascade
+                        style="--animation-order: {{ animation_index }};"
+                        {% assign animation_index = animation_index | plus: 1 %}
+                      {% endif %}
+                    >
+                      {{ 'component-featured-promo.css' | asset_url | stylesheet_tag }}
+                      {% render 'card-promo',
+                        color_scheme: promo_block[0].settings.color_scheme,
+                        image: promo_block[0].settings.image,
+                        heading: promo_block[0].settings.heading,
+                        content: promo_block[0].settings.content,
+                        cta_label: promo_block[0].settings.cta_label,
+                        cta_link: promo_block[0].settings.cta_link,
+                        promo_text: promo_block[0].settings.promo_text,
+                        promo_heading: promo_block[0].settings.promo_heading
+                      %}
+                    </li>
                   {% endif %}
 
                   {% if forloop.index == 7 and paginate.current_page == 1 and article_block.size > 0 %}
-                    <div class="collection__article-featured"></div>
+                    <li
+                      class="grid__item collection__featured-article-block{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                      {% if settings.animations_reveal_on_scroll %}
+                        data-cascade
+                        style="--animation-order: {{ animation_index }};"
+                        {% assign animation_index = animation_index | plus: 1 %}
+                      {% endif %}
+                    >
+                      {{ 'component-featured-article.css' | asset_url | stylesheet_tag }}
+                      {% render 'card-featured-article',
+                        image: article_block[0].settings.image,
+                        article: article_block[0].settings.article
+                      %}
+                    </li>
                   {% endif %}
 
                   {% if forloop.index == 11 and paginate.current_page == 1 and review_block.size > 0 %}
-                    <div class="collection__review-featured"></div>
+                    <li
+                      class="grid__item collection__review-block{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                      {% if settings.animations_reveal_on_scroll %}
+                        data-cascade
+                        style="--animation-order: {{ animation_index }};"
+                        {% assign animation_index = animation_index | plus: 1 %}
+                      {% endif %}
+                    >
+                      {{ 'component-featured-review.css' | asset_url | stylesheet_tag }}
+                      {% render 'card-review',
+                        color_scheme: review_block[0].settings.color_scheme,
+                        heading: review_block[0].settings.heading,
+                        review: review_block[0].settings.review,
+                        author: review_block[0].settings.author,
+                        date: review_block[0].settings.date
+                      %}
+                    </li>
                   {% endif %}
                 {%- endfor -%}
               </ul>
 
+              {% if paginate.pages > 1 %}
+                <script src="{{ 'load-more.js' | asset_url }}" defer="defer"></script>
+                <load-more-button
+                  class="button button--primary"
+                  data-current-page="1"
+                  data-total-pages="{{ paginate.pages }}"
+                  data-next-url="{{ collection.url | append: '?page=2' }}"
+                >
+                  {{ 'products.product.see_more' | t }}
+                  {%- render 'loading-spinner' -%}
+                </load-more-button>
+              {% endif %}
               {% comment %}
                 {%- if paginate.pages > 1 -%}
                   {% render 'pagination', paginate: paginate, anchor: '' %}
@@ -453,17 +515,105 @@
     {
       "type": "promo",
       "name": "Promo",
-      "settings": []
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:all.Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "t:all.Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:all.Description"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "t:all.Button_text"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "t:all.Button_link"
+        },
+        {
+          "type": "header",
+          "content": "Macaron"
+        },
+        {
+          "type": "text",
+          "id": "promo_text",
+          "label": "t:all.Text"
+        },
+        {
+          "type": "text",
+          "id": "promo_heading",
+          "label": "t:all.Heading"
+        }
+      ]
     },
     {
       "type": "article",
       "name": "Article",
-      "settings": []
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "t:all.Article"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:all.Image"
+        }
+      ]
     },
     {
       "type": "review",
       "name": "Avis",
-      "settings": []
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "section_color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-1"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:all.Heading",
+          "default": "Produit incomparable"
+        },
+        {
+          "type": "richtext",
+          "id": "review",
+          "label": "Avis",
+          "default": "<p>Le sérum numéro 2 a transformé ma peau couperosée. Je l’applique tous les soirs depuis 1 mois et les résultats ont été visibles dès les premières applications. Ma peau s’est éclaircie. Je mets beaucoup moins de fond de teint et mon visage est unifié et lumineux, rien à voir avec avant. Je ne peux plus m’en passer, c’est le meilleur produit jamais essayé. Merci !<p>"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Auteur",
+          "default": "Virginie"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "France, 21 Octobre 2024"
+        }
+      ]
     }
   ]
 }

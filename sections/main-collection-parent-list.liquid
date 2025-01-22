@@ -53,7 +53,7 @@
     {% comment %} Section title and description {% endcomment %}
     {% if settings.enable_animation %}
       <div
-        class="scroll-trigger animate--fade-in"
+        class="scroll-trigger animate--slide-in"
         data-cascade
         style="--animation-order: {{ animation_index }};"
         {% assign animation_index = animation_index | plus: 1 %}
@@ -178,7 +178,7 @@
                     and block.settings['overlay-btn-text'] == blank
                     and block.settings.collection != blank
                   %}
-                    <a href="{{ collection.url }}" class="" tabindex="-1" style="width: 100%;">
+                    <a href="{{ collection.url }}" class="full-unstyled-link" tabindex="-1" style="width: 100%;">
                   {% endif %}
 
                   <div class="grid-item__content">
@@ -186,7 +186,7 @@
                       {% if section.settings['content-position'] == 'below-image'
                         and block.settings.collection != blank
                       %}
-                        <a href="{{ collection.url }}" class="grid-item__subheading" tabindex="-1">
+                        <a href="{{ collection.url }}" class="grid-item__subheading full-unstyled-link" tabindex="-1">
                       {% endif %}
                       <div class="grid-item__subheading">{{ block.settings.subheading }}</div>
                       {% if section.settings['content-position'] == 'below-image'
@@ -199,7 +199,7 @@
                     {% if section.settings['content-position'] == 'below-image'
                       and block.settings.collection != blank
                     %}
-                      <a href="{{ collection.url }}" tabindex="-1">
+                      <a href="{{ collection.url }}" class="full-unstyled-link" tabindex="-1">
                     {% endif %}
                     <h3 class="grid-item__title">{{ collection_title }}</h3>
                     {% if section.settings['content-position'] == 'below-image'
@@ -247,11 +247,10 @@
 
       {% if section.settings.pack_image %}
         <div
-          class="collection-parent-pack scroll-trigger animate--fade-in"
-          style="--color-title: {{ section.settings.pack_title_color }};"
+          class="collection-parent-pack {%- if settings.enable_animation %} scroll-trigger animate--slide-in{% endif %}"
           {% if settings.enable_animation %}
             data-cascade
-            style="--animation-order: {{ animation_index }};"
+            style="animation-order: {{ animation_index }};"
             {% assign animation_index = animation_index | plus: 1 %}
           {% endif %}
         >
@@ -265,7 +264,7 @@
               height: section.settings.pack_image.height,
               alt: section.settings.pack_title
           }}
-          <div class="collection-parent-pack-content">
+          <div class="collection-parent-pack-content" style="--color-title: {{ section.settings.pack_title_color }}; ">
             {% if section.settings.pack_title != blank %}
               <p class="collection-parent-pack__title h3">
                 {{ section.settings.pack_title }}

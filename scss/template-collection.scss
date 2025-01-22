@@ -5,7 +5,7 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 979px) {
   .collection .slider.slider--tablet {
     margin-bottom: 1.5rem;
   }
@@ -57,7 +57,7 @@
   margin-bottom: 15rem;
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 979px) {
   .collection .slider--tablet.product-grid {
     scroll-padding-left: 1.5rem;
   }
@@ -75,7 +75,7 @@
   margin-bottom: 1rem;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .collection__title--desktop-slider .title {
     margin-bottom: 2.5rem;
   }
@@ -118,9 +118,14 @@
     grid-row-gap: 24px;
     grid-column-gap: 2px;
 
-    @include respond-to(md) {
+    @include respond-to(ml) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-row-gap: 32px;
+      grid-column-gap: 24px;
+    }
+
+    @include respond-to(xl) {
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(5, 1fr);
       grid-row-gap: 32px;
       grid-column-gap: 24px;
     }
@@ -139,14 +144,66 @@
     .product-featured {
       grid-column: span 2;
       grid-row: span 2;
+
+      .card__inner {
+        flex: 1;
+      }
+
+      .card__content {
+        flex: 0;
+      }
+
+      @include respond-to(md, l) {
+        grid-column: span 1;
+        grid-row: span 1;
+
+        .card__inner {
+          flex: initial;
+        }
+
+        .card__content {
+          flex: 1;
+        }
+      }
     }
 
-    .collection__promo-featured {
+    .collection__promo-block {
+      grid-column: span 2;
+
+      @include respond-to(md, ml) {
+        grid-column: span 1;
+
+        .card__featured-promo {
+          flex-direction: column;
+        }
+
+        .card__featured-promo--image {
+          aspect-ratio: 340 / 300;
+        }
+      }
+    }
+
+    .collection__featured-article-block {
       grid-column: span 2;
     }
 
-    .collection__article-featured {
-      grid-column: span 2;
+    @include respond-to(md, xl) {
+      .collection__review-block {
+        grid-column: span 2;
+
+        .card__featured-review {
+          padding-inline: 32px;
+        }
+
+        .card__featured--review--review {
+          -webkit-line-clamp: 6;
+        }
+      }
     }
   }
+}
+
+load-more-button.button {
+  margin-top: 32px;
+  padding: 16px 24px;
 }

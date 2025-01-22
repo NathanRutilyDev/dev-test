@@ -17,7 +17,7 @@ slider-component.slider-component-full-width {
   }
 }
 
-@media screen and (min-width: 749px) and (max-width: 990px) {
+@media screen and (min-width: 749px) and (max-width: 980px) {
   slider-component.page-width {
     padding: 0 5rem;
   }
@@ -82,7 +82,7 @@ slider-component.slider-component-full-width {
   }
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 979px) {
   .slider.slider--tablet {
     position: relative;
     flex-wrap: inherit;
@@ -132,7 +132,7 @@ slider-component.slider-component-full-width {
   scroll-snap-align: center;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .slider-component-desktop.page-width {
     max-width: none;
   }
@@ -317,13 +317,13 @@ slider-component.slider-component-full-width {
   justify-content: center;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 980px) {
   .slider:not(.slider--everywhere):not(.slider--desktop) + .slider-buttons {
     display: none;
   }
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 979px) {
   .slider--desktop:not(.slider--tablet) + .slider-buttons {
     display: none;
   }

@@ -127,6 +127,7 @@
       "description": "Description",
       "on_sale": "Promotion",
       "product_variants": "Variantes de produits",
+      "see_more": "Voir plus de produits",
       "quantity": {
         "label": "Quantité",
         "input_label": "Quantité pour {{ product }}",

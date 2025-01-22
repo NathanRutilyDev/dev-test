@@ -7,8 +7,8 @@ class FacetFiltersForm extends HTMLElement {
       this.onSubmitHandler(event);
     }, 800);
 
-    const facetForm = this.querySelector('form');
-    facetForm.addEventListener('input', this.debouncedOnSubmit.bind(this));
+    this.facetForm = this.querySelector('form');
+    this.facetForm.addEventListener('input', this.debouncedOnSubmit.bind(this));
 
     const facetWrapper = this.querySelector('#FacetsWrapperDesktop');
     if (facetWrapper) facetWrapper.addEventListener('keyup', onKeyUpEscape);
@@ -67,6 +67,10 @@ class FacetFiltersForm extends HTMLElement {
         FacetFiltersForm.renderFilters(html, event);
         FacetFiltersForm.renderProductGridContainer(html);
         FacetFiltersForm.renderProductCount(html);
+        this.querySelectorAll('facet-sorting').forEach((element) => {
+          console.log();
+          customElements.upgrade(element);
+        });
         if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(html.innerHTML);
       });
   }
@@ -180,7 +184,7 @@ class FacetFiltersForm extends HTMLElement {
     const activeFacetElementSelectors = [
       '.active-facets-mobile',
       '.active-facets-desktop',
-      '.product-grid-right-col .facets-vertical-form',
+      '.product-grid-right-col .product-count-vertical',
     ];
 
     activeFacetElementSelectors.forEach((selector) => {
@@ -302,6 +306,35 @@ FacetFiltersForm.searchParamsInitial = window.location.search.slice(1);
 FacetFiltersForm.searchParamsPrev = window.location.search.slice(1);
 customElements.define('facet-filters-form', FacetFiltersForm);
 FacetFiltersForm.setListeners();
+
+class FacetSort extends HTMLElement {
+  constructor() {
+    super();
+
+    this.addEventListener('click', (event) => {
+      const target = event.target.closest('li');
+      if (!target) return; // Ignore les clics en dehors des <li>
+      this.updateSortingInput(target);
+    });
+  }
+
+  updateSortingInput(target) {
+    this.facetSortingOptions = this.querySelectorAll('li');
+    const sortingInput = this.querySelector('input');
+    sortingInput.value = target.dataset.url;
+
+    this.facetSortingOptions.forEach((element) => {
+      element.classList.remove('facet-sorting__link--active');
+    });
+
+    target.classList.add('facet-sorting__link--active');
+    this.querySelector('summary span').innerText = target.innerText;
+    this.querySelector('details').removeAttribute('open');
+
+    this.closest('form').dispatchEvent(new Event('input'));
+  }
+}
+customElements.define('facet-sorting', FacetSort);
 
 class PriceRange extends HTMLElement {
   constructor() {

@@ -22,7 +22,7 @@ function onIntersection(elements, observer) {
 }
 
 function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent = false) {
-  const animationTriggerElements = Array.from(rootEl.getElementsByClassName(SCROLL_ANIMATION_TRIGGER_CLASSNAME));
+  const animationTriggerElements = Array.from(rootEl.querySelectorAll(`.${SCROLL_ANIMATION_TRIGGER_CLASSNAME}`));
   if (animationTriggerElements.length === 0) return;
 
   if (isDesignModeEvent) {
@@ -32,10 +32,32 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
     return;
   }
 
-  const observer = new IntersectionObserver(onIntersection, {
-    rootMargin: '0px 0px -50px 0px',
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        const elementTarget = entry.target;
+
+        if (entry.isIntersecting) {
+          elementTarget.classList.remove(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
+          if (elementTarget.hasAttribute('data-cascade')) {
+            elementTarget.setAttribute('style', `--animation-order: ${elementTarget.dataset.index || 0};`);
+          }
+          observer.unobserve(elementTarget);
+        } else {
+          elementTarget.classList.add(SCROLL_ANIMATION_OFFSCREEN_CLASSNAME);
+        }
+      });
+    },
+    {
+      rootMargin: '0px 0px 600px 0px',
+      threshold: 0.1, // L'animation démarre dès que 10% de l'élément est visible
+    },
+  );
+
+  animationTriggerElements.forEach((element, index) => {
+    element.setAttribute('data-index', index); // Ajout d'un index unique pour les animations en cascade
+    observer.observe(element);
   });
-  animationTriggerElements.forEach((element) => observer.observe(element));
 }
 
 // Zoom in animation logic
@@ -66,7 +88,7 @@ function initializeScrollZoomAnimationTrigger() {
 
         element.style.setProperty('--zoom-in-ratio', 1 + scaleAmount * percentageSeen(element));
       }),
-      { passive: true }
+      { passive: true },
     );
   });
 }

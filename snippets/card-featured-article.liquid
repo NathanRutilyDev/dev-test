@@ -1,0 +1,25 @@
+{% assign image = image | default: article.image %}
+
+<a href="{{ article.url }}" class="card__featured-article full-unstyled-link">
+  <div class="card__featured-article--image">
+    {% render 'responsive-image' with image, sizes: '260px', loading: 'lazy', allow_stretch: true %}
+  </div>
+  <div class="card__featured-article--content">
+    {% if article.metafields.data.tags.value.count > 0 %}
+      <div class="card__featured-article--tags">
+        {% for tag in article.metafields.data.tags.value %}
+          <span
+            class="card__featured-article--tag"
+            style="--color: {{ tag.color }}; --background-color: {{ tag.background_color }};"
+          >
+            {{- tag.name -}}
+          </span>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <h2 class="card__featured-article--title">{{ article.title }}</h2>
+    <div class="card__featured-article--excerpt text-body">
+      {{ article.excerpt | truncatewords: 24 }}
+    </div>
+  </div>
+</a>
