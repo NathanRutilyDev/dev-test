@@ -1,6 +1,8 @@
 {{ 'section-banner.css' | asset_url | stylesheet_tag }}
 {{ 'component-breadcrumbs.css' | asset_url | stylesheet_tag }}
-{{ 'component-search.css' | asset_url | stylesheet_tag }}
+{{ 'component-search-bar.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'search-bar.js' | asset_url }}" defer="defer"></script>
 
 <section class="hero-banner">
   <div 
@@ -15,7 +17,7 @@
         <p class="hero-banner__text text-body">
           {{ section.settings.text }}
         </p>
-        {% render 'search' %}
+        {% render 'search-bar' %}
       </div>
     </div>
   </div>
