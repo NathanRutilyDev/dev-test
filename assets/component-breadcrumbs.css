@@ -1,27 +1,12 @@
-#breadcrumbs.wrapper-padded {
-  margin: 0;
-  padding: 15px 60px;
+.breadcrumb a {
+  margin-right: 8px;
+  text-decoration: none;
+  color: var(--Main-White, #FFF);
 }
-#breadcrumbs .breadcrumb {
-  font-size: 0;
+.breadcrumb .breadcrumb-divider {
+  margin-right: 8px;
 }
-#breadcrumbs .breadcrumb > span {
-  font-size: 12px;
-}
-#breadcrumbs .breadcrumb .breadcrumb-item {
-  display: inline-block;
-}
-#breadcrumbs .breadcrumb .breadcrumb-divider:not(:last-child),
-#breadcrumbs .breadcrumb .breadcrumb-item:not(:last-child) {
-  margin-right: 10px;
-}
-#breadcrumbs .breadcrumb a {
-  color: var(--text-color);
-}
-#breadcrumbs .breadcrumb a span {
-  display: inline-block;
-  padding-bottom: 0;
-}
-.product-section #breadcrumbs {
-  margin-bottom: 8px;
+.breadcrumb .breadcrumb-item:last-child,
+.breadcrumb .breadcrumb-divider:last-child {
+  margin-right: 0;
 }

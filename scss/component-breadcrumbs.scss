@@ -1,36 +1,16 @@
-#breadcrumbs {
-  &.wrapper-padded {
-    margin: 0;
-    padding: 15px 60px;
+.breadcrumb {
+  a {
+    margin-right: 8px;
+    text-decoration: none;
+    color: var(--Main-White, #FFF);
   }
 
-  .breadcrumb {
-    font-size: 0;
-
-    > span {
-      font-size: 12px;
-    }
-
-    .breadcrumb-item {
-      display: inline-block;
-    }
-
-    .breadcrumb-divider:not(:last-child),
-    .breadcrumb-item:not(:last-child) {
-      margin-right: 10px;
-    }
-
-    a {
-      color: var(--text-color);
-
-      span {
-        display: inline-block;
-        padding-bottom: 0;
-      }
-    }
+  .breadcrumb-divider {
+    margin-right: 8px;
   }
 
-  .product-section & {
-    margin-bottom: 8px;
+  .breadcrumb-item:last-child,
+  .breadcrumb-divider:last-child {
+    margin-right: 0;
   }
 }
