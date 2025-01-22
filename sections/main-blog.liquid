@@ -1,6 +1,6 @@
 {{ 'component-article-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+{{ 'template-blog.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -8,7 +8,7 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: 768px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -16,8 +16,52 @@
   }
 {%- endstyle -%}
 
+
 {%- paginate blog.articles by 6 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
+    <div class="blog-grid">
+      {%- assign main_article = blog.articles.first -%}
+
+      <!-- Article principal -->
+        <div class="main-article__image">
+          <img src="{{ main_article.image | image_url: height: 880 }}" alt="{{ main_article.title }}">
+        </div>
+        <div class="main-article__content">
+          <h2>{{ main_article.title }}</h2>
+          <p>{{ main_article.excerpt }}</p>
+          <a href="{{ main_article.url }}" class="read-more">Voir tout l'article</a>
+      </div>
+  
+      <!-- Articles secondaires -->
+      <div class="blog-grid__secondary-articles">
+        {%- for article in blog.articles offset: 1 limit: 4 -%}
+          <div class="secondary-article">
+            <a href="{{ article.url }}">
+              <img src="{{ article.image | image_url: height: 300 }}" alt="{{ article.title }}">
+              <h3>{{ article.title }}</h3>
+            </a>
+          </div>
+        {%- endfor -%}
+      </div>
+  
+      <!-- Cartes spécialisées -->
+      <div class="blog-grid__special-card">
+        <div class="special-card">
+          <h3>Chat avec un expert</h3>
+          <p>Discutez avec notre équipe pour des conseils personnalisés.</p>
+          <a href="#" class="button">Commencer</a>
+        </div>
+        <div class="blog-grid__promo-card">
+          <div class="promo-card">
+            <h3>Profitez d'une réduction</h3>
+            <p>Créez votre pack et obtenez 10% de réduction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} <div class="main-blog page-width section-{{ section.id }}-padding">
     <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {{ blog.title | escape }}
     </h1>
@@ -47,12 +91,12 @@
     {%- if paginate.pages > 1 -%}
       {%- render 'pagination', paginate: paginate -%}
     {%- endif -%}
-  </div>
+  </div> {% endcomment %}
 {%- endpaginate -%}
 
 {% schema %}
 {
-  "name": "t:sections.main-blog.name",
+  "name": "Blog",
   "tag": "section",
   "class": "section",
   "settings": [
