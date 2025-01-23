@@ -46,8 +46,6 @@
 }
 
 .secondary-article {
-  border-radius: 4px;
-  overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -55,17 +53,78 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-align: center;
+  background-color: #FFF;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #FFF;
+}
+.secondary-article .secondary-article__card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 16px;
+  gap: 16px; /* Espacement entre les sections */
+  height: 100%;
+}
+.secondary-article .secondary-article__tags {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; /* Permet aux tags de passer à la ligne si nécessaire */
+  gap: 8px; /* Espacement entre les tags */
+}
+.secondary-article .secondary-article__tags .tag {
+  display: inline-block;
+  background-color: #F5F5F5;
+  color: #555;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 16px; /* Forme arrondie pour les tags */
+  font-weight: bold;
 }
 
 .secondary-article img {
+  width: 100%;
   height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.secondary-article__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; /* Espace entre le titre et le texte */
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start; /* Aligne les éléments à gauche */
+}
+.secondary-article__content .secondary-article h3 {
+  font-size: 14px;
+  padding: 8px;
+}
+.secondary-article__content .secondary-article__content h3 {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+}
+.secondary-article__content .secondary-article__content p {
+  font-size: 14px;
+  color: #777;
+  margin: 0;
 }
 
 .secondary-article h3 {

@@ -38,7 +38,17 @@
           <div class="secondary-article">
             <a href="{{ article.url }}">
               <img src="{{ article.image | image_url: height: 300 }}" alt="{{ article.title }}">
-              <h3>{{ article.title }}</h3>
+              <div class="secondary-article__card">
+                <div class="secondary-article__tags">
+                  {%- for tag in article.tags -%}
+                    <span class="tag">{{article.tags }}</span>
+                  {%- endfor -%}
+                </div>
+                <div class="secondary-article__content">
+                  <h3>{{ article.title }}</h3>
+                  <p>5 min de lecture</p> <!-- A remplacer par un metafield -->
+                </div>
+              </div>
             </a>
           </div>
         {%- endfor -%}
