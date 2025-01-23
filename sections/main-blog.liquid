@@ -45,16 +45,22 @@
       </div>
   
       <!-- Cartes spécialisées -->
-      <div class="blog-grid__special-card">
+      <div class="blog-grid__special-cards">
         <div class="special-card">
           <h3>Chat avec un expert</h3>
           <p>Discutez avec notre équipe pour des conseils personnalisés.</p>
           <a href="#" class="button">Commencer</a>
         </div>
-        <div class="blog-grid__promo-card">
-          <div class="promo-card">
-            <h3>Profitez d'une réduction</h3>
-            <p>Créez votre pack et obtenez 10% de réduction.</p>
+        <div class="promo-cards">
+          <div class="promo-cards__image">
+            <img src="{{ section.settings.image_promo | image_url: height: 424 }}" alt="discount image">
+          </div>
+          <div class="promo-cards__text">
+          <div>
+            <h3>Créez votre pack et obtenez 10% de réduction</h3>
+            <p class="text-body">Des soins à l'efficacité, réunis au sein d'un pack avec un prix préférentiel.</p>
+          </div>
+            <button>PACKS DE SOINS</button>
           </div>
         </div>
       </div>
@@ -100,6 +106,11 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_promo",
+      "label": "Image de promotion"
+    },
     {
       "type": "header",
       "content": "t:sections.main-blog.settings.header.content"
