@@ -213,7 +213,7 @@
       "from": "De",
       "filter_and_sort": "Filtrer et trier",
       "filter_by_label": "Filtrer par",
-      "filter_button": "Filtrer",
+      "filter_button": "Filtrer par",
       "filters_selected": {
         "one": "{{ count }} sélectionné",
         "other": "{{ count }} sélectionnés",

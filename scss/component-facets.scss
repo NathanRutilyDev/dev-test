@@ -1349,3 +1349,73 @@ input.mobile-facets__checkbox {
     }
   }
 }
+
+/* --- Mobile sticky facets */
+.mobile-facets__sticky {
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+  z-index: 100;
+  width: calc(100% - 10px);
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 5px;
+
+  > * {
+    flex: 1 0 0%;
+    max-width: 50%;
+    border-left: 1px solid rgba(var(--color-foreground), 0.1);
+
+    > * {
+      width: 100%;
+
+      summary {
+        width: 100%;
+      }
+    }
+  }
+
+  menu-drawer summary .mobile-facets__open,
+  facet-sorting summary {
+    height: 56px;
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  facet-sorting summary {
+    max-width: 100%;
+    overflow: hidden;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  facet-sorting details[open] {
+    summary {
+      background: rgb(var(--color-background-contrast));
+
+      svg {
+        rotate: -180deg;
+      }
+    }
+
+    .facet-sorting__options {
+      bottom: 100%;
+      top: initial;
+      right: 0;
+    }
+  }
+}

@@ -1507,3 +1507,71 @@ input.mobile-facets__checkbox {
 .sorting .facet-sorting__options li:hover, .sorting .facet-sorting__options li.facet-sorting__link--active {
   background-color: rgb(var(--color-background-contrast));
 }
+
+/* --- Mobile sticky facets */
+.mobile-facets__sticky {
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+  z-index: 100;
+  width: calc(100% - 10px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: white;
+  border-radius: 5px;
+}
+.mobile-facets__sticky > * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0%;
+          flex: 1 0 0%;
+  max-width: 50%;
+  border-left: 1px solid rgba(var(--color-foreground), 0.1);
+}
+.mobile-facets__sticky > * > * {
+  width: 100%;
+}
+.mobile-facets__sticky > * > * summary {
+  width: 100%;
+}
+.mobile-facets__sticky menu-drawer summary .mobile-facets__open,
+.mobile-facets__sticky facet-sorting summary {
+  height: 56px;
+  width: 100%;
+  padding: 16px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 8px;
+}
+.mobile-facets__sticky facet-sorting summary {
+  max-width: 100%;
+  overflow: hidden;
+}
+.mobile-facets__sticky facet-sorting summary svg {
+  width: 20px;
+  height: 20px;
+}
+.mobile-facets__sticky facet-sorting summary span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mobile-facets__sticky facet-sorting details[open] summary {
+  background: rgb(var(--color-background-contrast));
+}
+.mobile-facets__sticky facet-sorting details[open] summary svg {
+  rotate: -180deg;
+}
+.mobile-facets__sticky facet-sorting details[open] .facet-sorting__options {
+  bottom: 100%;
+  top: initial;
+  right: 0;
+}

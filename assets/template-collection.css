@@ -197,7 +197,12 @@
   }
 }
 
-load-more-button.button {
+.load-more-button-wrapper {
+  width: 100%;
+  text-align: center;
   margin-top: 32px;
+}
+
+load-more-button.button {
   padding: 16px 24px;
 }

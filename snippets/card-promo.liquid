@@ -1,6 +1,12 @@
 <div class="card__featured-promo color-{{ color_scheme }}">
   <div class="card__featured-promo--image">
-    {% render 'responsive-image' with image, sizes: '420px', loading: 'lazy', allow_stretch: true %}
+    {% if image != blank %}
+      {% render 'responsive-image' with image, sizes: '420px', loading: 'lazy', allow_stretch: true %}
+    {% else %}
+      <div class="responsive-image-wrapper">
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endif %}
 
     {% if promo_text != blank or promo_heading != blank %}
       <div class="card__featured-promo--macaron-content">

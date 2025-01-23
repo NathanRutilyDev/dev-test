@@ -160,7 +160,7 @@
             </div>
           {%- else -%}
             <div
-              class="collection center{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
+              class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
             >
               <div class="loading-overlay gradient"></div>
               <ul
@@ -267,15 +267,17 @@
 
               {% if paginate.pages > 1 %}
                 <script src="{{ 'load-more.js' | asset_url }}" defer="defer"></script>
-                <load-more-button
-                  class="button button--primary"
-                  data-current-page="1"
-                  data-total-pages="{{ paginate.pages }}"
-                  data-next-url="{{ collection.url | append: '?page=2' }}"
-                >
-                  {{ 'products.product.see_more' | t }}
-                  {%- render 'loading-spinner' -%}
-                </load-more-button>
+                <div class="load-more-button-wrapper">
+                  <load-more-button
+                    class="button button--primary"
+                    data-current-page="1"
+                    data-total-pages="{{ paginate.pages }}"
+                    data-next-url="{{ collection.url | append: '?page=2' }}"
+                  >
+                    {{ 'products.product.see_more' | t }}
+                    {%- render 'loading-spinner' -%}
+                  </load-more-button>
+                </div>
               {% endif %}
               {% comment %}
                 {%- if paginate.pages > 1 -%}
