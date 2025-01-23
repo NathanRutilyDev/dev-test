@@ -25,8 +25,33 @@
 
 @media screen and (max-width: 1079px) {
   .facets-container {
-    grid-template-columns: auto minmax(0, max-content);
-    column-gap: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding-inline: 16px;
+
+    #ProductCount {
+      white-space: nowrap;
+    }
+
+    .active-facets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 0;
+
+      .svg-wrapper {
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    .active-facets__button,
+    .active-facets__button-remove {
+      padding: 0;
+    }
   }
 }
 
@@ -744,9 +769,9 @@ a.active-facets__button.focused .active-facets__button-inner {
   }
 }
 
-.active-facets facet-remove:only-child:not(.filters-active) {
-  display: none;
-}
+// .active-facets facet-remove:only-child:not(.filters-active) {
+//   display: none;
+// }
 
 .facets-vertical .active-facets .active-facets-vertical-filter:only-child > facet-remove:not(.filters-active) {
   display: none;
@@ -845,6 +870,17 @@ a.active-facets__button.focused .active-facets__button-inner {
 .mobile-facets__header-inner {
   flex-grow: 1;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .h2 {
+    margin-block: 0;
+  }
+
+  .mobile-facets__count {
+    text-align: left;
+  }
 }
 
 .mobile-facets__info {
@@ -874,25 +910,16 @@ a.active-facets__button.focused .active-facets__button-inner {
   padding-bottom: 0.5rem;
   display: flex;
   align-items: center;
-  color: rgba(var(--color-link), var(--alpha-link));
+  color: rgb(var(--color-foreground));
 }
 
 .mobile-facets__open:hover {
-  color: rgb(var(--color-link));
+  background: rgb(var(--color-background-constrast));
 }
 
 .mobile-facets__open:hover line,
 .mobile-facets__open:hover circle {
   stroke: rgb(var(--color-link));
-}
-
-.mobile-facets__open-label {
-  transition: text-decoration var(--duration-short) ease;
-}
-
-.mobile-facets__open:hover .mobile-facets__open-label {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
 }
 
 .mobile-facets__open > * + * {
@@ -948,6 +975,13 @@ details.menu-opening .mobile-facets__close .svg-wrapper {
   display: grid;
   grid-template-columns: min-content 1fr;
   text-align: start;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    rotate: 90deg;
+    margin-right: 1.2rem;
+  }
 }
 
 .mobile-facets__close-button > .facets__and-helptext {
@@ -1061,7 +1095,9 @@ input.mobile-facets__checkbox {
 }
 
 .mobile-facets__label > svg {
-  background-color: rgb(var(--color-background));
+  border: 1px solid rgb(var(--color-foreground));
+  border-radius: 4px;
+  overflow: hidden;
   position: relative;
   z-index: 2;
   margin-right: 1.2rem;
@@ -1070,21 +1106,30 @@ input.mobile-facets__checkbox {
 
 .mobile-facets__label .icon-checkmark {
   position: absolute;
-  top: 1.9rem;
-  left: 2.8rem;
+  top: 1.5rem;
+  left: 2.5rem;
   visibility: hidden;
-  width: 11px;
-  height: 9px;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: rgb(var(--color-foreground));
 }
 
 .mobile-facets__label > input[type="checkbox"]:checked ~ .icon-checkmark {
   visibility: visible;
+  color: #ffffff;
 }
 
 .mobile-facets__arrow,
 .mobile-facets__summary .icon-caret {
   margin-left: auto;
   display: block;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    rotate: -90deg;
+  }
 }
 
 .mobile-facets__footer {
@@ -1220,6 +1265,7 @@ input.mobile-facets__checkbox {
   .facets-vertical-form {
     display: flex;
     justify-content: flex-start;
+    gap: 16px;
   }
 
   .product-count-vertical {
@@ -1234,12 +1280,30 @@ input.mobile-facets__checkbox {
     padding: 0.5rem 0.5rem 0.5rem 0;
   }
 
-  .facets-vertical .facets__price .field:last-of-type {
-    margin-left: 1rem;
+  .facets-vertical facet-sorting summary {
+    width: 200px;
+    max-width: 200px;
+    overflow: hidden;
+
+    span {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 
-  .facets-vertical .active-facets__button {
-    margin-bottom: 1.5rem;
+  .facets-vertical .facets-vertical-active-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+
+    .active-facets__button {
+      margin-right: 0;
+    }
+  }
+
+  .facets-vertical .facets__price .field:last-of-type {
+    margin-left: 1rem;
   }
 
   .facets-vertical .facet-checkbox input[type="checkbox"] {
@@ -1357,12 +1421,15 @@ input.mobile-facets__checkbox {
   left: 5px;
   z-index: 100;
   width: calc(100% - 10px);
-  display: flex;
-  align-items: center;
-  background: white;
-  border-radius: 5px;
 
-  > * {
+  > form {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    background: white;
+  }
+
+  > form > * {
     flex: 1 0 0%;
     max-width: 50%;
     border-left: 1px solid rgba(var(--color-foreground), 0.1);

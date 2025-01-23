@@ -70,21 +70,23 @@
         {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
           <facet-filters-form class="facets facets-vertical-sort page-width medium-down-hide">
             <form class="facets-vertical-form" id="FacetSortForm">
-              {%- for filter in collection.filters -%}
-                {%- for value in filter.active_values -%}
-                  <facet-remove>
-                    <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
-                      <span class="active-facets__button-inner button button--tertiary">
-                        {{ value.label | escape }}
-                        <span class="svg-wrapper">
-                          {% render 'icons', icon: 'close' %}
+              <div class="facets-vertical-active-values">
+                {%- for filter in collection.filters -%}
+                  {%- for value in filter.active_values -%}
+                    <facet-remove>
+                      <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
+                        <span class="active-facets__button-inner button button--tertiary">
+                          {{ value.label | escape }}
+                          <span class="svg-wrapper">
+                            {% render 'icons', icon: 'close' %}
+                          </span>
+                          <span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span>
                         </span>
-                        <span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span>
-                      </span>
-                    </a>
-                  </facet-remove>
+                      </a>
+                    </facet-remove>
+                  {%- endfor -%}
                 {%- endfor -%}
-              {%- endfor -%}
+              </div>
               <div class="product-count-vertical light" role="status">
                 <p class="product-count__text text-body">
                   <span id="ProductCountDesktop">

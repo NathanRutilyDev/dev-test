@@ -5,7 +5,7 @@ class FacetFiltersForm extends HTMLElement {
 
     this.debouncedOnSubmit = debounce((event) => {
       this.onSubmitHandler(event);
-    }, 800);
+    }, 100);
 
     this.facetForm = this.querySelector('form');
     this.facetForm.addEventListener('input', this.debouncedOnSubmit.bind(this));
@@ -67,8 +67,8 @@ class FacetFiltersForm extends HTMLElement {
         FacetFiltersForm.renderFilters(html, event);
         FacetFiltersForm.renderProductGridContainer(html);
         FacetFiltersForm.renderProductCount(html);
-        this.querySelectorAll('facet-sorting').forEach((element) => {
-          console.log();
+
+        FacetFiltersForm.querySelectorAll('facet-sorting').forEach((element) => {
           customElements.upgrade(element);
         });
         if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(html.innerHTML);
@@ -185,6 +185,7 @@ class FacetFiltersForm extends HTMLElement {
       '.active-facets-mobile',
       '.active-facets-desktop',
       '.product-grid-right-col .product-count-vertical',
+      '.product-grid-right-col .facets-vertical-active-values',
     ];
 
     activeFacetElementSelectors.forEach((selector) => {
@@ -204,7 +205,7 @@ class FacetFiltersForm extends HTMLElement {
       document.querySelector(selector).innerHTML = html.querySelector(selector).innerHTML;
     });
 
-    document.getElementById('FacetFiltersFormMobile').closest('menu-drawer').bindEvents();
+    document.getElementById('FacetFiltersFormMobile').querySelector('menu-drawer.mobile-facets__wrapper').bindEvents();
   }
 
   static renderCounts(source, target) {

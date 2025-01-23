@@ -23,11 +23,40 @@
 }
 @media screen and (max-width: 1079px) {
   .facets-container {
-    grid-template-columns: auto minmax(0, -webkit-max-content);
-    grid-template-columns: auto minmax(0, max-content);
-    -webkit-column-gap: 2rem;
-       -moz-column-gap: 2rem;
-            column-gap: 2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    gap: 16px;
+    padding-inline: 16px;
+  }
+  .facets-container #ProductCount {
+    white-space: nowrap;
+  }
+  .facets-container .active-facets {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    gap: 8px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0;
+  }
+  .facets-container .active-facets .svg-wrapper {
+    width: 10px;
+    height: 10px;
+  }
+  .facets-container .active-facets__button,
+  .facets-container .active-facets__button-remove {
+    padding: 0;
   }
 }
 .facet-filters {
@@ -818,10 +847,6 @@ a.active-facets__button.focused .active-facets__button-inner {
     width: 16px;
   }
 }
-.active-facets facet-remove:only-child:not(.filters-active) {
-  display: none;
-}
-
 .facets-vertical .active-facets .active-facets-vertical-filter:only-child > facet-remove:not(.filters-active) {
   display: none;
 }
@@ -951,6 +976,19 @@ a.active-facets__button.focused .active-facets__button-inner {
       -ms-flex-positive: 1;
           flex-grow: 1;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 16px;
+}
+.mobile-facets__header-inner .h2 {
+  margin-block: 0;
+}
+.mobile-facets__header-inner .mobile-facets__count {
+  text-align: left;
 }
 
 .mobile-facets__info {
@@ -986,28 +1024,16 @@ a.active-facets__button.focused .active-facets__button-inner {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: rgba(var(--color-link), var(--alpha-link));
+  color: rgb(var(--color-foreground));
 }
 
 .mobile-facets__open:hover {
-  color: rgb(var(--color-link));
+  background: rgb(var(--color-background-constrast));
 }
 
 .mobile-facets__open:hover line,
 .mobile-facets__open:hover circle {
   stroke: rgb(var(--color-link));
-}
-
-.mobile-facets__open-label {
-  -webkit-transition: -webkit-text-decoration var(--duration-short) ease;
-  transition: -webkit-text-decoration var(--duration-short) ease;
-  transition: text-decoration var(--duration-short) ease;
-  transition: text-decoration var(--duration-short) ease, -webkit-text-decoration var(--duration-short) ease;
-}
-
-.mobile-facets__open:hover .mobile-facets__open-label {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
 }
 
 .mobile-facets__open > * + * {
@@ -1072,6 +1098,12 @@ details.menu-opening .mobile-facets__close .svg-wrapper {
   grid-template-columns: -webkit-min-content 1fr;
   grid-template-columns: min-content 1fr;
   text-align: start;
+}
+.mobile-facets__close-button svg {
+  width: 20px;
+  height: 20px;
+  rotate: 90deg;
+  margin-right: 1.2rem;
 }
 
 .mobile-facets__close-button > .facets__and-helptext {
@@ -1214,7 +1246,9 @@ input.mobile-facets__checkbox {
 }
 
 .mobile-facets__label > svg {
-  background-color: rgb(var(--color-background));
+  border: 1px solid rgb(var(--color-foreground));
+  border-radius: 4px;
+  overflow: hidden;
   position: relative;
   z-index: 2;
   margin-right: 1.2rem;
@@ -1224,21 +1258,30 @@ input.mobile-facets__checkbox {
 
 .mobile-facets__label .icon-checkmark {
   position: absolute;
-  top: 1.9rem;
-  left: 2.8rem;
+  top: 1.5rem;
+  left: 2.5rem;
   visibility: hidden;
-  width: 11px;
-  height: 9px;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: rgb(var(--color-foreground));
 }
 
 .mobile-facets__label > input[type=checkbox]:checked ~ .icon-checkmark {
   visibility: visible;
+  color: #ffffff;
 }
 
 .mobile-facets__arrow,
 .mobile-facets__summary .icon-caret {
   margin-left: auto;
   display: block;
+}
+.mobile-facets__arrow svg,
+.mobile-facets__summary .icon-caret svg {
+  width: 20px;
+  height: 20px;
+  rotate: -90deg;
 }
 
 .mobile-facets__footer {
@@ -1385,6 +1428,7 @@ input.mobile-facets__checkbox {
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
+    gap: 16px;
   }
   .product-count-vertical {
     position: relative;
@@ -1395,11 +1439,29 @@ input.mobile-facets__checkbox {
   .facets-vertical .facets__price {
     padding: 0.5rem 0.5rem 0.5rem 0;
   }
+  .facets-vertical facet-sorting summary {
+    width: 200px;
+    max-width: 200px;
+    overflow: hidden;
+  }
+  .facets-vertical facet-sorting summary span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .facets-vertical .facets-vertical-active-values {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .facets-vertical .facets-vertical-active-values .active-facets__button {
+    margin-right: 0;
+  }
   .facets-vertical .facets__price .field:last-of-type {
     margin-left: 1rem;
-  }
-  .facets-vertical .active-facets__button {
-    margin-bottom: 1.5rem;
   }
   .facets-vertical .facet-checkbox input[type=checkbox] {
     z-index: 0;
@@ -1515,26 +1577,28 @@ input.mobile-facets__checkbox {
   left: 5px;
   z-index: 100;
   width: calc(100% - 10px);
+}
+.mobile-facets__sticky > form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: white;
   border-radius: 5px;
+  background: white;
 }
-.mobile-facets__sticky > * {
+.mobile-facets__sticky > form > * {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 0%;
           flex: 1 0 0%;
   max-width: 50%;
   border-left: 1px solid rgba(var(--color-foreground), 0.1);
 }
-.mobile-facets__sticky > * > * {
+.mobile-facets__sticky > form > * > * {
   width: 100%;
 }
-.mobile-facets__sticky > * > * summary {
+.mobile-facets__sticky > form > * > * summary {
   width: 100%;
 }
 .mobile-facets__sticky menu-drawer summary .mobile-facets__open,
