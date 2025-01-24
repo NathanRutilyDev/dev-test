@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .hero-banner {
   position: relative;
   width: 100%;
@@ -139,4 +140,61 @@
 .product-card p {
   font-size: 14px;
   color: #666;
+}
+
+.search-results {
+  position: absolute;
+  background: white;
+  border-top: 1px solid rgba(212, 204, 196, 0.5);
+  border-radius: 0 0 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 9999;
+  display: none; /* Masqué par défaut */
+  padding: 4px;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+}
+
+.search-results.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.search-result-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 8px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 12px;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+}
+
+.search-result-item a {
+  text-decoration: none;
+  color: #333;
+}
+
+.search-result-item h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.search-result-item p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #999;
 }
