@@ -50,14 +50,12 @@
     display: flex;
     flex-direction: column;
     padding: 16px;
-    gap: 16px; /* Espacement entre les sections */
     height: 100%;
   }
 
   .secondary-article__tags {
     display: flex;
     flex-wrap: wrap; /* Permet aux tags de passer à la ligne si nécessaire */
-    gap: 8px; /* Espacement entre les tags */
 
     .tag {
       display: inline-block;

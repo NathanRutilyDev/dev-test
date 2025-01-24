@@ -1,8 +1,16 @@
 {
   "sections": {
+    "banner": {
+      "type": "main-blog-banner",
+      "settings": {
+        "image": "shopify://shop_images/425cd268602f743584eb554914939893.png",
+        "text": "<p>Le Carnet renferme des milliers d’articles en lien avec l'univers du soin.</p>"
+      }
+    },
     "main": {
       "type": "main-blog",
       "settings": {
+        "image_promo": "shopify://shop_images/image-promo.jpg",
         "layout": "collage",
         "show_image": true,
         "image_height": "medium",
@@ -14,6 +22,7 @@
     }
   },
   "order": [
+    "banner",
     "main"
   ]
 }

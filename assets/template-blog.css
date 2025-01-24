@@ -67,7 +67,6 @@
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 16px;
-  gap: 16px; /* Espacement entre les sections */
   height: 100%;
 }
 .secondary-article .secondary-article__tags {
@@ -76,7 +75,6 @@
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap; /* Permet aux tags de passer à la ligne si nécessaire */
-  gap: 8px; /* Espacement entre les tags */
 }
 .secondary-article .secondary-article__tags .tag {
   display: inline-block;

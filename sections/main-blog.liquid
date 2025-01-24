@@ -40,9 +40,10 @@
               <img src="{{ article.image | image_url: height: 300 }}" alt="{{ article.title }}">
               <div class="secondary-article__card">
                 <div class="secondary-article__tags">
-                  {%- for tag in article.tags -%}
-                    <span class="tag">{{article.tags }}</span>
-                  {%- endfor -%}
+                  <span class="tag">Eczema</span>
+                  {% comment %} {%- for tag in article.tags -%}
+                    <span class="tag">{{article.tags }}</span> 
+                  {%- endfor -%} {% endcomment %}
                 </div>
                 <div class="secondary-article__content">
                   <h3>{{ article.title }}</h3>

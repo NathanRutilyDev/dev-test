@@ -1,0 +1,43 @@
+{{ 'section-blog-banner.css' | asset_url | stylesheet_tag }}
+{{ 'component-breadcrumbs.css' | asset_url | stylesheet_tag }}
+{{ 'component-search-article-bar.css' | asset_url | stylesheet_tag }}
+
+<div 
+  class="hero-banner__image" 
+  style="background-image: url('{{ section.settings.image | image_url: width: 1920 }}');">
+  <div class="hero-banner__content">
+    <div class="hero-banner__breadcrumb">
+      {% render 'breadcrumb' %}
+    </div>
+    <div class="hero-banner__main-content">
+      <h1 class="hero-banner__title">{{ blog.title }}</h1>
+      <div class="hero-banner__text text-body">
+        {{ section.settings.text }}
+      </div>
+      {% render 'search-article-bar' %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Conseils de peau",
+  "class": "hero-banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image arrière-plan"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte personnalisé"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["blog"],
+  }
+}
+{% endschema %}
