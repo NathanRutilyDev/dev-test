@@ -49,7 +49,9 @@
       "label": "Pagination",
       "page": "Page {{ number }}",
       "next": "Page suivante",
-      "previous": "Page précédente"
+      "previous": "Page précédente",
+      "read_more": "Lire la suite",
+      "read_less": "Replier"
     },
     "search": {
       "search": "Recherche",

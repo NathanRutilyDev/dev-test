@@ -1,7 +1,7 @@
 {
   "current": {
     "logo_width": 90,
-    "type_header_font": "assistant_n6",
+    "type_header_font": "raleway_n6",
     "heading_scale": 100,
     "type_body_font": "raleway_n4",
     "body_scale": 100,
@@ -137,15 +137,15 @@
           "button_label": "#ffffff",
           "secondary_button_label": "#443d36",
           "shadow": "#443d36",
-          "border": "#DDD6D0"
+          "border": "#ddd6d0"
         }
       },
       "scheme-2": {
         "settings": {
           "background": "#443d36",
-          "background_contrast": "#FFFFFF",
+          "background_contrast": "#ffffff",
           "background_gradient": "",
-          "text": "#FFFFFF",
+          "text": "#ffffff",
           "button": "#fff6eb",
           "button_label": "#443d36",
           "secondary_button_label": "#443d36",
@@ -155,41 +155,41 @@
       },
       "scheme-3": {
         "settings": {
-          "background": "#242833",
-          "background_contrast": "#FFFFFF",
+          "background": "#69543f",
+          "background_contrast": "#956237",
           "background_gradient": "",
           "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#000000",
+          "button": "#fff6eb",
+          "button_label": "#69543f",
           "secondary_button_label": "#ffffff",
           "shadow": "#121212",
-          "border": "#DDD6D0"
+          "border": "#ddd6d0"
         }
       },
       "scheme-4": {
         "settings": {
           "background": "#121212",
-          "background_contrast": "#FFFFFF",
+          "background_contrast": "#ffffff",
           "background_gradient": "",
           "text": "#ffffff",
           "button": "#ffffff",
           "button_label": "#121212",
           "secondary_button_label": "#ffffff",
           "shadow": "#121212",
-          "border": "#DDD6D0"
+          "border": "#ddd6d0"
         }
       },
       "scheme-5": {
         "settings": {
           "background": "#334fb4",
-          "background_contrast": "#FFFFFF",
+          "background_contrast": "#ffffff",
           "background_gradient": "",
           "text": "#ffffff",
           "button": "#ffffff",
           "button_label": "#334fb4",
           "secondary_button_label": "#ffffff",
           "shadow": "#121212",
-          "border": "#DDD6D0"
+          "border": "#ddd6d0"
         }
       }
     }

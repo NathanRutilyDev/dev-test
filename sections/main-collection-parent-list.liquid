@@ -2,7 +2,7 @@
 {{ 'section-collection-parent-list.css' | asset_url | stylesheet_tag }}
 
 {% if settings.animations_reveal_on_scroll %}
-  {% assign animation_index = 1 %}
+  {% assign animation_index = 0 %}
 {% endif %}
 
 {% unless section.settings['content-position'] == 'below-image' %}
@@ -92,13 +92,6 @@
 
             <div
               class="swiper-slide homepage-collection-grid-item homepage-collection-grid-item--{{ section.settings.content-position }} block-section--{{ block.id }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-              {% comment %}
-                {% if settings.enable_animation %}
-                  data-aos="fade-up"
-                  data-aos-delay="{{ animation_delay }}"
-                  {% assign animation_delay = animation_delay | plus: 150 %}
-                {% endif %}
-              {% endcomment %}
               {% if settings.animations_reveal_on_scroll %}
                 data-cascade
                 style="--animation-order: {{ animation_index }};"

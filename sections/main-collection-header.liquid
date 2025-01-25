@@ -68,7 +68,22 @@
                   {% assign animation_index = animation_index | plus: 1 %}
                 {% endif %}
               >
-                <div class="collection-header__text-item text-link-animated">{{ collection.description }}</div>
+                <read-more
+                  class="collection-header__text-item text-link-animated0 mu--show"
+                  data-expanded="false"
+                  style="--clamp: 3; --max-height: 8.5rem"
+                >
+                  <div class="read-more-content">{{- collection.description -}}</div>
+                </read-more>
+                <span class="read-more__toggle">
+                  <span class="read-more__toggle-text read-more__toggle-text--more">
+                    {{- 'general.pagination.read_more' | t -}}
+                  </span>
+                  <span class="read-more__toggle-text read-more__toggle-text--less">
+                    {{- 'general.pagination.read_less' | t -}}
+                  </span>
+                  {%- render 'icons', icon: 'chevron' -%}
+                </span>
               </div>
             {% endif %}
           </div>

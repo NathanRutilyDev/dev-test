@@ -3752,3 +3752,68 @@ details-disclosure > details {
   align-items: center;
   justify-content: center;
 }
+
+/*--- Read-more */
+.js read-more {
+  --clamp: 3;
+  --max-height: 4.5em;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--clamp);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: var(--max-height);
+  line-height: 1.5em;
+  transition: max-height 0.3s ease;
+
+  &[data-expanded="true"] {
+    -webkit-line-clamp: unset;
+  }
+
+  @include respond-to(md) {
+    &.mu--show {
+      -webkit-line-clamp: unset;
+      max-height: initial;
+
+      .read-more__toggle {
+        display: none;
+      }
+    }
+  }
+}
+
+.read-more__toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .read-more__toggle-text--less {
+    display: none;
+  }
+
+  read-more[data-expanded="true"] + & {
+    .read-more__toggle-text--more {
+      display: none;
+    }
+
+    .read-more__toggle-text--less {
+      display: block;
+    }
+
+    svg {
+      transform: rotate3d(1, 0, 0, 180deg);
+    }
+  }
+
+  @include respond-to(md) {
+    read-more.mu--show + & {
+      display: none;
+    }
+  }
+}

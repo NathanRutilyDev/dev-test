@@ -52,12 +52,10 @@
   }
 
   .homepage-collection-grid-item {
-    flex: 0 0 140px !important;
-    width: 140px;
+    width: auto;
 
-    @include respond-to(md) {
-      flex: 0 0 240px !important;
-      width: 240px;
+    &:nth-child(n + 3) {
+      animation-delay: 0s !important;
     }
 
     .grid-item__content {
@@ -125,6 +123,7 @@
     box-shadow: 0 0 0 1px var(--text-color, #443d36);
     padding: 2px;
     height: 134px;
+    aspect-ratio: 1;
 
     @include respond-to(md) {
       height: 194px;
