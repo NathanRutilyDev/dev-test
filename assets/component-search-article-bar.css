@@ -9,8 +9,8 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  border: none;
   border-radius: 4px;
-  border: 1px solid var(--Main-Border, #DDD6D0);
   background: var(--Main-White, #FFF);
 }
 .search-container .search {
@@ -44,4 +44,9 @@
 .search-container .search .search-button svg {
   width: 24px;
   height: 24px;
+}
+
+.has-results {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }

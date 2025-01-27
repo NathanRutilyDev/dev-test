@@ -75,12 +75,6 @@
   margin-bottom: 32px;
 }
 
-.search-results {
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 16px;
-}
 
 .product-card {
   display: flex;
@@ -112,15 +106,15 @@
 
 .search-results {
   position: absolute;
+  max-height: 300px;
   background: white;
   border-top: 1px solid rgba(212, 204, 196, 0.50);
-  border-radius: 0 0 4px;
-  max-height: 300px;
+  border-radius: 0 0 4px 4px;
   overflow-y: auto;
-  z-index: 9999;
   display: none; /* Masqué par défaut */
   padding: 4px;
   align-self: stretch;
+  margin-top: 16px;
 }
 
 .search-results.active {
@@ -131,25 +125,66 @@
 
 .search-result-item {
   display: flex;
-  padding: 8px;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
+  padding: 8px;
   align-self: stretch;
-}
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 
-.search-result-item a {
-  text-decoration: none;
-  color: #333;
-}
+  a {
+    display: flex;
+    align-items: center; 
+    text-decoration: none;
+    color: #666;
+    width: 100%;
+    overflow: hidden;
 
-.search-result-item h4 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: bold;
-}
+    img {
+      flex-shrink: 0; 
+      width: 56px;
+      height: 56px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
 
-.search-result-item p {
-  margin: 4px 0 0;
-  font-size: 14px;
-  color: #999;
+    .search-result-text {
+      display: flex;
+      flex-direction: column; 
+      flex-grow: 1;
+      margin-left: 8px;
+      overflow: hidden;
+
+      .search-result-tags {
+        display: flex;
+        align-items: center; 
+        justify-content: space-between;
+        flex-grow: 1;
+        overflow: hidden;
+
+        span {
+          margin: 4px 0 0;
+          font-size: 14px;
+        }
+
+        p {
+          font-size: 12px;
+          margin: 0;
+          color: #999;
+          text-align: right;
+          white-space: nowrap;
+        }
+      }
+      
+      h4 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
 }
