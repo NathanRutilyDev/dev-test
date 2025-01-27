@@ -91,8 +91,8 @@ class ArticleSearch {
             <img src="${article.image}" alt="${article.title}">
             <div class="search-result-text">
               <div class="search-result-tags">
-                <span>Eczema</span>
-                <p>5 min</p>
+                <span>${article.tag}</span>
+                <p>${this.countReadingTime(article)} min</p>
               </div>
               <h4 class="text-body">${article.title}</h4>
             </div>
@@ -104,6 +104,14 @@ class ArticleSearch {
 
     this.resultsContainer.classList.add('active');
     this.searchContainer.classList.add('has-results');
+  }
+
+  countReadingTime(article) {
+    const body = article.body
+    const wordCount = body.trim().split(/\s+/).length;
+    console.log(wordCount)
+    const contentReadTime = Math.ceil(wordCount / 150) -1;
+    return contentReadTime;
   }
 
   clearResults() {

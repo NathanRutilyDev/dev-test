@@ -16,6 +16,9 @@
   }
 {%- endstyle -%}
 
+{% assign content_words = article.content | split: ' ' %}
+{% assign content_words_size = content_words.size %}
+{% assign content_read_time = content_words_size | divided_by: 120 | round %}
 
 {%- paginate blog.articles by 6 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
@@ -35,6 +38,9 @@
       <!-- Articles secondaires -->
       <div class="blog-grid__secondary-articles">
         {%- for article in blog.articles offset: 1 limit: 4 -%}
+          {% assign content_words = article.content | split: ' ' %}
+          {% assign content_words_size = content_words.size %}
+          {% assign content_read_time = content_words_size | divided_by: 150 | round %}
           <div class="secondary-article">
             <a href="{{ article.url }}">
               <img src="{{ article.image | image_url: height: 300 }}" alt="{{ article.title }}">
@@ -47,7 +53,7 @@
                 </div>
                 <div class="secondary-article__content">
                   <h3>{{ article.title }}</h3>
-                  <p>5 min de lecture</p> <!-- A remplacer par un metafield -->
+                  <p>{{ content_read_time }} min de lecture</p>
                 </div>
               </div>
             </a>
