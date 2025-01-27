@@ -94,7 +94,7 @@ class ArticleSearch {
                 <span>Eczema</span>
                 <p>5 min</p>
               </div>
-              <h4>${article.title}</h4>
+              <h4 class="text-body">${article.title}</h4>
             </div>
           </a>
         </div>

@@ -230,19 +230,26 @@
 }
 .search-result-item a .search-result-text .search-result-tags span {
   margin: 4px 0 0;
-  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #6E8B99;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px; /* 133.333% */
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  color: var(--Main-White, #FFF);
 }
 .search-result-item a .search-result-text .search-result-tags p {
-  font-size: 12px;
   margin: 0;
-  color: #999;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.12px;
   text-align: right;
   white-space: nowrap;
 }
 .search-result-item a .search-result-text h4 {
   margin: 0;
-  font-size: 16px;
-  font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
