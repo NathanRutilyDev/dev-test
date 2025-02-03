@@ -253,7 +253,7 @@
   white-space: nowrap;
 }
 .search-result-item a .search-result-text h4 {
-  margin: 0;
+  margin: 8px 0 0 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

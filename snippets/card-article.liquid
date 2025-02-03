@@ -117,13 +117,14 @@
 
         <div class="card__overlay">
           <div class="card__overlay--upper">
-            {% if card_article.tags != blank %}
-              {% for tag in card_article.tags %}
+            {% assign tags = card_article.metafields.data.tags.value %}
+            {% if tags != blank %}
+              {% for tag in tags %}
                 <div
                   class="card__overlay--tags"
-                  style="--background-color: {{ card_article.tags.value.arriere_plan }}; color: {{ card_article.tags.value.couleur_du_texte }}"
+                  style="--background-color: {{ tag.backgroung_color }}; color: {{ tag.color }}"
                 >
-                  <span>{{ card_article.tags.value.nom }}</span>
+                  <span>{{ tag.name }}</span>
                 </div>
               {% endfor %}
             {% endif %}
