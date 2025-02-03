@@ -26,6 +26,7 @@
       {%- assign main_article = blog.articles.first -%}
 
       <!-- Article principal -->
+      <div>
         <div class="main-article__image">
           <img src="{{ main_article.image | image_url: height: 880 }}" alt="{{ main_article.title }}">
         </div>
@@ -33,6 +34,7 @@
           <h2>{{ main_article.title }}</h2>
           <p>{{ main_article.excerpt }}</p>
           <a href="{{ main_article.url }}" class="read-more">Voir tout l'article</a>
+        </div>
       </div>
   
       <!-- Articles secondaires -->

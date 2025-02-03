@@ -1,0 +1,23 @@
+{%- if predictive_search.performed -%}
+    {%- for article in predictive_search.resources.articles -%}
+        {% assign content_words = article.content | split: ' ' %}
+        {% assign content_words_size = content_words.size %}
+        {% assign content_read_time = content_words_size | divided_by: 150 | round %}
+
+        <div class="search-result-item">
+            <a href="{{ article.url }}">
+              <img src="{{ article.image | image_url: width: 56 }}" alt="{{ article.title | escape }}">
+              <div class="search-result-text">
+                    <div class="search-result-tags">
+                        {% for tag in article.tags %}
+                            {% assign entry = article.metafields.data.tags[tag] %}
+                            <span style="--color: {{ entry.color }}; --background: {{ entry.background }}">{{ entry.name }}</span>
+                        {% endfor %}
+                        <p>{{ content_read_time }} min</p>
+                    </div>
+                    <h4 class="text-body">{{ article.title }}</h4>
+              </div>
+            </a>
+        </div>
+    {%- endfor %}
+{%- endif %}
