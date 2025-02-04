@@ -1,4 +1,100 @@
 @charset "UTF-8";
+.filter-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding: 16px 64px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 40px;
+  border-bottom: 1px solid #D4CCC4;
+  background: var(--Main-White, #FFF);
+}
+
+.simple-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 12px;
+  border: none;
+  background-color: #FFF;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.simple-button p {
+  color: var(--Main-Brown, #443D36);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  margin: 0;
+}
+.simple-button .svg-wrapper {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+.simple-button .svg-wrapper > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+  transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.simple-button[aria-expanded=false] .icon-plus {
+  -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+  opacity: 1;
+  visibility: visible;
+}
+
+.simple-button[aria-expanded=false] .icon-minus {
+  -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+          transform: rotate(180deg);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.simple-button[aria-expanded=true] .icon-plus {
+  -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+          transform: rotate(180deg);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.simple-button[aria-expanded=true] .icon-minus {
+  -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+  opacity: 1;
+  visibility: visible;
+}
+
+.filter-panel {
+  display: none;
+}
+
+.filter-panel.active {
+  display: block;
+  padding: 16px 64px;
+  background: #f9f9f9;
+}
+
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 colonnes égales */

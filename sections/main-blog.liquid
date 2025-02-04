@@ -16,9 +16,59 @@
   }
 {%- endstyle -%}
 
-{% assign content_words = article.content | split: ' ' %}
-{% assign content_words_size = content_words.size %}
-{% assign content_read_time = content_words_size | divided_by: 150 | round %}
+<script src="{{ 'filter-accordion.js' | asset_url }}" defer="defer"></script>
+
+<filter-accordion>
+  <div class="filter-row">
+    <button class="simple-button" data-filter="preoccupation" aria-expanded="false">
+      <p>Préoccupation</p>
+      <div class="svg-wrapper">
+        <div class="icon-plus">
+          {{- 'icon-plus.svg' | inline_asset_content -}}
+        </div>
+        <div class="icon-minus">
+          {{- 'icon-minus.svg' | inline_asset_content -}}
+        </div>
+      </div>
+    </button>
+
+    <button class="simple-button" data-filter="besoin" aria-expanded="false">
+      <p>Besoin</p>
+      <div class="svg-wrapper">
+        <div class="icon-plus">
+          {{- 'icon-plus.svg' | inline_asset_content -}}
+        </div>
+        <div class="icon-minus">
+          {{- 'icon-minus.svg' | inline_asset_content -}}
+        </div>
+      </div>
+    </button>
+
+    <button class="simple-button" data-filter="peau" aria-expanded="false">
+      <p>Type de peau</p>
+      <div class="svg-wrapper">
+        <div class="icon-plus">
+          {{- 'icon-plus.svg' | inline_asset_content -}}
+        </div>
+        <div class="icon-minus">
+          {{- 'icon-minus.svg' | inline_asset_content -}}
+        </div>
+      </div>
+    </button>
+  </div>
+
+  <div class="filter-results">
+    <div class="filter-panel" data-filter="preoccupation">
+      <p>Contenu pour Préoccupation</p>
+    </div>
+    <div class="filter-panel" data-filter="besoin">
+      <p>Contenu pour Besoin</p>
+    </div>
+    <div class="filter-panel" data-filter="peau">
+      <p>Contenu pour Type de peau</p>
+    </div>
+  </div>
+</filter-accordion>
 
 {%- paginate blog.articles by 6 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">

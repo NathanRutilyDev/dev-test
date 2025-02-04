@@ -3,7 +3,7 @@
 {{ 'component-search-article-bar.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image != blank %}
-  {% render 'responsive-image' with section.settings.image, loading: 'lazy', allow_stretch: true, class: 'hero-banner__image' %}
+  {% render 'responsive-image' with section.settings.image, loading: 'eager', allow_stretch: true, class: 'hero-banner__image' %}
 {% else %}
   <div class="responsive-image-wrapper">
     {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
