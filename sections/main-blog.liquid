@@ -91,27 +91,6 @@
       <div class="blog-grid__secondary-articles">
         {%- for article in blog.articles offset: 1 limit: 4 -%}
           {% render 'card-article', card_article: article %}
-
-          {% comment %} {% assign content_words = article.content | split: ' ' %}
-          {% assign content_words_size = content_words.size %}
-          {% assign content_read_time = content_words_size | divided_by: 150 | round %}
-          <div class="secondary-article">
-            <a href="{{ article.url }}">
-              <img src="{{ article.image | image_url: height: 300 }}" alt="{{ article.title }}">
-              <div class="secondary-article__card">
-                <div class="secondary-article__tags">
-                  <span class="tag">Eczema</span>
-                  {% comment %} {%- for tag in article.tags -%}
-                    <span class="tag">{{article.tags }}</span> 
-                  {%- endfor -%} {% endcomment %}
-                </div>
-                <div class="secondary-article__content">
-                  <h3>{{ article.title }}</h3>
-                  <p>{{ content_read_time }} min de lecture</p>
-                </div>
-              </div>
-            </a>
-          </div> {% endcomment %}
         {%- endfor -%}
       </div>
   

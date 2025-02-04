@@ -90,49 +90,21 @@
             </div>
           </div>
         {%- endif -%}
-        <div class="card__content">
-          <div class="card__information">
-            <h3
-              class="card__heading"
-              {% if card_article.image == null and settings.card_style == 'standard' %}
-                id="title-{{ section_id }}-{{ card_article.id }}"
-              {% endif %}
-            >
-              <a
-                href="{{ card_article.url }}"
-                id="StandardCardNoMediaLink-{{ section_id }}-{{ card_article.id }}"
-                class="full-unstyled-link"
-                aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_article.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_article.id }}"
-              >
-                {{ card_article.title | escape }}
-              </a>
-            </h3>
-            {% if card_article.metafields.data.subtitle != blank %}
-              <p class="card__subtitle h5">
-                {{ card_article.metafields.data.subtitle }}
-              </p>
-            {% endif %}
-          </div>
-        </div>
-
-        <div class="card__overlay">
-          <div class="card__overlay--upper">
-            {% assign tags = card_article.metafields.data.tags.value %}
-            {% if tags != blank %}
-              {% for tag in tags %}
-                <div
-                  class="card__overlay--tags"
-                  style="--background-color: {{ tag.backgroung_color }}; color: {{ tag.color }}"
-                >
-                  <span>{{ tag.name }}</span>
-                </div>
-              {% endfor %}
-            {% endif %}
-          </div>
-        </div>
       </div>
       <div class="card__content">
         <div class="card__information">
+          {% assign tags = card_article.metafields.data.tags.value %}
+            {% if tags != blank %}
+              {% for tag in tags %}
+                <div class="card__tags">
+                  <span 
+                    style="background-color: {{ tag.background_color }}; color: {{ tag.color }}"
+                  >
+                    {{ tag.name }}
+                  </span>
+                </div>
+              {% endfor %}
+            {% endif %}
           <h3
             class="card__heading{% if card_article.image or settings.card_style == 'standard' %} h5{% endif %}"
             {% if card_article.image or settings.card_style == 'card' %}
@@ -153,7 +125,7 @@
             <div class="card__footer">
               {% if card_article.content != blank %}
                 <span class="card__content_read_time text-xs">
-                  {% assign content_words = article.content | split: ' ' %}
+                  {% assign content_words = card_article.content | split: ' ' %}
                   {% assign content_words_size = content_words.size %}
                   {% assign content_read_time = content_words_size | divided_by: 150 | round %}
                   {{ content_read_time }} min de lecture

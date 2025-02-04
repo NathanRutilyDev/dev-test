@@ -1,20 +1,5 @@
-@media screen and (max-width: 749px) {
-  .articles-wrapper .article {
-    width: 100%;
-  }
-}
-
-.article {
-  display: flex;
-  align-items: center;
-}
-
-.article.grid__item {
-  padding: 0;
-}
-
-.grid--peek .article-card {
-  box-sizing: border-box;
+.card__tags {
+  margin-bottom: 12px;
 }
 
 .article-card__image-wrapper > a {
@@ -139,4 +124,16 @@
       margin-bottom: 7rem;
     }
   }
+}
+
+.card__tags span {
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: Raleway;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px; /* 133.333% */
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
 }
