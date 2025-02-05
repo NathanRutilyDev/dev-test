@@ -71,6 +71,13 @@
             "allowTouchMove": true,
             "draggable": true,
             "slidesPerView": "auto",
+            "pagination": {
+              "type": "bullets",
+              "el": ".swiper-pagination",
+              "clickable": true,
+              "dynamicBullets": true,
+              "dynamicMainBullets": 3
+            },
             "navigation": {
               "nextEl": ".swiper-button-next",
               "prevEl": ".swiper-button-prev"
@@ -227,8 +234,87 @@
             <div class="placeholder-noblocks">
               {{ 'general.onboarding.no_content' | t }}
             </div>
+          {% else %}
+            {% if section.settings.pack_image %}
+              <div
+                class="swiper-slide collection-pack-slide homepage-collection-grid-item large-up-hide homepage-collection-grid-item--{{ section.settings.content-position }} block-section--{{ block.id }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ animation_index }};"
+                  {% assign animation_index = animation_index | plus: 1 %}
+                {% endif %}
+                {{ block.shopify_attributes }}
+              >
+                <style>
+                  .section--{{ section.id }} .block-section--{{ block.id }} .grid-item-details--background-gradient,
+                  .section--{{ section.id }} .block-section--{{ block.id }} .hover-outer .hover-inner::before {
+                    background: -webkit-linear-gradient(top, {{ block.settings.overlay_color | color_modify: 'alpha', 0.3 }} 0%, {{ block.settings.overlay_color | color_modify: 'alpha', 0.8 }} 75%);
+                    background: linear-gradient(to bottom, {{ block.settings.overlay_color | color_modify: 'alpha', 0.3 }} 0%, {{ block.settings.overlay_color | color_modify: 'alpha', 0.8 }} 75%);
+                  }
+
+                  {% unless section.settings.content-position == 'below-image' %}
+                    .section--{{ section.id }} .block-section--{{ block.id }} .grid-item__subheading,
+                    .section--{{ section.id }} .block-section--{{ block.id }} .grid-item__title {
+                      color: {{ block.settings.overlay_font_color }} !important;
+                    }
+                  {% endunless %}
+                </style>
+                <div class="homepage-collection-grid-inner">
+                  <div class="grid-image">
+                    {% if section.settings.pack_url != blank
+                      and section.settings['content-position'] == 'below-image'
+                    %}
+                      <a href="{{ section.settings.pack_url }}" class="grid-image--centered" tabindex="-1" title="">
+                    {% endif %}
+                    {% render 'responsive-image' with section.settings.pack_image, allow_stretch: stretch_img %}
+
+                    {% if section.settings.pack_promo != blank %}
+                      <div
+                        class="collection-parent-pack__promo"
+                        style="--color-title: {{ section.settings.pack_title_color }}; "
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="81" viewBox="0 0 80 81" fill="none">
+                          <path d="M68.4086 12.3375L40.1762 0.497559L11.8404 12.0884L0 40.3214L11.5909 68.6571L39.8238 80.4976L68.1596 68.9062L80 40.6737L68.4086 12.3375Z" fill="#847465"/>
+                        </svg>
+                        <span>{{ section.settings.pack_promo }}</span>
+                      </div>
+                    {% endif %}
+                    {% if section.settings.pack_url != blank
+                      and section.settings['content-position'] == 'below-image'
+                    %}
+                      </a>
+                    {% endif %}
+                  </div>
+
+                  <div
+                    class="grid-item-details--{{ section.settings.content-position }}{% if block.settings.show-gradient-overlay and section.settings.content-position != 'below-image' %} grid-item-details--background-gradient{% endif %}"
+                    {% unless section.settings['content-position'] == 'below-image' %}
+                      style="position:relative;"
+                    {% endunless %}
+                  >
+                    {% if section.settings['content-position'] != 'below-image'
+                      and section.settings.pack_title != blank
+                    %}
+                      <a href="{{ collection.url }}" class="full-unstyled-link" tabindex="-1" style="width: 100%;">
+                    {% endif %}
+
+                    <div class="grid-item__content">
+                      <h3 class="grid-item__title">{{ section.settings.pack_title }}</h3>
+                    </div>
+
+                    {% if section.settings['content-position'] != 'below-image'
+                      and block.settings.collection != blank
+                    %}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
           {% endif %}
         </div>
+
+        <div class="swiper-pagination"></div>
 
         <div class="swiper-button-prev">
           {% render 'icons', icon: 'arrow' %}
@@ -239,8 +325,9 @@
       </swiper-slider>
 
       {% if section.settings.pack_image %}
-        <div
-          class="collection-parent-pack {%- if settings.enable_animation %} scroll-trigger animate--slide-in{% endif %}"
+        <a
+          href="{{ section.settings.pack_url }}"
+          class="collection-parent-pack medium-down-hide full-unstyled-link {%- if settings.enable_animation %} scroll-trigger animate--slide-in{% endif %}"
           {% if settings.enable_animation %}
             data-cascade
             style="animation-order: {{ animation_index }};"
@@ -272,7 +359,7 @@
               </div>
             {% endif %}
           </div>
-        </div>
+        </a>
       {% endif %}
     </div>
   </div>
@@ -338,6 +425,11 @@
       "id": "pack_title",
       "label": "Titre du pack",
       "default": "Créez votre pack"
+    },
+    {
+      "type": "url",
+      "id": "pack_url",
+      "label": "Url du pack"
     },
     {
       "type": "text",

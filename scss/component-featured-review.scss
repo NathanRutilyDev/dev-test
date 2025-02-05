@@ -40,6 +40,13 @@
     @include respond-to(md) {
       -webkit-line-clamp: 9;
     }
+
+    @include respond-to(l, xl) {
+      p {
+        line-height: 20px;
+        text-align: left;
+      }
+    }
   }
 
   .card__featured--review--footer {
@@ -48,5 +55,34 @@
     align-items: center;
     gap: 8px;
     width: 100%;
+  }
+}
+
+@media screen and (min-width: 780px) and (max-width: 1600px) {
+  .card__featured-review {
+    .card__featured--review--review {
+      p {
+        line-height: 20px;
+        text-align: left;
+        margin-top: 0;
+      }
+    }
+
+    .card__featured--review--footer {
+      align-items: flex-start;
+      gap: 0px;
+    }
+
+    .card__featured--review--heading {
+      text-align: left;
+    }
+
+    .card__featured--review--stars {
+      justify-content: flex-start;
+    }
+    .card__featured--review--stars > * {
+      width: 16px;
+      height: 16px;
+    }
   }
 }

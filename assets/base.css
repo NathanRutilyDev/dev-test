@@ -4047,6 +4047,10 @@ details-disclosure > details {
 }
 
 /* --- Swiper --- */
+.swiper {
+  --swiper-theme-color: rgb(var(--color-foreground));
+}
+
 .swiper-button-prev,
 .swiper-button-next {
   min-width: 48px;
