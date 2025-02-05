@@ -117,9 +117,49 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background: var(--Main-Peach-dark, #FBEEE0);
+
+  .special-card__header {
+    display: flex;
+    align-items: center;
+  }
+
+  .special-card__vignette {
+    display: flex;
+    align-items: center;
+    background-color: #FFF;
+    border-radius: 4px;
+    padding: 16px;
+    gap: 16px;
+
+    .special-card__svg-container {
+      padding: 8px;
+      background-color: #FBEEE0;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .special-cards__infos {
+      width: 100%;
+
+      h5, p {
+        margin: 0;
+      }
+    }
+
+    .special-card__arrow-container {
+      display: flex;
+    }
+  }
+  
+  svg {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .special-card h3 {

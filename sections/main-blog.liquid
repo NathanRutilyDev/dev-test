@@ -101,10 +101,43 @@
       <!-- Cartes spécialisées -->
       <div class="blog-grid__special-cards">
         <div class="special-card">
-          <h3>Chat avec un expert</h3>
-          <p>Discutez avec notre équipe pour des conseils personnalisés.</p>
-          <a href="#" class="button">Commencer</a>
+          <div class="special-card__header">
+            <div class="special-cards__portrait">
+              <img src="{{ section.settings.image_chat | image_url: height: 80 }}" alt="photo de Christine">
+            </div>
+            <div class="special-cards__infos">
+              <h4>Chat avec Christine !</h4>
+              <p class="text-body">Bénéficiez de précieux conseils d'experts pour faire les meilleurs choix pour votre commande.</p>
+            </div>
+          </div>
+          <div>
+            <div class="special-card__vignette">
+              <div class="special-card__svg-container">
+                {{- 'icon-chat-bubble.svg' | inline_asset_content -}}
+              </div>
+              <div class="special-cards__infos">
+                <h5>Chat en ligne</h5>
+                <p class="text-body">Nous sommes en ligne de 9h à 17h du lundi au vendredi.</p>
+              </div>
+              <div class="special-card__arrow-container">
+                {{- 'icon-arrow-compact.svg' | inline_asset_content -}}
+              </div>
+            </div>
+            <div class="special-card__vignette">
+              <div class="special-card__svg-container">
+                {{- 'icon-email.svg' | inline_asset_content -}}
+              </div>
+              <div class="special-cards__infos">
+                <h5>christine@oleassence.com</h5>
+                <p class="text-body">Pour toutes vos questions concernant vos soins et commandes.</p>
+              </div>
+              <div class="special-card__arrow-container">
+                {{- 'icon-arrow-compact.svg' | inline_asset_content -}}
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="promo-cards">
           <div class="promo-cards__image">
             <img src="{{ section.settings.image_promo | image_url: height: 424 }}" alt="discount image">
@@ -137,6 +170,11 @@
       "type": "image_picker",
       "id": "image_promo",
       "label": "Image de promotion"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_chat",
+      "label": "Image de chat"
     },
     {
       "type": "header",

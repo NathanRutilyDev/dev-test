@@ -139,13 +139,62 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: var(--Main-Peach-dark, #FBEEE0);
+}
+.special-card .special-card__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.special-card .special-card__vignette {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #FFF;
+  border-radius: 4px;
+  padding: 16px;
+  gap: 16px;
+}
+.special-card .special-card__vignette .special-card__svg-container {
+  padding: 8px;
+  background-color: #FBEEE0;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: var(--Main-Peach-dark, #FBEEE0);
+}
+.special-card .special-card__vignette .special-cards__infos {
+  width: 100%;
+}
+.special-card .special-card__vignette .special-cards__infos h5, .special-card .special-card__vignette .special-cards__infos p {
+  margin: 0;
+}
+.special-card .special-card__vignette .special-card__arrow-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.special-card svg {
+  width: 32px;
+  height: 32px;
 }
 
 .special-card h3 {
