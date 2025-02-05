@@ -102,33 +102,12 @@
   gap: 32px; /* Espacement entre les éléments */
 }
 
-/* Article principal */
-.main-article__image {
+.blog-grid__featured-article {
+  display: grid;
   grid-column: 1/3;
-  grid-row: 1/3;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 16px;
-}
-
-.main-article__image img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 4px;
-}
-
-.main-article__content {
-  grid-column: 1/3;
-  grid-row: 3/5;
-  padding: 16px;
-  border-radius: 4px;
+  grid-row: 1/5;
+  grid-template-rows: 1fr;
+  gap: 24px;
 }
 
 /* Articles secondaires */
@@ -139,91 +118,6 @@
   grid-column: 3/5; /* Occupe les colonnes 3 et 4 */
   grid-row: 1/3; /* Occupe les lignes 1 et 2 */
   gap: 24px; /* Espacement interne entre les articles */
-}
-
-.secondary-article {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background-color: #FFF;
-  border-radius: 4px;
-  overflow: hidden;
-  background-color: #FFF;
-}
-.secondary-article .secondary-article__card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  padding: 16px;
-  height: 100%;
-}
-.secondary-article .secondary-article__tags {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; /* Permet aux tags de passer à la ligne si nécessaire */
-}
-.secondary-article .secondary-article__tags .tag {
-  display: inline-block;
-  background-color: #F5F5F5;
-  color: #555;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 16px; /* Forme arrondie pour les tags */
-  font-weight: bold;
-}
-
-.secondary-article img {
-  width: 100%;
-  height: 300px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 16px;
-}
-
-.secondary-article__content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between; /* Espace entre le titre et le texte */
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start; /* Aligne les éléments à gauche */
-}
-.secondary-article__content .secondary-article h3 {
-  font-size: 14px;
-  padding: 8px;
-}
-.secondary-article__content .secondary-article__content h3 {
-  font-size: 16px;
-  color: #333;
-  margin: 0;
-}
-.secondary-article__content .secondary-article__content p {
-  font-size: 14px;
-  color: #777;
-  margin: 0;
-}
-
-.secondary-article h3 {
-  font-size: 14px;
-  padding: 8px;
 }
 
 /* Cartes spécialisées */
