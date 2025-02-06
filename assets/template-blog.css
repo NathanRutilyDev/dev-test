@@ -130,7 +130,7 @@
 }
 
 .special-card {
-  padding: 16px;
+  padding: 32px;
   border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -147,6 +147,12 @@
           align-items: center;
   background: var(--Main-Peach-dark, #FBEEE0);
 }
+.special-card .special-cards__infos {
+  width: 100%;
+}
+.special-card .special-cards__infos h5, .special-card .special-cards__infos h4, .special-card .special-cards__infos p {
+  margin: 0;
+}
 .special-card .special-card__header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -154,6 +160,23 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  gap: 16px;
+}
+.special-card .special-card__header .special-cards__portrait img {
+  border-radius: 999px;
+}
+.special-card .special-card__header .special-cards__infos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 12px;
+}
+.special-card .special-card__vignettes-container {
+  width: 100%;
 }
 .special-card .special-card__vignette {
   display: -webkit-box;
@@ -180,12 +203,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-.special-card .special-card__vignette .special-cards__infos {
-  width: 100%;
-}
-.special-card .special-card__vignette .special-cards__infos h5, .special-card .special-card__vignette .special-cards__infos p {
-  margin: 0;
 }
 .special-card .special-card__vignette .special-card__arrow-container {
   display: -webkit-box;

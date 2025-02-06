@@ -113,7 +113,7 @@
 }
 
 .special-card {
-  padding: 16px;
+  padding: 32px;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -121,9 +121,32 @@
   align-items: center;
   background: var(--Main-Peach-dark, #FBEEE0);
 
+  .special-cards__infos {
+    width: 100%;
+
+    h5, h4, p {
+      margin: 0;
+    }
+  }
+
   .special-card__header {
     display: flex;
     align-items: center;
+    gap: 16px;
+
+    .special-cards__portrait img {
+      border-radius: 999px;
+    }
+
+    .special-cards__infos {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+
+  .special-card__vignettes-container {
+    width: 100%;
   }
 
   .special-card__vignette {
@@ -141,14 +164,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    .special-cards__infos {
-      width: 100%;
-
-      h5, p {
-        margin: 0;
-      }
     }
 
     .special-card__arrow-container {

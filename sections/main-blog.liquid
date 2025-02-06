@@ -110,7 +110,7 @@
               <p class="text-body">Bénéficiez de précieux conseils d'experts pour faire les meilleurs choix pour votre commande.</p>
             </div>
           </div>
-          <div>
+          <div class="special-card__vignettes-container">
             <div class="special-card__vignette">
               <div class="special-card__svg-container">
                 {{- 'icon-chat-bubble.svg' | inline_asset_content -}}
@@ -156,8 +156,8 @@
 
     {% comment %} {%- if paginate.pages > 1 -%}
       {%- render 'pagination', paginate: paginate -%}
-    {%- endif -%}
-  </div> {% endcomment %}
+    {%- endif -%} {% endcomment %}
+
 {%- endpaginate -%}
 
 {% schema %}
