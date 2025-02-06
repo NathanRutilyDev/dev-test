@@ -241,3 +241,7 @@
       -ms-flex: 1;
           flex: 1;
 }
+
+.article-card-wrapper .card__content-overlay {
+  position: relative;
+}

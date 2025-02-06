@@ -92,7 +92,7 @@
           </div>
         {%- endif -%}
       </div>
-      <div class="card__content">
+      <div class="card__content{% if overlayed %}-overlay{% endif %}">
         <div class="card__information">
           {% assign tags = card_article.metafields.data.tags.value %}
             {% if tags != blank %}
@@ -130,23 +130,25 @@
             
           {% endif %}
         </div>
-        <div class="card-information">
-          <div class="card__footer">
-            {% if card_article.content != blank and featured != true %}
-              <span class="card__content_read_time text-xs">
-                {% assign content_words = card_article.content | split: ' ' %}
-                {% assign content_words_size = content_words.size %}
-                {% assign content_read_time = content_words_size | divided_by: 150 | round %}
-                {{ content_read_time }} min de lecture
-              </span>
-            {% elsif featured == true %}
-              <a href="{{ card_article.url }}" class="read-more">VOIR TOUT L'ARTICLE</a>
-              <div class="card__arrow-container">
-                {{- 'icon-arrow-compact.svg' | inline_asset_content -}}
-              </div>
-            {% endif %}
+        {% if overlayed == false %}
+          <div class="card-information">
+            <div class="card__footer">
+              {% if card_article.content != blank and featured != true %}
+                <span class="card__content_read_time text-xs">
+                  {% assign content_words = card_article.content | split: ' ' %}
+                  {% assign content_words_size = content_words.size %}
+                  {% assign content_read_time = content_words_size | divided_by: 150 | round %}
+                  {{ content_read_time }} min de lecture
+                </span>
+              {% elsif featured == true %}
+                <a href="{{ card_article.url }}" class="read-more">VOIR TOUT L'ARTICLE</a>
+                <div class="card__arrow-container">
+                  {{- 'icon-arrow-compact.svg' | inline_asset_content -}}
+                </div>
+              {% endif %}
+            </div>
           </div>
-        </div>
+        {% endif %}
       </div>
     </div>
   </div>
