@@ -10,6 +10,23 @@ customElements.define(
         this.buttons = this.querySelectorAll('.simple-button');
         this.panels = this.querySelectorAll('.filter-panel');
         this.setupListeners();
+
+        // Gestion mobile :
+        this.mobileToggle = this.querySelector('.filter-accordion-mobile__toggle');
+        this.mobileClose = this.querySelector('.filter-accordion-mobile__close');
+
+        if (this.mobileToggle) {
+          this.mobileToggle.addEventListener('click', () => {
+            // On ajoute une classe (ici "open") sur le custom element pour déclencher l'affichage en overlay
+            this.classList.add('open');
+          });
+        }
+        if (this.mobileClose) {
+          this.mobileClose.addEventListener('click', () => {
+            // On retire la classe "open" pour fermer l'overlay
+            this.classList.remove('open');
+          });
+        }
       }
   
       setupListeners() {

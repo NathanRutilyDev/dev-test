@@ -68,6 +68,76 @@
       <p>Contenu pour Type de peau</p>
     </div>
   </div>
+
+  <!-- Mobile version -->
+  <div class="filter-accordion-mobile">
+    <!-- Bouton sticky visible par défaut en bas de l'écran -->
+    <button class="filter-accordion-mobile__toggle">
+      Tous nos articles
+    </button>
+  
+    <!-- Overlay full-screen (initialement caché) -->
+    <div class="filter-accordion-mobile__overlay">
+      <header class="filter-accordion-mobile__header">
+        <h2>Tous nos articles</h2>
+        <!-- Bouton pour fermer l'overlay -->
+        <button class="filter-accordion-mobile__close">&times;</button>
+      </header>
+      
+      <!-- Contenu de l'accordéon : 3 boutons en accordéon -->
+      <div class="filter-accordion-mobile__content">
+        <div class="filter-item">
+          <button class="simple-button" data-filter="preoccupation" aria-expanded="false">
+            <p>Préoccupation</p>
+            <div class="svg-wrapper">
+              <div class="icon-plus">
+                {{- 'icon-plus.svg' | inline_asset_content -}}
+              </div>
+              <div class="icon-minus">
+                {{- 'icon-minus.svg' | inline_asset_content -}}
+              </div>
+            </div>
+          </button>
+          <div class="filter-panel" data-filter="preoccupation">
+            <p>Contenu pour Préoccupation</p>
+          </div>
+        </div>
+        <div class="filter-item">
+          <button class="simple-button" data-filter="besoin" aria-expanded="false">
+            <p>Besoin</p>
+            <div class="svg-wrapper">
+              <div class="icon-plus">
+                {{- 'icon-plus.svg' | inline_asset_content -}}
+              </div>
+              <div class="icon-minus">
+                {{- 'icon-minus.svg' | inline_asset_content -}}
+              </div>
+            </div>
+          </button>
+          <div class="filter-panel" data-filter="besoin">
+            <p>Contenu pour Besoin</p>
+          </div>
+        </div>
+        <div class="filter-item">
+          <button class="simple-button" data-filter="peau" aria-expanded="false">
+            <p>Type de peau</p>
+            <div class="svg-wrapper">
+              <div class="icon-plus">
+                {{- 'icon-plus.svg' | inline_asset_content -}}
+              </div>
+              <div class="icon-minus">
+                {{- 'icon-minus.svg' | inline_asset_content -}}
+              </div>
+            </div>
+          </button>
+          <div class="filter-panel" data-filter="peau">
+            <p>Contenu pour Type de peau</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </filter-accordion>
 
 {%- paginate blog.articles by 12 -%}

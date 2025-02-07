@@ -159,7 +159,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  /* Si besoin de forcer la hauteur disponible */
   overflow: hidden;
 }
 .article-card-wrapper .card__content .card-information {
@@ -180,6 +179,12 @@
   /* Si besoin de forcer la hauteur disponible */
   height: 100%;
   overflow: hidden;
+}
+.article-card-wrapper.featured .card__content h3 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: 0.32px;
 }
 
 .featured-extra-info {
