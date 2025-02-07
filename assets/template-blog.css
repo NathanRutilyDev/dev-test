@@ -307,6 +307,21 @@
   letter-spacing: 0.32px;
   -webkit-transition: background 0.2s ease;
   transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.load-more-button-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 40px;
+  text-transform: uppercase;
 }
 
 .most-read-grid {
@@ -337,4 +352,8 @@
   display: grid;
   grid-column: 1/3;
   grid-row: 2/3;
+}
+
+.most-read h1 {
+  text-align: center;
 }

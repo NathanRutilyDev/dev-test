@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .card__tags {
   margin-bottom: 12px;
 }
@@ -205,6 +206,10 @@
   -webkit-box-orient: vertical;
   word-break: break-all;
 }
+.featured-extra-info a {
+  text-decoration: none;
+  color: var(--Main-Brown, #443D36);
+}
 .featured-extra-info h2 {
   margin-bottom: 8px;
   font-size: 24px;
@@ -242,6 +247,45 @@
           flex: 1;
 }
 
+.article-card-wrapper.overlayed .card__inner {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.article-card-wrapper.overlayed .card__media {
+  height: 100%;
+}
+
+.article-card-wrapper.overlayed .card__media img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
+
 .article-card-wrapper .card__content-overlay {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  /* Optionnel : un fond en dégradé pour améliorer la lisibilité */
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.6)));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  color: #fff;
+  /* Si vous souhaitez que ce contenu occupe toute la largeur de la carte */
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 0px 0px 4px 4px;
+}
+.article-card-wrapper .card__content-overlay h3 {
+  color: #fff;
+}
+.article-card-wrapper .card__content-overlay .featured-extra-info {
+  -webkit-line-clamp: 2;
+}
+.article-card-wrapper .card__content-overlay .featured-extra-info:hover {
+  -webkit-line-clamp: 28;
 }

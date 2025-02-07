@@ -48,7 +48,7 @@
       assign sizes_division_mobile = 2
     endif
   -%}
-  <div class="card-wrapper article-card-wrapper{% if featured %} featured{% endif %}">
+  <div class="card-wrapper article-card-wrapper{% if featured %} featured{% endif %}{% if overlayed %} overlayed{% endif %}">
     <div
       class="
         card card--{{ settings.card_style }}
@@ -125,12 +125,15 @@
             <!-- Contenu supplémentaire spécifique à la carte featured -->
             <div class="featured-extra-info">
                 <p>{{ card_article.content }}</p>
-              
             </div>
-            
+          {% elsif overlayed %}
+            <div class="featured-extra-info">
+              <p>{{ card_article.excerpt }}</p>
+            </div>
           {% endif %}
         </div>
-        {% if overlayed == false %}
+        {% if overlayed %}
+        {% else %}
           <div class="card-information">
             <div class="card__footer">
               {% if card_article.content != blank and featured != true %}

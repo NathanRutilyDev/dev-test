@@ -79,7 +79,7 @@
       <div class="blog-grid__featured-article">
         {% render 'card-article', 
           card_article: featured_article,
-          featured: true
+          featured: true,
         %}
       </div>
   
@@ -167,9 +167,10 @@
 
 {%- endpaginate -%}
 
-<div class="main-blog page-width section-{{ section.id }}-padding">
+<div class="main-blog page-width section-{{ section.id }}-padding most-read">
+  <h1 >Les plus lus</h1>
   <div class="most-read-grid">
-    {%- assign overlayed_article = blog.articles.last -%}
+    {%- assign overlayed_article = blog.articles.first -%}
 
     <div class="most-read-grid__secondary-articles">
       {%- for article in blog.articles offset: 1 limit: 2 -%}
