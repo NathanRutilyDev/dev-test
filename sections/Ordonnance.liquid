@@ -44,6 +44,7 @@
 
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
+    <div class="products-list-Ordonnance">
     {%- for block in section.blocks -%}
       <div
         class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -104,6 +105,10 @@
         </div>
       </div>
     {%- endfor -%}
+    </div>
+    <div class="Ordonnance-selected-products">
+      
+    </div>
   </div>
 </div>
 
