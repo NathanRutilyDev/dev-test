@@ -41,7 +41,9 @@
     assign corners_class = ' collapse-corners'
   endunless
 -%}
-
+{%- liquid
+  assign product = section.settings.product
+-%}
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
     {%- for block in section.blocks -%}
@@ -84,6 +86,11 @@
                   {{ block.settings.heading }}
                 </h2>
               {%- endif -%}
+              <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  
+                      {{ product.title | escape }}
+                    
+                  </h2>
               {%- if block.settings.text -%}
                 <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ block.settings.text }}</div>
               {%- endif -%}
