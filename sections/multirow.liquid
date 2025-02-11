@@ -44,10 +44,50 @@
 
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
+     {% assign products = shop.metaobjects.product.values %}
+
+        {% for product in products %}  
+	        <div>
+	            {{
+                  product.featured_image
+                  | image_url: width: 1500
+                  | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+                }}
+	            <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  
+                      {{ product.title | escape }}
+                    
+                  </h2>
+                <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
+              
+	        </div>
+        {% endfor %}
     {%- for block in section.blocks -%}
-      {%- liquid
-  assign product = block.settings.product
--%}
+      
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
       <div
         class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         {{ block.shopify_attributes }}
