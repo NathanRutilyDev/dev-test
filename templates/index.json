@@ -14,12 +14,11 @@
       "blocks": {
         "row_GMHiMX": {
           "type": "row",
-          "source": "{{ metaobjects.product_highlights_phase_1[\"serum-microkystes-imperfections-roll-on\"] }}",
+          "source": "{{ metaobjects.phase_2[\"phase-2-nclklul5\"] }}",
           "settings": {
-            "image": "{{ metaobjects.product_highlights_phase_1[\"serum-microkystes-imperfections-roll-on\"].image.value }}",
-            "caption": "{{ metaobjects.product_highlights_phase_1[\"serum-microkystes-imperfections-roll-on\"].title.value }}",
+            "caption": "",
             "heading": "Row",
-            "text": "{{ metaobjects.product_highlights_phase_1[\"serum-microkystes-imperfections-roll-on\"].description | metafield_tag }}",
+            "text": "",
             "button_label": "Button label",
             "button_link": ""
           }
