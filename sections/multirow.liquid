@@ -48,7 +48,7 @@
 
         {% for product in products %}  
 	        <div>
-               <img src="{{ product.image | img_url: 'large' }}" alt="{{ entry.title }}">
+               <img src="{{ product.image | image_url }}" alt="{{ entry.title }}">
 	           
 	            <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
                   
