@@ -26,63 +26,9 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
-    },
-    "main_collection_parent_list_ih7VHF": {
-      "type": "main-collection-parent-list",
-      "blocks": {
-        "featured_collection_HNpakL": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "subheading": "Subheading",
-            "overlay-btn-text": "Shop now",
-            "show-gradient-overlay": false,
-            "overlay_font_color": "#ffffff",
-            "overlay_color": "#242424"
-          }
-        },
-        "featured_collection_aBH7Qa": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "subheading": "Subheading",
-            "overlay-btn-text": "Shop now",
-            "show-gradient-overlay": false,
-            "overlay_font_color": "#ffffff",
-            "overlay_color": "#242424"
-          }
-        },
-        "featured_collection_G3kfK9": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "",
-            "subheading": "Subheading",
-            "overlay-btn-text": "Shop now",
-            "show-gradient-overlay": false,
-            "overlay_font_color": "#ffffff",
-            "overlay_color": "#242424"
-          }
-        }
-      },
-      "block_order": [
-        "featured_collection_HNpakL",
-        "featured_collection_aBH7Qa",
-        "featured_collection_G3kfK9"
-      ],
-      "settings": {
-        "title": "Featured Collections",
-        "description": "",
-        "content-position": "overlay",
-        "colors": "",
-        "pack_title": "Créez votre pack",
-        "pack_url": "",
-        "pack_promo": "-10%",
-        "pack_title_color": "#ffffff"
-      }
     }
   },
   "order": [
-    "multirow_74DPcy",
-    "main_collection_parent_list_ih7VHF"
+    "multirow_74DPcy"
   ]
 }
