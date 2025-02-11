@@ -14,10 +14,12 @@
       "blocks": {
         "row_GMHiMX": {
           "type": "row",
+          "source": "{{ metaobjects.product_highlights_phase_1[\"serum-microkystes-imperfections-roll-on\"] }}",
           "settings": {
-            "caption": "Caption",
+            "image": "{{ metaobjects.product_highlights_phase_1[\"serum-microkystes-imperfections-roll-on\"].image.value }}",
+            "caption": "{{ metaobjects.product_highlights_phase_1[\"serum-microkystes-imperfections-roll-on\"].title.value }}",
             "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "{{ metaobjects.product_highlights_phase_1[\"serum-microkystes-imperfections-roll-on\"].description | metafield_tag }}",
             "button_label": "Button label",
             "button_link": ""
           }
@@ -63,9 +65,63 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "main_collection_parent_list_ih7VHF": {
+      "type": "main-collection-parent-list",
+      "blocks": {
+        "featured_collection_HNpakL": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "subheading": "Subheading",
+            "overlay-btn-text": "Shop now",
+            "show-gradient-overlay": false,
+            "overlay_font_color": "#FFFFFF",
+            "overlay_color": "#242424"
+          }
+        },
+        "featured_collection_aBH7Qa": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "subheading": "Subheading",
+            "overlay-btn-text": "Shop now",
+            "show-gradient-overlay": false,
+            "overlay_font_color": "#FFFFFF",
+            "overlay_color": "#242424"
+          }
+        },
+        "featured_collection_G3kfK9": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "subheading": "Subheading",
+            "overlay-btn-text": "Shop now",
+            "show-gradient-overlay": false,
+            "overlay_font_color": "#FFFFFF",
+            "overlay_color": "#242424"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_HNpakL",
+        "featured_collection_aBH7Qa",
+        "featured_collection_G3kfK9"
+      ],
+      "settings": {
+        "title": "Featured Collections",
+        "description": "",
+        "content-position": "overlay",
+        "colors": "",
+        "pack_title": "Créez votre pack",
+        "pack_url": "",
+        "pack_promo": "-10%",
+        "pack_title_color": "#ffffff"
+      }
     }
   },
   "order": [
-    "multirow_74DPcy"
+    "multirow_74DPcy",
+    "main_collection_parent_list_ih7VHF"
   ]
 }
