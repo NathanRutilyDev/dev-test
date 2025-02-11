@@ -44,35 +44,6 @@
 
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
-{% for entry in shop.metaobjects["phase_2"].values %}
-    {% assign product_gid = entry.product %}
-    {% assign product_id = product_gid | split: "/" | last %}
-    {% assign product = all_products[product_id] %}
-
-    {% if product %}
-        <div class="product-card">
-            <img src="{{ product.featured_image | image_url: 'large' }}" alt="{{ product.title }}">
-            <h2>{{ product.title }}</h2>
-            <p>{{ product.description }}</p>
-        </div>
-    {% else %}
-        <p>Product not found for ID: {{ product_id }}</p>
-    {% endif %}
-<p>Product Data: {{ product | json }}</p>
-
- <p>Entry Name: {{ entry.name }}</p>
-    <p>Raw Product GID: {{ entry.product }}</p>
-
-    {% assign product_gid = entry.product %}
-    {% assign product_id = product_gid | split: "/" | last %}
-    <p>Extracted Product ID: {{ product_id }}</p>
-
-    {% assign product = all_products[product_id] %}
-    <p>Product Found: {{ product.title }}</p>
-
-  
-{% endfor %}
-
 
 
 
@@ -80,30 +51,6 @@
 
     
     {%- for block in section.blocks -%}
-      
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       
       <div
         class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
