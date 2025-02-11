@@ -45,14 +45,7 @@
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
 {% for entry in shop.metaobjects["phase_2"].values %}
-
-
-
-
-
-  
-    {% assign product_gid = entry.product %}
-    {% assign product_id = product_gid | split: "/" | last %}
+    {% assign product_id = entry.product | split: "/" | last %}
     {% assign product = all_products[product_id] %}
 
     {% if product %}
@@ -64,18 +57,8 @@
     {% else %}
         <p>Product not found.</p>
     {% endif %}
-
-
-  <p>Raw product GID: {{ entry.product }}</p>
-    {% assign product_id = entry.product | split: "/" | last %}
-    <p>Extracted product ID: {{ product_id }}</p>
-    <p>All Products Lookup: {{ all_products[product_id] | json }}</p>
-
-
-
-
-  
 {% endfor %}
+
 
 
 
