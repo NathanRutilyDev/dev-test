@@ -46,6 +46,7 @@
   <div class="multirow__inner page-width">
 {% for entry in shop.metaobjects["phase_2"].values %}
     {% assign product = all_products[entry.product.id] %}
+  <p>Product ID: {{ entry.product.id }}</p>
 
     {% if product %}
         <div>
