@@ -46,19 +46,17 @@
   <div class="multirow__inner page-width">
      {% assign products = shop.metaobjects["phase_2"].values %}
 
-        {% for product in products %}  
-	        <div>
-               <img src="{{ product.image | image_url }}" alt="{{ entry.title }}">
-	           
-	            <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
-                  
-                      {{ product.title | escape }}
-                    
-                  </h2>
-                <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
-              
-	        </div>
-        {% endfor %}
+<!-- Debugging: Print number of products -->
+<p>Product count: {{ products.size }}</p>
+
+{% for product in products %}  
+    <div>
+        <p>Debug: {{ product | json }}</p> <!-- Print raw product data -->
+        <img src="{{ product.image | image_url }}" alt="{{ product.title }}">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.description }}</p>
+    </div>
+{% endfor %}
     {%- for block in section.blocks -%}
       
 
