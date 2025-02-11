@@ -49,6 +49,7 @@
     {% assign product = all_products[product_id] %}
 
     {% if product %}
+      {{ product }}
         <div>
             <img src="{{ product.featured_image | image_url: 'large' }}" alt="{{ product.title }}">
             <h2>{{ product.title }}</h2>
