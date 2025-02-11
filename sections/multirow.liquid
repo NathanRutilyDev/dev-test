@@ -44,20 +44,14 @@
 
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
-{% for entry in shop.metaobjects["phase_2"].values %}
-    {% assign product_id = entry.product | split: "/" | last %}
-    {% assign product = all_products[product_id] %}
-
-    {% if product %}
-      {{ product }}
+{% for product in shop.metaobjects["phase-2-b86589bb"].values %}
+        
         <div>
             <img src="{{ product.featured_image | image_url: 'large' }}" alt="{{ product.title }}">
             <h2>{{ product.title }}</h2>
             <p>{{ product.description }}</p>
         </div>
-    {% else %}
-        <p>Product not found.</p>
-    {% endif %}
+
 {% endfor %}
 
 
