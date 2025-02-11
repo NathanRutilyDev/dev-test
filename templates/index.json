@@ -11,44 +11,6 @@
   "sections": {
     "multirow_74DPcy": {
       "type": "multirow",
-      "blocks": {
-        "row_GMHiMX": {
-          "type": "row",
-          "source": "{{ metaobjects.phase_2[\"phase-2-nclklul5\"] }}",
-          "settings": {
-            "caption": "",
-            "heading": "Row",
-            "text": "",
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        },
-        "row_3We6tC": {
-          "type": "row",
-          "settings": {
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        },
-        "row_h94bHR": {
-          "type": "row",
-          "settings": {
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "row_GMHiMX",
-        "row_3We6tC",
-        "row_h94bHR"
-      ],
       "settings": {
         "image_height": "medium",
         "desktop_image_width": "medium",
@@ -75,7 +37,7 @@
             "subheading": "Subheading",
             "overlay-btn-text": "Shop now",
             "show-gradient-overlay": false,
-            "overlay_font_color": "#FFFFFF",
+            "overlay_font_color": "#ffffff",
             "overlay_color": "#242424"
           }
         },
@@ -86,7 +48,7 @@
             "subheading": "Subheading",
             "overlay-btn-text": "Shop now",
             "show-gradient-overlay": false,
-            "overlay_font_color": "#FFFFFF",
+            "overlay_font_color": "#ffffff",
             "overlay_color": "#242424"
           }
         },
@@ -97,7 +59,7 @@
             "subheading": "Subheading",
             "overlay-btn-text": "Shop now",
             "show-gradient-overlay": false,
-            "overlay_font_color": "#FFFFFF",
+            "overlay_font_color": "#ffffff",
             "overlay_color": "#242424"
           }
         }
