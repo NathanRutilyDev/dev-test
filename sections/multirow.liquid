@@ -44,7 +44,7 @@
 
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
-     {% assign products = shop.metaobjects["phase_2"].values %}
+     {% assign products = shop.metaobjects["phase_2.products"].values %}
 
 <!-- Debugging: Print number of products -->
 <p>Product count: {{ products.size }}</p>
