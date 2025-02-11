@@ -58,6 +58,19 @@
     {% else %}
         <p>Product not found for ID: {{ product_id }}</p>
     {% endif %}
+
+
+ <p>Entry Name: {{ entry.name }}</p>
+    <p>Raw Product GID: {{ entry.product }}</p>
+
+    {% assign product_gid = entry.product %}
+    {% assign product_id = product_gid | split: "/" | last %}
+    <p>Extracted Product ID: {{ product_id }}</p>
+
+    {% assign product = all_products[product_id] %}
+    <p>Product Found: {{ product.title }}</p>
+
+  
 {% endfor %}
 
 
