@@ -41,12 +41,13 @@
     assign corners_class = ' collapse-corners'
   endunless
 -%}
-{%- liquid
-  assign product = section.settings.product
--%}
+
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
     {%- for block in section.blocks -%}
+      {%- liquid
+  assign product = block.settings.product
+-%}
       <div
         class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         {{ block.shopify_attributes }}
