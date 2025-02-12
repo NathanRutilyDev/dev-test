@@ -46,7 +46,7 @@
   <div class="multirow__inner page-width">
 
 
-    {% for product in product.metafields.ordonnance.phase_1_metas %}
+    {% for product in product.metafields.ordonnance.phase_1_metas.values %}
        {{ product.featured_image }}
     {{ product.title }}
       {{ product.description }}
