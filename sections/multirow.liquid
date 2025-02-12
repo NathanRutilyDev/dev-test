@@ -44,11 +44,7 @@
 
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
-
     {%- for block in section.blocks -%}
-   {%- liquid
-  assign product = block.settings.product
--%}   
       <div
         class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         {{ block.shopify_attributes }}
@@ -56,182 +52,60 @@
         <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}{% if section.settings.image_layout contains 'alternate' %}{% cycle odd_class, even_class %}{% else %}{{ odd_class }}{% endif %}">
           <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
             <div
-              class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-              {% if section.settings.image_height == 'adapt' %}
+              class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if block.settings.image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
+              {% if section.settings.image_height == 'adapt' and block.settings.image != blank %}
                 style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
               {% endif %}
             >
-              {%- if product.featured_image != blank -%}
+              {%- if block.settings.image != blank -%}
                 {%- capture sizes -%}
                   (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
                   (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
                 {%- endcapture -%}
                 {{
-                  product.featured_image
+                  block.settings.image
                   | image_url: width: 1500
                   | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
                 }}
               {%- else -%}
                 {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
-
-              
             </div>
           </div>
           <div class="image-with-text__text-item grid__item">
             <div class="image-with-text__content image-with-text__content--{{ section.settings.desktop_content_position }} image-with-text__content--desktop-{{ section.settings.desktop_content_alignment }} image-with-text__content--mobile-{{ section.settings.mobile_content_alignment }} image-with-text__content--{{ section.settings.image_height }} content-container{% unless no_content_background and no_content_styles %} gradient color-{{ section.settings.row_color_scheme }}{% else %} background-transparent{% endunless %}">
-              <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
-                  
-                      {{ product.title | escape }}
-                    
-                  </h2>
-          
-                <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
-              <div>{{ product.price }}</div>
-              <div>
-                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button">Add</button>
-              </div>
+              {%- if block.settings.caption -%}
+                <p class="image-with-text__text image-with-text__text--caption caption-with-letter-spacing caption-with-letter-spacing--medium">
+                  {{ block.settings.caption | escape }}
+                </p>
+              {%- endif -%}
+              {%- if block.settings.heading -%}
+                <h2 class="image-with-text__heading {{ section.settings.heading_size }} rte">
+                  {{ block.settings.heading }}
+                </h2>
+              {%- endif -%}
+              {%- if block.settings.text -%}
+                <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ block.settings.text }}</div>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                <a
+                  {% if block.settings.button_link == blank %}
+                    role="link" aria-disabled="true"
+                  {% else %}
+                    href="{{ block.settings.button_link }}"
+                  {% endif %}
+                  class="button button--{{ section.settings.button_style }}"
+                >
+                  {{ block.settings.button_label | escape }}
+                </a>
+              {%- endif -%}
             </div>
           </div>
         </div>
       </div>
     {%- endfor -%}
   </div>
-  <div class="multi--right-block">
-     <div class="selected__products">
-     </div>
-<button
-            type="submit"
-            name="add"
-            class="dev__product-form__submit button button--full-width button--primary"
-          
-          >
-    Add to cart
-          </button>
-   <div>
-     
-   </div>
-  </div>
 </div>
-
-
-
-
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let selectedProductsContainer = document.querySelector(".selected__products");
-    let addToCartButton = document.querySelector(".dev__product-form__submit");
-
-    // Load saved products from localStorage
-    let selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
-
-    // Function to render selected products
-    function renderSelectedProducts() {
-      selectedProductsContainer.innerHTML = ""; // Clear existing items
-      selectedProducts.forEach(product => {
-        let productElement = document.createElement("div");
-        productElement.classList.add("selected-product");
-        productElement.innerHTML = `
-          <div class="selected-product__image">
-            <img src="${product.image}" alt="${product.title}" width="50">
-          </div>
-          <div class="selected-product__info">
-            <p>${product.title}</p>
-            <p>${product.price}</p>
-            <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
-          </div>
-        `;
-        
-        // Remove product from localStorage on click
-        productElement.querySelector(".remove-button").addEventListener("click", function () {
-          selectedProducts = selectedProducts.filter(p => p.variantId !== product.variantId);
-          localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
-          renderSelectedProducts(); // Re-render UI
-        });
-
-        selectedProductsContainer.appendChild(productElement);
-      });
-    }
-
-    // Initial render from localStorage
-    renderSelectedProducts();
-
-    // Handle "Add" button click
-    document.querySelectorAll(".add-button").forEach(button => {
-      button.addEventListener("click", function () {
-        let variantId = this.dataset.variantId; // Get the variant ID
-        let productTitle = this.closest(".image-with-text__content").querySelector(".product__title").textContent;
-        let productPrice = this.closest(".image-with-text__content").querySelector("div:nth-of-type(2)").textContent;
-        let productImage = this.closest(".image-with-text").querySelector("img")?.src || '';
-
-        // Prevent duplicates
-        if (selectedProducts.some(p => p.variantId === variantId)) return;
-
-        // Add to localStorage
-        let productData = { variantId: variantId, title: productTitle, price: productPrice, image: productImage };
-        selectedProducts.push(productData);
-        localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
-
-        renderSelectedProducts(); // Re-render UI
-      });
-    });
-
-    // Handle "Add to Cart" button click
-    addToCartButton.addEventListener("click", function () {
-      if (selectedProducts.length === 0) {
-        alert("No products selected!");
-        return;
-      }
-
-      // Debug: Log selected products before sending
-      console.log("Selected Products:", selectedProducts);
-
-      // Prepare data in correct Shopify format
-      let cartData = { 
-        items: selectedProducts.map(product => ({
-          id: Number(product.variantId), // Convert to number
-          quantity: 1
-        }))
-      };
-
-      // Debug: Log cartData before sending
-      console.log("Sending to Shopify /cart/add.js:", JSON.stringify(cartData));
-
-      // Send the request to Shopify's cart API
-      fetch("/cart/add.js", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cartData)
-      })
-        .then(response => response.json().then(data => ({ status: response.status, body: data })))
-        .then(({ status, body }) => {
-          if (status >= 400) {
-            console.error("Shopify Error Response:", body);
-            alert("Failed to add products to cart: " + (body.message || "Unknown error"));
-            return;
-          }
-
-          console.log("Products successfully added to cart:", body);
-          localStorage.removeItem("selectedProducts"); // Clear storage
-          selectedProducts = []; // Reset array
-          renderSelectedProducts(); // Update UI
-          window.location.href = "/cart"; // Redirect to cart page
-        })
-        .catch(error => {
-          console.error("Error adding to cart:", error);
-          alert("Failed to add products to cart. Please try again.");
-        });
-    });
-  });
-</script>
-
-
-
-
-
-
 
 {% schema %}
 {
@@ -241,7 +115,6 @@
     "groups": ["header", "footer"]
   },
   "settings": [
-    
     {
       "type": "select",
       "id": "image_height",
@@ -479,11 +352,6 @@
       "type": "row",
       "name": "t:sections.multirow.blocks.row.name",
       "settings": [
-        {
-      "type": "product",
-      "id": "product",
-      "label": "t:sections.featured-product.settings.product.label"
-    },
         {
           "type": "image_picker",
           "id": "image",
