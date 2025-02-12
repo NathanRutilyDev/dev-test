@@ -51,6 +51,13 @@
 {% endfor %}
 
 
+{% for entry in metaobjects.phase1.values %}
+  <h2>Title: {{ entry.product.title }}</h2>
+  <img src="{{ entry.product.featured_image | image_url: width: 300 }}" alt="{{ entry.product.title }}">
+  <p>Description: {{ entry.product.description }}</p>
+{% endfor %}
+
+    
     
     {%- for block in section.blocks -%}
    {%- liquid
