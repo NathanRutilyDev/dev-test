@@ -89,7 +89,7 @@
                 <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
               <div>{{ product.price }}</div>
               <div>
-                <button type="button" id="{{ product.id }}">Add</button>
+                <button type="button" id="{{ product.id }}" class="add-button">Add</button>
               </div>
             </div>
           </div>
@@ -114,6 +114,50 @@
   </div>
 </div>
 
+
+
+
+
+<script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".add-button").forEach(button => {
+      button.addEventListener("click", function () {
+        // Get product details
+        let productId = this.id;
+        let productTitle = this.closest(".image-with-text__content").querySelector(".product__title").textContent;
+        let productPrice = this.closest(".image-with-text__content").querySelector("div:nth-of-type(2)").textContent;
+        let productImage = this.closest(".image-with-text").querySelector("img")?.src || '';
+
+        // Create a new product entry
+        let selectedProductsContainer = document.querySelector(".selected__products");
+
+        let productElement = document.createElement("div");
+        productElement.classList.add("selected-product");
+        productElement.innerHTML = `
+          <div class="selected-product__image">
+            <img src="${productImage}" alt="${productTitle}" width="50">
+          </div>
+          <div class="selected-product__info">
+            <p>${productTitle}</p>
+            <p>${productPrice}</p>
+            <button class="remove-button" data-id="${productId}">Remove</button>
+          </div>
+        `;
+
+        // Append to selected products
+        selectedProductsContainer.appendChild(productElement);
+
+        // Add remove functionality
+        productElement.querySelector(".remove-button").addEventListener("click", function () {
+          productElement.remove();
+        });
+      });
+    });
+  });
+</script>
+
+</script>
 {% schema %}
 {
   "name": "t:sections.multirow.name",
