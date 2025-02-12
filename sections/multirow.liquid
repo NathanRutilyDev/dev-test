@@ -58,6 +58,26 @@
 
 
 
+
+
+{% assign featured_entry = shop.metafields.ordonnance.phase_1_metas.value %}
+
+
+    {% assign product = all_products[featured_entry.phase_1.product.id] %}
+
+    <div class="featured-product">
+        <img src="{{ product.featured_image | image_url: 'large' }}" alt="{{ product.title }}">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.description}}</p>
+    </div>
+
+
+
+
+
+
+    
+
     
     {%- for block in section.blocks -%}
       
