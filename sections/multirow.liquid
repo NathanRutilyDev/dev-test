@@ -45,31 +45,6 @@
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
 
-{% assign featured_entries = product.metafields.custom.homepage_products.value %}
-
-{% if featured_entries.size > 0 %}
-    <div class="featured-products-grid">
-        {% for entry in featured_entries %}
-            {% assign product = all_products[entry.homepage-featured-products-zqhnblqh.id] %}
-            
-            {% if product %}
-                <div class="featured-product">
-                    <img src="{{ product.featured_image | image_url: 'large' }}" alt="{{ product.title }}">
-                    <h2>{{ entry.custom_title | default: product.title }}</h2>
-                    <p>{{ entry.custom_description | default: product.description }}</p>
-                    <a href="{{ product.url }}" class="btn">View Product</a>
-                </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-{% else %}
-    <p>No featured products selected.</p>
-{% endif %}
-
-
-    
-
-    
     {%- for block in section.blocks -%}
       
       <div
