@@ -152,6 +152,22 @@
     },
     "multirow_jCha3t": {
       "type": "multirow",
+      "blocks": {
+        "row_yhwPix": {
+          "type": "row",
+          "settings": {
+            "product": "anti-rides-oleo-premium-n-2",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_yhwPix"
+      ],
       "settings": {
         "image_height": "medium",
         "desktop_image_width": "medium",
