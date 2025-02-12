@@ -89,7 +89,7 @@
                 <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
               <div>{{ product.price }}</div>
               <div>
-                <button type="button" id="{{ product.id }}" class="add-button">Add</button>
+                <button type="button" id="{{ product.variants.first.id }}" class="add-button">Add</button>
               </div>
             </div>
           </div>
@@ -140,13 +140,13 @@
           <div class="selected-product__info">
             <p>${product.title}</p>
             <p>${product.price}</p>
-            <button class="remove-button" data-id="${product.id}">Remove</button>
+            <button class="remove-button" data-id="${product.variantId}">Remove</button>
           </div>
         `;
         
         // Remove product from localStorage on click
         productElement.querySelector(".remove-button").addEventListener("click", function () {
-          selectedProducts = selectedProducts.filter(p => p.id !== product.id);
+          selectedProducts = selectedProducts.filter(p => p.variantId !== product.variantId);
           localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
           renderSelectedProducts(); // Re-render UI
         });
@@ -161,16 +161,16 @@
     // Handle "Add" button click
     document.querySelectorAll(".add-button").forEach(button => {
       button.addEventListener("click", function () {
-        let productId = this.id;
+        let variantId = this.id; // Now it correctly gets the variant ID
         let productTitle = this.closest(".image-with-text__content").querySelector(".product__title").textContent;
         let productPrice = this.closest(".image-with-text__content").querySelector("div:nth-of-type(2)").textContent;
         let productImage = this.closest(".image-with-text").querySelector("img")?.src || '';
 
         // Prevent duplicates
-        if (selectedProducts.some(p => p.id === productId)) return;
+        if (selectedProducts.some(p => p.variantId === variantId)) return;
 
         // Add to localStorage
-        let productData = { id: productId, title: productTitle, price: productPrice, image: productImage };
+        let productData = { variantId: variantId, title: productTitle, price: productPrice, image: productImage };
         selectedProducts.push(productData);
         localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
 
@@ -185,30 +185,33 @@
         return;
       }
 
-      let requests = selectedProducts.map(product => {
-        return fetch("/cart/add.js", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: product.id, quantity: 1 }) // Shopify expects {id, quantity}
-        });
-      });
+      // Prepare the correct cart format
+      let cartData = { 
+        items: selectedProducts.map(product => ({
+          id: product.variantId, // Shopify needs the variant ID
+          quantity: 1 // Change this if quantity selection is needed
+        }))
+      };
 
-      // Execute all API requests and redirect to cart after completion
-      Promise.all(requests)
-        .then(responses => {
-          return Promise.all(responses.map(response => response.json())); // Parse JSON responses
-        })
+      // Send the request to Shopify's cart API
+      fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cartData)
+      })
+        .then(response => response.json())
         .then(data => {
           console.log("Products added to cart:", data);
           localStorage.removeItem("selectedProducts"); // Clear storage
           selectedProducts = []; // Reset array
           renderSelectedProducts(); // Update UI
-          window.location.href = "/cart"; // Redirect to cart
+          window.location.href = "/cart"; // Redirect to cart page
         })
         .catch(error => console.error("Error adding to cart:", error));
     });
   });
 </script>
+
 
 
 
