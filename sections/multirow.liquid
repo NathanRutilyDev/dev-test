@@ -45,35 +45,26 @@
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
 
+{% assign featured_entries = product.metafields.custom.homepage_products.value %}
 
-    {% for product in product.metafields.ordonnance.phase_1_metas.value %}
-       {{ product.featured_image }}
-    {{ product.title }}
-      {{ product.description }}
-  {% endfor %} 
-    {% for recommended_product in product.metafields.ordonnance.phase_1_metas.value %}
-    {{ recommended_product.title }}
-  {% endfor %} 
-
-
-
-
-
-
-{% assign featured_entry = shop.metafields.ordonnance.phase_1_metas.value %}
-
-
-    {% assign product = all_products[featured_entry.phase_1.product.id] %}
-
-    <div class="featured-product">
-        <img src="{{ product.featured_image | image_url: 'large' }}" alt="{{ product.title }}">
-        <h2>{{ product.title }}</h2>
-        <p>{{ product.description}}</p>
+{% if featured_entries.size > 0 %}
+    <div class="featured-products-grid">
+        {% for entry in featured_entries %}
+            {% assign product = all_products[entry.product_ref.id] %}
+            
+            {% if product %}
+                <div class="featured-product">
+                    <img src="{{ product.featured_image | image_url: 'large' }}" alt="{{ product.title }}">
+                    <h2>{{ entry.custom_title | default: product.title }}</h2>
+                    <p>{{ entry.custom_description | default: product.description }}</p>
+                    <a href="{{ product.url }}" class="btn">View Product</a>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
-
-
-
-
+{% else %}
+    <p>No featured products selected.</p>
+{% endif %}
 
 
     
