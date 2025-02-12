@@ -51,6 +51,9 @@
     {{ product.title }}
       {{ product.description }}
   {% endfor %} 
+    {% for recommended_product in product.metafields.ordonnance.phase_1_metas.value %}
+    {{ recommended_product.title }}
+  {% endfor %} 
 
 
 
