@@ -11,6 +11,34 @@
   "sections": {
     "multirow_74DPcy": {
       "type": "multirow",
+      "blocks": {
+        "row_npGWVP": {
+          "type": "row",
+          "settings": {
+            "product": "anti-rides-oleo-premium-n-2",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        },
+        "row_rrDnL7": {
+          "type": "row",
+          "settings": {
+            "product": "baume-chanvre",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_npGWVP",
+        "row_rrDnL7"
+      ],
       "settings": {
         "image_height": "medium",
         "desktop_image_width": "medium",
