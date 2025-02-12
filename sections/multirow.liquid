@@ -121,96 +121,95 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    let selectedProductsContainer = document.querySelector(".selected__products");
-    let addToCartButton = document.querySelector(".dev__product-form__submit");
-
-    // Load saved products from localStorage
-    let selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
-
-    // Function to render selected products
-    function renderSelectedProducts() {
-      selectedProductsContainer.innerHTML = ""; // Clear existing items
-      selectedProducts.forEach(product => {
-        let productElement = document.createElement("div");
-        productElement.classList.add("selected-product");
-        productElement.innerHTML = `
-          <div class="selected-product__image">
-            <img src="${product.image}" alt="${product.title}" width="50">
-          </div>
-          <div class="selected-product__info">
-            <p>${product.title}</p>
-            <p>${product.price}</p>
-            <button class="remove-button" data-id="${product.id}">Remove</button>
-          </div>
-        `;
-        
-        // Remove product from localStorage on click
-        productElement.querySelector(".remove-button").addEventListener("click", function () {
-          selectedProducts = selectedProducts.filter(p => p.id !== product.id);
-          localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
-          renderSelectedProducts(); // Re-render UI
-        });
-
-        selectedProductsContainer.appendChild(productElement);
-      });
+    // Function to save the products to localStorage
+    function saveToLocalStorage(product) {
+      let products = JSON.parse(localStorage.getItem('selectedProducts')) || [];
+      products.push(product);
+      localStorage.setItem('selectedProducts', JSON.stringify(products));
     }
 
-    // Initial render from localStorage
-    renderSelectedProducts();
-
-    // Handle "Add" button click
+    // Listen for clicks on each "Add" button
     document.querySelectorAll(".add-button").forEach(button => {
       button.addEventListener("click", function () {
+        // Get product details
         let productId = this.id;
         let productTitle = this.closest(".image-with-text__content").querySelector(".product__title").textContent;
         let productPrice = this.closest(".image-with-text__content").querySelector("div:nth-of-type(2)").textContent;
         let productImage = this.closest(".image-with-text").querySelector("img")?.src || '';
 
-        // Prevent duplicates
-        if (selectedProducts.some(p => p.id === productId)) return;
+        // Store product in localStorage
+        let product = {
+          id: productId,
+          title: productTitle,
+          price: productPrice,
+          image: productImage
+        };
+        saveToLocalStorage(product);
 
-        // Add to localStorage
-        let productData = { id: productId, title: productTitle, price: productPrice, image: productImage };
-        selectedProducts.push(productData);
-        localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+        // Create a new product element for display
+        let selectedProductsContainer = document.querySelector(".selected__products");
 
-        renderSelectedProducts(); // Re-render UI
+        let productElement = document.createElement("div");
+        productElement.classList.add("selected-product");
+        productElement.innerHTML = `
+          <div class="selected-product__image">
+            <img src="${productImage}" alt="${productTitle}" width="50">
+          </div>
+          <div class="selected-product__info">
+            <p>${productTitle}</p>
+            <p>${productPrice}</p>
+            <button class="remove-button" data-id="${productId}">Remove</button>
+          </div>
+        `;
+
+        // Append to selected products
+        selectedProductsContainer.appendChild(productElement);
+
+        // Add remove functionality
+        productElement.querySelector(".remove-button").addEventListener("click", function () {
+          // Remove product from localStorage
+          let products = JSON.parse(localStorage.getItem('selectedProducts')) || [];
+          products = products.filter(p => p.id !== productId);
+          localStorage.setItem('selectedProducts', JSON.stringify(products));
+
+          // Remove the product from the selected products list
+          productElement.remove();
+        });
       });
     });
 
-    // Handle "Add to Cart" button click
-    addToCartButton.addEventListener("click", function () {
-      if (selectedProducts.length === 0) {
-        alert("No products selected!");
-        return;
-      }
+    // Listen for click on the "Add to Cart" button
+    document.querySelector(".dev__product-form__submit").addEventListener("click", function () {
+      let products = JSON.parse(localStorage.getItem('selectedProducts')) || [];
 
-      // Shopify Cart API format
-      let cartData = {
-        items: selectedProducts.map(product => ({
-          id: product.id,
-          quantity: 1 // You can modify this based on your requirement
-        }))
-      };
+      // Prepare data for Shopify cart API
+      let lineItems = products.map(product => ({
+        variant_id: product.id,  // Shopify product variant ID
+        quantity: 1  // Assuming 1 quantity for now
+      }));
 
-      // Send request to Shopify
-      fetch("/cart/add.js", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cartData)
+      // Call Shopify AJAX API to add items to cart
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ items: lineItems })
       })
-        .then(response => response.json())
-        .then(data => {
-          alert("Products added to cart!");
-          localStorage.removeItem("selectedProducts"); // Clear storage
-          selectedProducts = []; // Reset array
-          renderSelectedProducts(); // Update UI
-          window.location.href = "/cart"; // Redirect to cart page
-        })
-        .catch(error => console.error("Error adding to cart:", error));
+      .then(response => response.json())
+      .then(data => {
+        // Successfully added to cart
+        console.log('Added to cart:', data);
+        // You can optionally redirect to cart page or show a success message
+        window.location.href = '/cart'; // Redirect to cart page
+      })
+      .catch(error => {
+        console.error('Error adding to cart:', error);
+      });
     });
   });
 </script>
+
 
 
 
