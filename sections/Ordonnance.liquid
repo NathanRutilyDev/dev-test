@@ -50,7 +50,7 @@
   title: {{ product.title.value }}
 {% endfor %}
 
-
+<pre>{{ metaobjects.phase1 | json }}</pre>
 {% for entry in metaobjects.phase1.values %}
   <h2>Title: {{ entry.product.title }}</h2>
   <img src="{{ entry.product.featured_image | image_url: width: 300 }}" alt="{{ entry.product.title }}">
