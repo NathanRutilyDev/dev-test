@@ -44,8 +44,11 @@
 
 <div class="multirow section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="multirow__inner page-width">
-    <div class="products-list-Ordonnance">
+
     {%- for block in section.blocks -%}
+   {%- liquid
+  assign product = block.settings.product
+-%}   
       <div
         class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         {{ block.shopify_attributes }}
@@ -53,96 +56,215 @@
         <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}{% if section.settings.image_layout contains 'alternate' %}{% cycle odd_class, even_class %}{% else %}{{ odd_class }}{% endif %}">
           <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
             <div
-              class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if block.settings.image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-              {% if section.settings.image_height == 'adapt' and block.settings.image != blank %}
+              class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
+              {% if section.settings.image_height == 'adapt' %}
                 style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
               {% endif %}
             >
-              {%- if block.settings.image != blank -%}
+              {%- if product.featured_image != blank -%}
                 {%- capture sizes -%}
                   (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
                   (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
                 {%- endcapture -%}
                 {{
-                  block.settings.image
+                  product.featured_image
                   | image_url: width: 1500
                   | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
                 }}
               {%- else -%}
                 {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
+
+              
             </div>
           </div>
           <div class="image-with-text__text-item grid__item">
             <div class="image-with-text__content image-with-text__content--{{ section.settings.desktop_content_position }} image-with-text__content--desktop-{{ section.settings.desktop_content_alignment }} image-with-text__content--mobile-{{ section.settings.mobile_content_alignment }} image-with-text__content--{{ section.settings.image_height }} content-container{% unless no_content_background and no_content_styles %} gradient color-{{ section.settings.row_color_scheme }}{% else %} background-transparent{% endunless %}">
-              {%- if block.settings.caption -%}
-                <p class="image-with-text__text image-with-text__text--caption caption-with-letter-spacing caption-with-letter-spacing--medium">
-                  {{ block.settings.caption | escape }}
-                </p>
-              {%- endif -%}
-              {%- if block.settings.heading -%}
-                <h2 class="image-with-text__heading {{ section.settings.heading_size }} rte">
-                  {{ block.settings.heading }}
-                </h2>
-              {%- endif -%}
-              {%- if block.settings.text -%}
-                <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ block.settings.text }}</div>
-              {%- endif -%}
-              {%- if block.settings.button_label != blank -%}
-                <a
-                  {% if block.settings.button_link == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link }}"
-                  {% endif %}
-                  class="button button--{{ section.settings.button_style }}"
-                >
-                  {{ block.settings.button_label | escape }}
-                </a>
-              {%- endif -%}
+              <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  
+                      {{ product.title | escape }}
+                    
+                  </h2>
+          
+                <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
+              <div>{{ product.price }}</div>
+              <div>
+                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button">Add</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     {%- endfor -%}
-    </div>
-    <div class="Ordonnance-selected-products">
-      
-    </div>
+  </div>
+  <div class="multi--right-block">
+     <div class="selected__products">
+     </div>
+<button
+            type="submit"
+            name="add"
+            class="dev__product-form__submit button button--full-width button--primary"
+          
+          >
+    Add to cart
+          </button>
+   <div>
+     
+   </div>
   </div>
 </div>
 
+
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let selectedProductsContainer = document.querySelector(".selected__products");
+    let addToCartButton = document.querySelector(".dev__product-form__submit");
+
+    // Load saved products from localStorage
+    let selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
+
+    // Function to render selected products
+    function renderSelectedProducts() {
+      selectedProductsContainer.innerHTML = ""; // Clear existing items
+      selectedProducts.forEach(product => {
+        let productElement = document.createElement("div");
+        productElement.classList.add("selected-product");
+        productElement.innerHTML = `
+          <div class="selected-product__image">
+            <img src="${product.image}" alt="${product.title}" width="50">
+          </div>
+          <div class="selected-product__info">
+            <p>${product.title}</p>
+            <p>${product.price}</p>
+            <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
+          </div>
+        `;
+        
+        // Remove product from localStorage on click
+        productElement.querySelector(".remove-button").addEventListener("click", function () {
+          selectedProducts = selectedProducts.filter(p => p.variantId !== product.variantId);
+          localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+          renderSelectedProducts(); // Re-render UI
+        });
+
+        selectedProductsContainer.appendChild(productElement);
+      });
+    }
+
+    // Initial render from localStorage
+    renderSelectedProducts();
+
+    // Handle "Add" button click
+    document.querySelectorAll(".add-button").forEach(button => {
+      button.addEventListener("click", function () {
+        let variantId = this.dataset.variantId; // Get the variant ID
+        let productTitle = this.closest(".image-with-text__content").querySelector(".product__title").textContent;
+        let productPrice = this.closest(".image-with-text__content").querySelector("div:nth-of-type(2)").textContent;
+        let productImage = this.closest(".image-with-text").querySelector("img")?.src || '';
+
+        // Prevent duplicates
+        if (selectedProducts.some(p => p.variantId === variantId)) return;
+
+        // Add to localStorage
+        let productData = { variantId: variantId, title: productTitle, price: productPrice, image: productImage };
+        selectedProducts.push(productData);
+        localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+
+        renderSelectedProducts(); // Re-render UI
+      });
+    });
+
+    // Handle "Add to Cart" button click
+    addToCartButton.addEventListener("click", function () {
+      if (selectedProducts.length === 0) {
+        alert("No products selected!");
+        return;
+      }
+
+      // Debug: Log selected products before sending
+      console.log("Selected Products:", selectedProducts);
+
+      // Prepare data in correct Shopify format
+      let cartData = { 
+        items: selectedProducts.map(product => ({
+          id: Number(product.variantId), // Convert to number
+          quantity: 1
+        }))
+      };
+
+      // Debug: Log cartData before sending
+      console.log("Sending to Shopify /cart/add.js:", JSON.stringify(cartData));
+
+      // Send the request to Shopify's cart API
+      fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cartData)
+      })
+        .then(response => response.json().then(data => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+          if (status >= 400) {
+            console.error("Shopify Error Response:", body);
+            alert("Failed to add products to cart: " + (body.message || "Unknown error"));
+            return;
+          }
+
+          console.log("Products successfully added to cart:", body);
+          localStorage.removeItem("selectedProducts"); // Clear storage
+          selectedProducts = []; // Reset array
+          renderSelectedProducts(); // Update UI
+          window.location.href = "/cart"; // Redirect to cart page
+        })
+        .catch(error => {
+          console.error("Error adding to cart:", error);
+          alert("Failed to add products to cart. Please try again.");
+        });
+    });
+  });
+</script>
+
+
+
+
+
+
+
 {% schema %}
 {
-  "name": "Ordonnance",
+  "name": "t:sections.ordonnance.name",
   "class": "section",
   "disabled_on": {
     "groups": ["header", "footer"]
   },
   "settings": [
+    
     {
       "type": "select",
       "id": "image_height",
       "options": [
         {
           "value": "adapt",
-          "label": "t:sections.multirow.settings.image_height.options__1.label"
+          "label": "t:sections.ordonnance.settings.image_height.options__1.label"
         },
         {
           "value": "small",
-          "label": "t:sections.multirow.settings.image_height.options__2.label"
+          "label": "t:sections.ordonnance.settings.image_height.options__2.label"
         },
         {
           "value": "medium",
-          "label": "t:sections.multirow.settings.image_height.options__3.label"
+          "label": "t:sections.ordonnance.settings.image_height.options__3.label"
         },
         {
           "value": "large",
-          "label": "t:sections.multirow.settings.image_height.options__4.label"
+          "label": "t:sections.ordonnance.settings.image_height.options__4.label"
         }
       ],
       "default": "medium",
-      "label": "t:sections.multirow.settings.image_height.label"
+      "label": "t:sections.ordonnance.settings.image_height.label"
     },
     {
       "type": "select",
@@ -150,20 +272,20 @@
       "options": [
         {
           "value": "small",
-          "label": "t:sections.multirow.settings.desktop_image_width.options__1.label"
+          "label": "t:sections.ordonnance.settings.desktop_image_width.options__1.label"
         },
         {
           "value": "medium",
-          "label": "t:sections.multirow.settings.desktop_image_width.options__2.label"
+          "label": "t:sections.ordonnance.settings.desktop_image_width.options__2.label"
         },
         {
           "value": "large",
-          "label": "t:sections.multirow.settings.desktop_image_width.options__3.label"
+          "label": "t:sections.ordonnance.settings.desktop_image_width.options__3.label"
         }
       ],
       "default": "medium",
-      "label": "t:sections.multirow.settings.desktop_image_width.label",
-      "info": "t:sections.multirow.settings.desktop_image_width.info"
+      "label": "t:sections.ordonnance.settings.desktop_image_width.label",
+      "info": "t:sections.ordonnance.settings.desktop_image_width.info"
     },
     {
       "type": "select",
@@ -199,15 +321,15 @@
       "options": [
         {
           "value": "body",
-          "label": "t:sections.multirow.settings.text_style.options__1.label"
+          "label": "t:sections.ordonnance.settings.text_style.options__1.label"
         },
         {
           "value": "subtitle",
-          "label": "t:sections.multirow.settings.text_style.options__2.label"
+          "label": "t:sections.ordonnance.settings.text_style.options__2.label"
         }
       ],
       "default": "body",
-      "label": "t:sections.multirow.settings.text_style.label"
+      "label": "t:sections.ordonnance.settings.text_style.label"
     },
     {
       "type": "select",
@@ -215,15 +337,15 @@
       "options": [
         {
           "value": "primary",
-          "label": "t:sections.multirow.settings.button_style.options__1.label"
+          "label": "t:sections.ordonnance.settings.button_style.options__1.label"
         },
         {
           "value": "secondary",
-          "label": "t:sections.multirow.settings.button_style.options__2.label"
+          "label": "t:sections.ordonnance.settings.button_style.options__2.label"
         }
       ],
       "default": "secondary",
-      "label": "t:sections.multirow.settings.button_style.label"
+      "label": "t:sections.ordonnance.settings.button_style.label"
     },
     {
       "type": "select",
@@ -231,20 +353,20 @@
       "options": [
         {
           "value": "top",
-          "label": "t:sections.multirow.settings.desktop_content_position.options__1.label"
+          "label": "t:sections.ordonnance.settings.desktop_content_position.options__1.label"
         },
         {
           "value": "middle",
-          "label": "t:sections.multirow.settings.desktop_content_position.options__2.label"
+          "label": "t:sections.ordonnance.settings.desktop_content_position.options__2.label"
         },
         {
           "value": "bottom",
-          "label": "t:sections.multirow.settings.desktop_content_position.options__3.label"
+          "label": "t:sections.ordonnance.settings.desktop_content_position.options__3.label"
         }
       ],
       "default": "middle",
-      "label": "t:sections.multirow.settings.desktop_content_position.label",
-      "info": "t:sections.multirow.settings.desktop_content_position.info"
+      "label": "t:sections.ordonnance.settings.desktop_content_position.label",
+      "info": "t:sections.ordonnance.settings.desktop_content_position.info"
     },
     {
       "type": "select",
@@ -252,19 +374,19 @@
       "options": [
         {
           "value": "left",
-          "label": "t:sections.multirow.settings.desktop_content_alignment.options__1.label"
+          "label": "t:sections.ordonnance.settings.desktop_content_alignment.options__1.label"
         },
         {
           "value": "center",
-          "label": "t:sections.multirow.settings.desktop_content_alignment.options__2.label"
+          "label": "t:sections.ordonnance.settings.desktop_content_alignment.options__2.label"
         },
         {
           "value": "right",
-          "label": "t:sections.multirow.settings.desktop_content_alignment.options__3.label"
+          "label": "t:sections.ordonnance.settings.desktop_content_alignment.options__3.label"
         }
       ],
       "default": "left",
-      "label": "t:sections.multirow.settings.desktop_content_alignment.label"
+      "label": "t:sections.ordonnance.settings.desktop_content_alignment.label"
     },
     {
       "type": "select",
@@ -272,24 +394,24 @@
       "options": [
         {
           "value": "alternate-left",
-          "label": "t:sections.multirow.settings.image_layout.options__1.label"
+          "label": "t:sections.ordonnance.settings.image_layout.options__1.label"
         },
         {
           "value": "alternate-right",
-          "label": "t:sections.multirow.settings.image_layout.options__2.label"
+          "label": "t:sections.ordonnance.settings.image_layout.options__2.label"
         },
         {
           "value": "align-left",
-          "label": "t:sections.multirow.settings.image_layout.options__3.label"
+          "label": "t:sections.ordonnance.settings.image_layout.options__3.label"
         },
         {
           "value": "align-right",
-          "label": "t:sections.multirow.settings.image_layout.options__4.label"
+          "label": "t:sections.ordonnance.settings.image_layout.options__4.label"
         }
       ],
       "default": "alternate-left",
-      "label": "t:sections.multirow.settings.image_layout.label",
-      "info": "t:sections.multirow.settings.image_layout.info"
+      "label": "t:sections.ordonnance.settings.image_layout.label",
+      "info": "t:sections.ordonnance.settings.image_layout.info"
     },
     {
       "type": "color_scheme",
@@ -300,12 +422,12 @@
     {
       "type": "color_scheme",
       "id": "row_color_scheme",
-      "label": "t:sections.multirow.settings.container_color_scheme.label",
+      "label": "t:sections.ordonnance.settings.container_color_scheme.label",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "t:sections.multirow.settings.header_mobile.content"
+      "content": "t:sections.ordonnance.settings.header_mobile.content"
     },
     {
       "type": "select",
@@ -313,19 +435,19 @@
       "options": [
         {
           "value": "left",
-          "label": "t:sections.multirow.settings.mobile_content_alignment.options__1.label"
+          "label": "t:sections.ordonnance.settings.mobile_content_alignment.options__1.label"
         },
         {
           "value": "center",
-          "label": "t:sections.multirow.settings.mobile_content_alignment.options__2.label"
+          "label": "t:sections.ordonnance.settings.mobile_content_alignment.options__2.label"
         },
         {
           "value": "right",
-          "label": "t:sections.multirow.settings.mobile_content_alignment.options__3.label"
+          "label": "t:sections.ordonnance.settings.mobile_content_alignment.options__3.label"
         }
       ],
       "default": "left",
-      "label": "t:sections.multirow.settings.mobile_content_alignment.label"
+      "label": "t:sections.ordonnance.settings.mobile_content_alignment.label"
     },
     {
       "type": "header",
@@ -355,48 +477,53 @@
   "blocks": [
     {
       "type": "row",
-      "name": "t:sections.multirow.blocks.row.name",
+      "name": "t:sections.ordonnance.blocks.row.name",
       "settings": [
+        {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.featured-product.settings.product.label"
+    },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.multirow.blocks.row.settings.image.label"
+          "label": "t:sections.ordonnance.blocks.row.settings.image.label"
         },
         {
           "type": "text",
           "id": "caption",
-          "default": "t:sections.multirow.blocks.row.settings.caption.default",
-          "label": "t:sections.multirow.blocks.row.settings.caption.label"
+          "default": "t:sections.ordonnance.blocks.row.settings.caption.default",
+          "label": "t:sections.ordonnance.blocks.row.settings.caption.label"
         },
         {
           "type": "inline_richtext",
           "id": "heading",
-          "default": "t:sections.multirow.blocks.row.settings.heading.default",
-          "label": "t:sections.multirow.blocks.row.settings.heading.label"
+          "default": "t:sections.ordonnance.blocks.row.settings.heading.default",
+          "label": "t:sections.ordonnance.blocks.row.settings.heading.label"
         },
         {
           "type": "richtext",
           "id": "text",
-          "default": "t:sections.multirow.blocks.row.settings.text.default",
-          "label": "t:sections.multirow.blocks.row.settings.text.label"
+          "default": "t:sections.ordonnance.blocks.row.settings.text.default",
+          "label": "t:sections.ordonnance.blocks.row.settings.text.label"
         },
         {
           "type": "text",
           "id": "button_label",
-          "default": "t:sections.multirow.blocks.row.settings.button_label.default",
-          "label": "t:sections.multirow.blocks.row.settings.button_label.label"
+          "default": "t:sections.ordonnance.blocks.row.settings.button_label.default",
+          "label": "t:sections.ordonnance.blocks.row.settings.button_label.label"
         },
         {
           "type": "url",
           "id": "button_link",
-          "label": "t:sections.multirow.blocks.row.settings.button_link.label"
+          "label": "t:sections.ordonnance.blocks.row.settings.button_link.label"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Ordonnance",
+      "name": "t:sections.ordonnance.presets.name",
       "blocks": [
         {
           "type": "row"
