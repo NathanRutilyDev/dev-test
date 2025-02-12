@@ -33,11 +33,35 @@
             "button_label": "Button label",
             "button_link": ""
           }
+        },
+        "row_wXGfpy": {
+          "type": "row",
+          "settings": {
+            "product": "elixir-integral-des-peaux-matures-oleo-star",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        },
+        "row_kQjAQW": {
+          "type": "row",
+          "settings": {
+            "product": "cernes-et-poches-sous-les-yeux-oleo-fluide-n-2",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
         "row_64aaPn",
-        "row_gyNtD3"
+        "row_gyNtD3",
+        "row_wXGfpy",
+        "row_kQjAQW"
       ],
       "settings": {
         "image_height": "medium",
