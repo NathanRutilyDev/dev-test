@@ -89,7 +89,7 @@
                 <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
               <div>{{ product.price }}</div>
               <div>
-                <button type="button" id="{{ product.variants.first.id }}" class="add-button">Add</button>
+                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button">Add</button>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@
           <div class="selected-product__info">
             <p>${product.title}</p>
             <p>${product.price}</p>
-            <button class="remove-button" data-id="${product.variantId}">Remove</button>
+            <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
           </div>
         `;
         
@@ -161,7 +161,7 @@
     // Handle "Add" button click
     document.querySelectorAll(".add-button").forEach(button => {
       button.addEventListener("click", function () {
-        let variantId = this.id; // Now it correctly gets the variant ID
+        let variantId = this.dataset.variantId; // Get the variant ID
         let productTitle = this.closest(".image-with-text__content").querySelector(".product__title").textContent;
         let productPrice = this.closest(".image-with-text__content").querySelector("div:nth-of-type(2)").textContent;
         let productImage = this.closest(".image-with-text").querySelector("img")?.src || '';
@@ -185,13 +185,15 @@
         return;
       }
 
-      // Prepare the correct cart format
+      // Format the data correctly for Shopify's API
       let cartData = { 
         items: selectedProducts.map(product => ({
-          id: product.variantId, // Shopify needs the variant ID
+          id: Number(product.variantId), // Convert to number (Shopify requires this)
           quantity: 1 // Change this if quantity selection is needed
         }))
       };
+
+      console.log("Sending to Shopify:", cartData); // Debugging
 
       // Send the request to Shopify's cart API
       fetch("/cart/add.js", {
@@ -199,15 +201,23 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cartData)
       })
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Failed to add products to cart");
+          }
+          return response.json();
+        })
         .then(data => {
-          console.log("Products added to cart:", data);
+          console.log("Products successfully added:", data);
           localStorage.removeItem("selectedProducts"); // Clear storage
           selectedProducts = []; // Reset array
           renderSelectedProducts(); // Update UI
           window.location.href = "/cart"; // Redirect to cart page
         })
-        .catch(error => console.error("Error adding to cart:", error));
+        .catch(error => {
+          console.error("Error adding to cart:", error);
+          alert("Failed to add products to cart. Please try again.");
+        });
     });
   });
 </script>
