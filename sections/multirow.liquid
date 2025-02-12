@@ -88,6 +88,9 @@
           
                 <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
               <div>{{ product.price }}</div>
+              <div>
+                <button type="button" id="{{ product.id }}">Add</button>
+              </div>
             </div>
           </div>
         </div>
@@ -95,7 +98,19 @@
     {%- endfor -%}
   </div>
   <div class="multi--right-block">
+     <div class="selected__products">
+     </div>
+<button
+            type="submit"
+            name="add"
+            class="dev__product-form__submit button button--full-width button--primary"
+          
+          >
+    Add to cart
+          </button>
+   <div>
      
+   </div>
   </div>
 </div>
 
