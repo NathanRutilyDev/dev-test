@@ -139,10 +139,16 @@ text-transform: uppercase;
   cursor: pointer;
 }
 .selected__products{
-margin: 12px 4px 0px 16px;
-  max-height: 195px;
-    overflow-y: scroll;
+  margin: 12px 4px 0px 16px;
+  max-height: 0;
+  transition: max-height 0.8s ease, opacity 1s ease;
+  opacity: 0;
+  overflow-y: scroll;
 }
+.selected__products.show {
+ max-height: 195px;
+ opacity: 1;
+    }
 .selected-product{
   display: flex;
     align-items: flex-start;

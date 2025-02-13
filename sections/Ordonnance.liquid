@@ -202,23 +202,7 @@
     display:none;
   }
 </style>
-                 <style>
-    .selected__products {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.8s ease, opacity 1s ease;
-        opacity: 0;
-    }
 
-    .selected__products.show {
-        max-height: 195px; /* Adjust based on your content height */
-        opacity: 1;
-    }
-
-    .selected-products-title {
-        cursor: pointer;
-    }
-</style>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     let selectedProductsContainer = document.querySelector(".selected__products");
