@@ -140,6 +140,8 @@ text-transform: uppercase;
 }
 .selected__products{
 margin: 12px 4px 0px 16px;
+  max-height: 195px;
+    overflow-y: scroll;
 }
 .selected-product{
   display: flex;
