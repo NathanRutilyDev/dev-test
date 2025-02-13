@@ -86,7 +86,7 @@ letter-spacing: 0.14px;
 }
 .ordonnance__check-btn button{
   height: auto;
-    padding: 8px 20px;
+    padding: 10px 24px;
     min-height: auto;
     font-size: 14px;
     font-style: normal;
@@ -311,10 +311,13 @@ letter-spacing: 0.14px;
 }
 .ordonnance__check-btn .add-button.added .added-checked{
   display:block;
+  line-height: 0;
+  margin-right: 8px;
 }
 .ordonnance__check-btn .add-button.added{
     background: transparent;
     color: #443D36;
+  cursor: not-allowed;
 }
 
 
