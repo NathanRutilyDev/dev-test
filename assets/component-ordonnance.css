@@ -306,6 +306,16 @@ letter-spacing: 0.14px;
     letter-spacing: 0.14px;
     margin-top: 4px;
 }
+.ordonnance__check-btn .added-checked{
+  display:none;
+}
+.ordonnance__check-btn .add-button.added .added-checked{
+  display:block;
+}
+.ordonnance__check-btn .add-button.added{
+    background: transparent;
+    color: #443D36;
+}
 
 
 
