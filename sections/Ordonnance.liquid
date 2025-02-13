@@ -102,7 +102,10 @@
                     -%}
                   </div>
               <div class="ordonnance__check-btn">
-                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">Ajouter</button>
+                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">
+                  <span class="added-checked"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.33337 9.33325L5.66671 11.6666L12.6667 4.33325" stroke="#443D36" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/></svg></span>
+                  Ajouter
+                </button>
               </div>
              </div>
             </div>
@@ -280,13 +283,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
                 renderSelectedProducts();
                 updateTotalPrice();
-                updateButtonStates(); // Update button states after removal
+                updateButtonStates();
             });
 
             selectedProductsContainer.appendChild(productElement);
         });
 
-        updateButtonStates(); // Ensure buttons are updated on render
+        updateButtonStates();
     }
 
     function addProductToSelection(button) {
@@ -304,16 +307,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         renderSelectedProducts();
         updateTotalPrice();
-        updateButtonStates(); // Ensure buttons are updated
+        updateButtonStates();
     }
 
     function updateButtonStates() {
         document.querySelectorAll(".add-button").forEach(button => {
             let variantId = button.dataset.variantId;
             if (selectedProducts.some(p => p.variantId === variantId)) {
-                button.classList.add("added"); // Mark as added
+                button.classList.add("added");
+                button.textContent = "Ajouté"; // Change text to "Ajouté"
             } else {
-                button.classList.remove("added"); // Remove if not in list
+                button.classList.remove("added");
+                button.textContent = "Ajouter"; // Change text back to "Ajouter"
             }
         });
     }
@@ -325,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 0);
 
         document.querySelectorAll(".selected-products-total").forEach(element => {
-            element.textContent = totalPrice.toFixed(2) + "€"; // Update all instances
+            element.textContent = totalPrice.toFixed(2) + "€";
         });
 
         document.querySelector(".num-selected_products").textContent = selectedProducts.length;
@@ -382,6 +387,7 @@ document.addEventListener("DOMContentLoaded", function () {
     renderSelectedProducts();
     updateTotalPrice();
 });
+
 
 </script>
 
