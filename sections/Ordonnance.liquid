@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let variantId = button.dataset.variantId;
         let productContainer = button.closest(".ordonnance__content");
         let productTitle = productContainer.querySelector(".product__title").textContent;
-        let productPrice = productContainer.querySelector("div:nth-of-type(2)").textContent;
+        let productPrice = productContainer.querySelector(".price").textContent;
         let productImage = productContainer.closest(".ordonnance-with-text").querySelector("img")?.src || '';
 
         // Prevent duplicates
