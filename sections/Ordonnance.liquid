@@ -58,7 +58,7 @@
    {%- liquid
   assign product = block.settings.product
 -%}   
-      <div
+     <div
         class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         {{ block.shopify_attributes }}
       >
@@ -66,7 +66,7 @@
           <div class="ordonnance__media-item grid__item">
             <div
               class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-              >
+            >
               {%- if product.featured_image != blank -%}
                 {%- capture sizes -%}
                   (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
@@ -92,18 +92,18 @@
                     
                   </h2>
           
-                <div class="ordonnance__description rte {{ section.settings.text_style }}">
-                  {{ product.description }}
-                </div>
-              <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                <div class="ordonnance__description rte {{ section.settings.text_style }}">{{ product.description }}</div>
+             <div class="ordonnance__product--add">
+              <div id="price-{{ section.id }}" class="ordonnance__product-price" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       price_class: 'price--large'
                     -%}
                   </div>
-              <div>
-                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button">Add</button>
+              <div class="ordonnance__check-btn">
+                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">Add</button>
               </div>
+             </div>
             </div>
           </div>
         </div>
