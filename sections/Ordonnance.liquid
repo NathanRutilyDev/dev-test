@@ -208,9 +208,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedProductsContainer = document.querySelector(".selected__products");
     let addToCartButton = document.querySelector(".dev__product-form__submit");
     let addAllButton = document.querySelector(".add-all-button");
+    let numSelectedProducts = document.querySelector(".num-selected_products");
 
     // Load saved products from localStorage
     let selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
+
+    // Function to update the product counter
+    function updateProductCounter() {
+        numSelectedProducts.textContent = selectedProducts.length; 
+    }
 
     // Function to render selected products
     function renderSelectedProducts() {
@@ -228,16 +234,19 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
                 </div>
             `;
-            
+
             // Remove product from localStorage on click
             productElement.querySelector(".remove-button").addEventListener("click", function () {
                 selectedProducts = selectedProducts.filter(p => p.variantId !== product.variantId);
                 localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
                 renderSelectedProducts(); // Re-render UI
+                updateProductCounter();  // Update counter
             });
 
             selectedProductsContainer.appendChild(productElement);
         });
+
+        updateProductCounter(); // Ensure counter updates on render
     }
 
     // Initial render from localStorage
@@ -260,6 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
 
         renderSelectedProducts(); // Re-render UI
+        updateProductCounter();  // Update counter
     }
 
     // Handle "Add" button click for individual products
@@ -323,8 +333,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
 </script>
+
                  
 <script>
  document.addEventListener("DOMContentLoaded", function () {
