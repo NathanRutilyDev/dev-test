@@ -40,17 +40,17 @@
 
 <div class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="page-width">
-   <div class="ordonnance__inner grid">
+    <h2 class="ordonnance-heading"> Ordonnance</h2>
+    <div class="ordonnance__inner grid">
      <div class="ordonnance--left-block grid__item">
-<div class="ordonnance-header">
- <h2 class="ordonnance-heading"> Ordonnance </h2>
-  <div class="ordonnance-head-details">
-    <div class="ordonnance-head-text">Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.</div>
-    <div class="ordonnance-head-btn">
-       <button type="button" class="add-all-button button button--secondary">Tout ajouter</button>
-    </div>
-  </div>
-</div>
+       <div class="ordonnance-header">
+         <div class="ordonnance-head-details">
+           <div class="ordonnance-head-text">Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.</div>
+           <div class="ordonnance-head-btn">
+             <button type="button" class="add-all-button button button--secondary">Tout ajouter</button>
+           </div>
+         </div>
+       </div>
     
     
     {%- for block in section.blocks -%}
