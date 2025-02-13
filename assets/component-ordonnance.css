@@ -94,7 +94,9 @@ letter-spacing: 0.14px;
 }
 .ordonnance--right__inner{
 width: 60%;
-      margin-left: auto;
+margin-left: auto;
+  background-color: #ffffff;
+    border-radius: 4px;
 }
 .ordonnance--right_img{
   width: 72px;
