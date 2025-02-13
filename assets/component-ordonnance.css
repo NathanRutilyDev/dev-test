@@ -47,7 +47,7 @@
   border-radius: 4px;
   height: 100%;
 }
-.ordonnance-with-text.ordonnance__grid{
+.ordonnance-with-text .ordonnance__grid{
   gap: 16px !important;
 }
 .ordonnance__content .product__title {
