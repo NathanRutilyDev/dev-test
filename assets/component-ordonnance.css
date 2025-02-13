@@ -48,7 +48,7 @@
   height: 100%;
 }
 .ordonnance-with-text.ordonnance__grid{
-  gap: 16px;
+  gap: 16px !important;
 }
 .ordonnance__content .product__title {
     margin-top: 0px;
