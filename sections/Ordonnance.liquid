@@ -269,14 +269,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Function to update total price
-    function updateTotalPrice() {
-        let total = selectedProducts.reduce((sum, product) => {
-            let price = parseFloat(product.price.replace(/[^\d,.]/g, '').replace(',', '.')) || 0;
-            return sum + price;
-        }, 0);
+function updateTotalPrice() {
+    let total = selectedProducts.reduce((sum, product) => {
+        let price = parseFloat(product.price.replace(/[^\d,.]/g, '').replace(',', '.')) || 0;
+        return sum + price;
+    }, 0);
 
-        selectedProductsTotal.textContent = total.toFixed(2) + " €";  // Display formatted total
-    }
+    // Update all .selected-products-total elements
+    document.querySelectorAll(".selected-products-total").forEach(el => {
+        el.textContent = total.toFixed(2) + " €";
+    });
+}
+
 
     // Function to render selected products
     function renderSelectedProducts() {
