@@ -258,6 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let addToCartButton = document.querySelector(".dev__product-form__submit");
     let addAllButton = document.querySelector(".add-all-button");
     let numSelectedProducts = document.querySelector(".num-selected_products");
+    let selectedProductsTotal = document.querySelector(".selected-products-total");
 
     // Load saved products from localStorage
     let selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
@@ -265,6 +266,16 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to update the product counter
     function updateProductCounter() {
         numSelectedProducts.textContent = selectedProducts.length; 
+    }
+
+    // Function to update total price
+    function updateTotalPrice() {
+        let total = selectedProducts.reduce((sum, product) => {
+            let price = parseFloat(product.price.replace(/[^\d,.]/g, '').replace(',', '.')) || 0;
+            return sum + price;
+        }, 0);
+
+        selectedProductsTotal.textContent = total.toFixed(2) + " €";  // Display formatted total
     }
 
     // Function to render selected products
@@ -290,12 +301,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
                 renderSelectedProducts(); // Re-render UI
                 updateProductCounter();  // Update counter
+                updateTotalPrice();      // Update total price
             });
 
             selectedProductsContainer.appendChild(productElement);
         });
 
         updateProductCounter(); // Ensure counter updates on render
+        updateTotalPrice();     // Ensure total updates on render
     }
 
     // Initial render from localStorage
@@ -319,6 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         renderSelectedProducts(); // Re-render UI
         updateProductCounter();  // Update counter
+        updateTotalPrice();      // Update total price
     }
 
     // Handle "Add" button click for individual products
@@ -383,6 +397,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
 
                  
 <script>
