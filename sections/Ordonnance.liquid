@@ -319,25 +319,28 @@ function updateTotalPrice() {
     renderSelectedProducts();
 
     // Function to add a product
-    function addProductToSelection(button) {
-        let variantId = button.dataset.variantId;
-        let productContainer = button.closest(".ordonnance__content");
-        let productTitle = productContainer.querySelector(".product__title").textContent;
-        let productPrice = productContainer.querySelector(".price-item").textContent;
-        let productImage = productContainer.closest(".ordonnance-with-text").querySelector("img")?.src || '';
+function addProductToSelection(button) {
+    let variantId = button.dataset.variantId;
+    let productContainer = button.closest(".ordonnance__content");
+    let productTitle = productContainer.querySelector(".product__title").textContent;
+    let productPrice = productContainer.querySelector(".price-item").textContent;
+    let productImage = productContainer.closest(".ordonnance-with-text").querySelector("img")?.src || '';
 
-        // Prevent duplicates
-        if (selectedProducts.some(p => p.variantId === variantId)) return;
+    // Prevent duplicates
+    if (selectedProducts.some(p => p.variantId === variantId)) return;
 
-        // Add to localStorage
-        let productData = { variantId, title: productTitle, price: productPrice, image: productImage };
-        selectedProducts.push(productData);
-        localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+    // Add to localStorage
+    let productData = { variantId, title: productTitle, price: productPrice, image: productImage };
+    selectedProducts.push(productData);
+    localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
 
-        renderSelectedProducts(); // Re-render UI
-        updateProductCounter();  // Update counter
-        updateTotalPrice();      // Update total price
-    }
+    renderSelectedProducts(); // Re-render UI
+    updateTotalPrice(); // Update total price
+
+    // Add 'added' class to the clicked button
+    button.classList.add("added");
+}
+
 
     // Handle "Add" button click for individual products
     document.querySelectorAll(".add-button").forEach(button => {
