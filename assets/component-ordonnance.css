@@ -84,6 +84,14 @@ font-weight: 600;
 line-height: 20px; /* 142.857% */
 letter-spacing: 0.14px;
 }
+.ordonnance__check-btn button{
+  height: auto;
+    padding: 8px 20px;
+    min-height: auto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+}
 
 
 
