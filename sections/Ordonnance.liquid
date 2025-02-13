@@ -51,15 +51,22 @@
            </div>
          </div>
        </div>
-       <div class="ordonnance-phase">
-         {%- for block in section.blocks -%}
-           {%- liquid
-              assign product = block.settings.product
-              -%}
-           <div class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {{ block.shopify_attributes }}>
-             <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}">
-               <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
-                 <div class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
+    
+    <div class="ordonnance-phase phase_1">
+      
+    {%- for block in section.blocks -%}
+      {% if block.type == 'phase_1' %}
+   {%- liquid
+  assign product = block.settings.product
+-%}   
+      <div
+        class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}">
+          <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
+            <div
+              class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
               {% if section.settings.image_height == 'adapt' %}
                 style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
               {% endif %}
@@ -103,9 +110,75 @@
           </div>
         </div>
       </div>
+        {% endif %}
     {%- endfor -%}
-       </div>
+    </div>
 
+
+    <div class="ordonnance-phase phase_2">
+      
+    {%- for block in section.blocks -%}
+      {% if block.type == 'phase_2' %}
+   {%- liquid
+  assign product = block.settings.product
+-%}   
+      <div
+        class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}">
+          <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
+            <div
+              class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
+              {% if section.settings.image_height == 'adapt' %}
+                style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
+              {% endif %}
+            >
+              {%- if product.featured_image != blank -%}
+                {%- capture sizes -%}
+                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                  (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                {%- endcapture -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 1500
+                  | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+                }}
+              {%- else -%}
+                {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+
+              
+            </div>
+          </div>
+          <div class="image-with-text__text-item grid__item">
+            <div class="image-with-text__content image-with-text__content--{{ section.settings.desktop_content_position }} image-with-text__content--desktop-{{ section.settings.desktop_content_alignment }} image-with-text__content--mobile-{{ section.settings.mobile_content_alignment }} image-with-text__content--{{ section.settings.image_height }} content-container{% unless no_content_background and no_content_styles %} gradient color-{{ section.settings.row_color_scheme }}{% else %} background-transparent{% endunless %}">
+              <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  
+                      {{ product.title | escape }}
+                    
+                  </h2>
+          
+                <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
+              <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                    {%- render 'price',
+                      product: product,
+                      price_class: 'price--large'
+                    -%}
+                  </div>
+              <div>
+                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        {% endif %}
+    {%- endfor -%}
+    </div>
+
+       
+       
   </div>
      <div class="ordonnance--right-block grid__item">
      <div class="selected__products">
@@ -236,12 +309,6 @@
   });
 </script>
 
-
-
-
-
-
-
 {% schema %}
 {
   "name": "t:sections.ordonnance.name",
@@ -286,13 +353,24 @@
   ],
   "blocks": [
     {
-      "type": "row",
-      "name": "t:sections.ordonnance.blocks.row.name",
+      "type": "phase_1",
+      "name": "t:sections.ordonnance.blocks.phase_1.name",
       "settings": [
         {
       "type": "product",
       "id": "product",
-      "label": "t:sections.featured-product.settings.product.label"
+      "label": "t:sections.ordonnance.blocks.phase_1.settings.product.label"
+    }
+      ]
+    },
+        {
+      "type": "phase_2",
+      "name": "t:sections.ordonnance.blocks.phase_2.name",
+      "settings": [
+        {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.ordonnance.blocks.phase_2.settings.product.label"
     }
       ]
     }
@@ -300,17 +378,6 @@
   "presets": [
     {
       "name": "t:sections.ordonnance.presets.name",
-      "blocks": [
-        {
-          "type": "row"
-        },
-        {
-          "type": "row"
-        },
-        {
-          "type": "row"
-        }
-      ]
     }
   ]
 }
