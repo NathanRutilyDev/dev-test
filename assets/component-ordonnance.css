@@ -296,6 +296,7 @@ letter-spacing: 0.14px;
     font-weight: 600;
     line-height: 24px;
     letter-spacing: 0.16px;
+  cursor: pointer;
 }
 .ordonnance--chat-text {
     font-size: 14px;
