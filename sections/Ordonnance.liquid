@@ -60,16 +60,13 @@
   assign product = block.settings.product
 -%}   
       <div
-        class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         {{ block.shopify_attributes }}
       >
-        <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}">
-          <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
+        <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet">
+          <div class="ordonnance__media-item grid__item">
             <div
-              class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-              {% if section.settings.image_height == 'adapt' %}
-                style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
-              {% endif %}
+              class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
             >
               {%- if product.featured_image != blank -%}
                 {%- capture sizes -%}
@@ -88,15 +85,15 @@
               
             </div>
           </div>
-          <div class="image-with-text__text-item grid__item">
-            <div class="image-with-text__content image-with-text__content--{{ section.settings.desktop_content_position }} image-with-text__content--desktop-{{ section.settings.desktop_content_alignment }} image-with-text__content--mobile-{{ section.settings.mobile_content_alignment }} image-with-text__content--{{ section.settings.image_height }} content-container{% unless no_content_background and no_content_styles %} gradient color-{{ section.settings.row_color_scheme }}{% else %} background-transparent{% endunless %}">
+          <div class="ordonnance__text-item grid__item">
+            <div class="ordonnance__content">
               <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
                   
                       {{ product.title | escape }}
                     
                   </h2>
           
-                <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
+                <div class="ordonnance__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
               <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
@@ -115,24 +112,21 @@
     </div>
 
 
-    <div class="ordonnance-phase phase_2">
-     <h3 class="ordonnance-phase-heading">Phase 2</h3> 
+  <div class="ordonnance-phase phase_2">
+      <h3 class="ordonnance-phase-heading">Phase 2</h3>
     {%- for block in section.blocks -%}
       {% if block.type == 'phase_2' %}
    {%- liquid
   assign product = block.settings.product
 -%}   
       <div
-        class="image-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         {{ block.shopify_attributes }}
       >
-        <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}">
-          <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
+        <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet">
+          <div class="ordonnance__media-item grid__item">
             <div
-              class="image-with-text__media image-with-text__media--{{ section.settings.image_height }} gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-              {% if section.settings.image_height == 'adapt' %}
-                style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
-              {% endif %}
+              class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
             >
               {%- if product.featured_image != blank -%}
                 {%- capture sizes -%}
@@ -151,15 +145,15 @@
               
             </div>
           </div>
-          <div class="image-with-text__text-item grid__item">
-            <div class="image-with-text__content image-with-text__content--{{ section.settings.desktop_content_position }} image-with-text__content--desktop-{{ section.settings.desktop_content_alignment }} image-with-text__content--mobile-{{ section.settings.mobile_content_alignment }} image-with-text__content--{{ section.settings.image_height }} content-container{% unless no_content_background and no_content_styles %} gradient color-{{ section.settings.row_color_scheme }}{% else %} background-transparent{% endunless %}">
+          <div class="ordonnance__text-item grid__item">
+            <div class="ordonnance__content">
               <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
                   
                       {{ product.title | escape }}
                     
                   </h2>
           
-                <div class="image-with-text__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
+                <div class="ordonnance__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
               <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
