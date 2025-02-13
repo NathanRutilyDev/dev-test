@@ -92,7 +92,7 @@
                     
                   </h2>
           
-                <div class="ordonnance__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
+                <div class="ordonnance__description rte {{ section.settings.text_style }}">{{ product.description }}</div>
               <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
@@ -150,7 +150,7 @@
                     
                   </h2>
           
-                <div class="ordonnance__text rte {{ section.settings.text_style }}">{{ product.description }}</div>
+                <div class="ordonnance__description rte {{ section.settings.text_style }}">{{ product.description }}</div>
               <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
