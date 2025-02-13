@@ -25,6 +25,9 @@
   gap: 16px;
   align-self: stretch;
 }
+.ordonnance-with-text{
+margin-bottom:24px;
+}
 .ordonnance-phase{
     border-top: 1px solid #DDD6D0;
     margin-top: 24px;
