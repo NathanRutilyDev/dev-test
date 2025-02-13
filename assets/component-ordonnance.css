@@ -45,6 +45,7 @@ letter-spacing: 0.24px;
 }
 .ordonnance-phase .ordonnance__media{
   border-radius: 4px;
+  height: 100%;
 }
 
 
