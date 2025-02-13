@@ -97,6 +97,8 @@ width: 60%;
 margin-left: auto;
     border-radius: 4px;
   overflow: hidden;
+  position: sticky;
+    top: 50px;
 }
 .ordonnance--right-top{
 padding: 24px;
