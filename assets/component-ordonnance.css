@@ -27,6 +27,7 @@ align-self: stretch;
 }
 .ordonnance-phase{
 border-top: 1px solid #DDD6D0;
+  margin-top: 24px;
 }
 .ordonnance-phase-heading{
 font-family: Raleway;
@@ -35,4 +36,6 @@ font-style: normal;
 font-weight: 600;
 line-height: 32px; /* 133.333% */
 letter-spacing: 0.24px;
+    margin-top: 24px;
+    margin-bottom: 16px;
 }
