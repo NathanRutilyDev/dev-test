@@ -223,6 +223,8 @@ letter-spacing: 0.16px;
   display: flex;
     justify-content: space-between;
     align-items: center;
+  margin-top: 8px;
+    margin-bottom: 16px;
 }
 
 
