@@ -1,5 +1,4 @@
 .ordonnance-heading{
-color: #443D36;
 /* Heading/H1 */
 font-family: Raleway;
 font-size: 40px;
@@ -11,7 +10,6 @@ letter-spacing: 0.4px;
 .ordonnance-head-text{
   flex: 1 0 0;
 align-self: stretch;
-  color: #443D36;
 /* Body/Medium/Semi */
 font-family: Raleway;
 font-size: 16px;
