@@ -142,10 +142,17 @@ text-transform: uppercase;
 margin: 12px 4px 0px 16px;
 }
 .selected-product{
-  display: flex
-;
+  display: flex;
     align-items: flex-start;
     gap: 12px;
+}
+.selected-product__info .title{
+margin: 0;
+  font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.14px;
 }
 
 
