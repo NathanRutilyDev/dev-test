@@ -153,7 +153,7 @@
                   </h2>
           
                 <div class="ordonnance__description rte {{ section.settings.text_style }}">{{ product.description }}</div>
-             
+             <div class="ordonnance__product--add">
               <div id="price-{{ section.id }}" class="ordonnance__product-price" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
@@ -163,6 +163,7 @@
               <div class="ordonnance__check-btn">
                 <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">Add</button>
               </div>
+             </div>
             </div>
           </div>
         </div>
