@@ -232,6 +232,14 @@ letter-spacing: 0.16px;
 .ordonnance--right-bottom button svg{
   margin: 0px 10px;
 }
+.ordonnance--bottom-info{
+  margin-bottom: 24px;
+  font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.14px;
+}
 
 
 
