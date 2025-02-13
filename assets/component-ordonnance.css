@@ -277,6 +277,34 @@ letter-spacing: 0.14px;
 .ordonnance--option-text {
     margin-top: 16px;
 }
+.ordonnance--right-chat {
+    display: flex;
+    margin-top: 32px;
+    border-radius: 4px;
+    background: #fbeee0;
+    overflow: hidden;
+    padding: 16px;
+    gap: 16px;
+}
+.ordonnance--right-chat img {
+    width: 48px;
+    height: 48px;
+}
+.ordonnance--chat-title {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.16px;
+}
+.ordonnance--chat-text {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.14px;
+    margin-top: 4px;
+}
 
 
 
