@@ -12,36 +12,22 @@
     "ordonnance_CQkryU": {
       "type": "Ordonnance",
       "blocks": {
-        "row_64aaPn": {
-          "type": "row",
+        "phase_1_aqmRUm": {
+          "type": "phase_1",
           "settings": {
-            "product": "baume-chanvre"
+            "product": "serum-microkystes-imperfections-roll-on"
           }
         },
-        "row_gyNtD3": {
-          "type": "row",
+        "phase_1_FkH4qN": {
+          "type": "phase_1",
           "settings": {
-            "product": "anti-rides-oleo-premium-n-2"
-          }
-        },
-        "row_wXGfpy": {
-          "type": "row",
-          "settings": {
-            "product": "elixir-integral-des-peaux-matures-oleo-star"
-          }
-        },
-        "row_kQjAQW": {
-          "type": "row",
-          "settings": {
-            "product": "cernes-et-poches-sous-les-yeux-oleo-fluide-n-2"
+            "product": "gel-aloe-vera"
           }
         }
       },
       "block_order": [
-        "row_64aaPn",
-        "row_gyNtD3",
-        "row_wXGfpy",
-        "row_kQjAQW"
+        "phase_1_aqmRUm",
+        "phase_1_FkH4qN"
       ],
       "settings": {
         "section_color_scheme": "",
