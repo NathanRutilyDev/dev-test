@@ -219,6 +219,11 @@ font-weight: 600;
 line-height: 24px; /* 150% */
 letter-spacing: 0.16px;
 }
+.ordonnance--bottom-delivery{
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
 
