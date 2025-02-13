@@ -299,26 +299,39 @@
   });
 </script>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".ordonnance__description").forEach(description => {
-      let fullText = description.innerHTML.trim(); // Get full description text
-      let words = fullText.split(" "); // Split into words
+ document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".ordonnance__description").forEach(description => {
+    let fullText = description.innerHTML.trim(); // Get full description text
+    let words = fullText.split(/\s+/); // Split into words
 
-      if (words.length > 17) {
-        let truncatedText = words.slice(0, 17).join(" ") + "...";
-        description.innerHTML = truncatedText + ` <span class="show-more" style="cursor: pointer;">Voir Plus</span>`;
+    if (words.length > 16) {
+      let truncatedText = words.slice(0, 16).join(" ") + "..."; // Truncate after 16 words
+      let showMoreSpan = document.createElement("span"); // Create 'show more' button
+      showMoreSpan.textContent = "Voir Plus";
+      showMoreSpan.classList.add("show-more");
+      showMoreSpan.style.cursor = "pointer";
 
-description.querySelector(".show-more").addEventListener("click", function () {
-  description.innerHTML = fullText + ` <span class="show-less" style="cursor: pointer;">Voir Moins</span>`;
+      description.innerHTML = truncatedText + " "; // Set truncated text
+      description.appendChild(showMoreSpan); // Add "Voir Plus" button
 
-  description.querySelector(".show-less").addEventListener("click", function () {
-    description.innerHTML = truncatedText + ` <span class="show-more" style="cursor: pointer;">Voir Plus</span>`;
+      // Toggle show more/less
+      showMoreSpan.addEventListener("click", function () {
+        if (this.classList.contains("show-more")) {
+          description.innerHTML = fullText + " ";
+          this.textContent = "Voir Moins"; // Change text
+          this.classList.replace("show-more", "show-less"); // Change class
+          description.appendChild(this); // Keep the button inside
+        } else {
+          description.innerHTML = truncatedText + " ";
+          this.textContent = "Voir Plus"; // Change text back
+          this.classList.replace("show-less", "show-more"); // Change class back
+          description.appendChild(this); // Keep the button inside
+        }
+      });
+    }
   });
 });
 
-      }
-    });
-  });
 </script>
 
 
