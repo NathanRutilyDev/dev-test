@@ -296,6 +296,23 @@
     });
   });
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".ordonnance__description").forEach(description => {
+      let fullText = description.innerHTML.trim(); // Get full description text
+      let words = fullText.split(" "); // Split into words
+
+      if (words.length > 17) {
+        let truncatedText = words.slice(0, 17).join(" ") + "...";
+        description.innerHTML = truncatedText + ` <span class="show-more">Show More</span>`;
+
+        description.querySelector(".show-more").addEventListener("click", function () {
+          description.innerHTML = fullText; // Restore full text
+        });
+      }
+    });
+  });
+</script>
 
 {% schema %}
 {
