@@ -94,6 +94,7 @@ letter-spacing: 0.14px;
 }
 .ordonnance--right__inner{
 width: 60%;
+      margin-left: auto;
 }
 .ordonnance--right_img{
   width: 72px;
