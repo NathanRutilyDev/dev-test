@@ -145,6 +145,7 @@ margin: 12px 4px 0px 16px;
   display: flex;
     align-items: flex-start;
     gap: 12px;
+  margin-bottom: 8px;
 }
 .selected-product__info .title{
 margin: 0;
