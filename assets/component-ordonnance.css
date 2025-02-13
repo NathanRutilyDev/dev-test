@@ -95,12 +95,13 @@ letter-spacing: 0.14px;
 .ordonnance--right__inner{
 width: 60%;
 margin-left: auto;
-  background-color: #ffffff;
     border-radius: 4px;
+  overflow: hidden;
 }
 .ordonnance--right-top{
 padding: 24px;
   border-bottom: 1px solid #DDD6D0;
+    background-color: #ffffff;
 }
 .ordonnance--right_img{
   width: 72px;
@@ -199,6 +200,7 @@ margin: 0;
 }
 .ordonnance--right-bottom{
 padding: 24px;
+    background-color: #ffffff;
 }
 .ordonnance--bottom-total h5{
   margin: 0;
