@@ -229,6 +229,9 @@ letter-spacing: 0.16px;
 .ordonnance--delivery{
   font-weight: 600;
 }
+.ordonnance--right-bottom button svg{
+  margin: 0px 10px;
+}
 
 
 
