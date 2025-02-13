@@ -147,6 +147,12 @@ margin: 12px 4px 0px 16px;
     gap: 12px;
   margin-bottom: 8px;
 }
+.selected-product__image img{
+    width: 56px;
+    height: 57px;
+    border-radius: 4px;
+    overflow: hidden;
+}
 .selected-product__info .title{
 margin: 0;
   font-size: 14px;
