@@ -39,11 +39,11 @@ letter-spacing: 0.24px;
     margin-top: 24px;
     margin-bottom: 16px;
 }
-.ordonnance-phase .image-with-text__media-item{
+.ordonnance-phase .ordonnance__media-item{
     max-width: 140px;
     height: 180px;
 }
-.ordonnance-phase .image-with-text__media{
+.ordonnance-phase .ordonnance__media{
   border-radius: 4px;
 }
 
