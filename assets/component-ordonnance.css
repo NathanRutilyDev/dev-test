@@ -197,6 +197,45 @@ margin: 0;
 .num-selected_products{
     margin-right: 4px;
 }
+.ordonnance--right-bottom{
+padding: 24px;
+}
+.ordonnance--bottom-total h5{
+  margin: 0;
+  font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 24px; /* 150% */
+letter-spacing: 0.16px;
+}
+.ordonnance--bottom-total{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  gap: 16px;
+  font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 24px; /* 150% */
+letter-spacing: 0.16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
