@@ -68,7 +68,12 @@
     letter-spacing: 0.14px;
     margin-bottom: 12px;
 }
-
+.ordonnance__product--add{
+display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: space-between;
+}
 
 
 
