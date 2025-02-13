@@ -202,6 +202,23 @@
     display:none;
   }
 </style>
+                 <style>
+    .selected__products {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+        opacity: 0;
+    }
+
+    .selected__products.show {
+        max-height: 500px; /* Adjust based on your content height */
+        opacity: 1;
+    }
+
+    .selected-products-title {
+        cursor: pointer;
+    }
+</style>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     let selectedProductsContainer = document.querySelector(".selected__products");
@@ -361,7 +378,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let selectedProductsContainer = document.querySelector(".selected__products");
+        let toggleButton = document.querySelector(".selected-products-title");
 
+        toggleButton.addEventListener("click", function () {
+            selectedProductsContainer.classList.toggle("show");
+        });
+    });
+</script>
 
 {% schema %}
 {
