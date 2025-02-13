@@ -25,3 +25,11 @@ align-items: flex-start;
 gap: 16px;
 align-self: stretch;
 }
+.ordonnance-phase-heading{
+font-family: Raleway;
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: 32px; /* 133.333% */
+letter-spacing: 0.24px;
+}
