@@ -98,6 +98,9 @@ margin-left: auto;
   background-color: #ffffff;
     border-radius: 4px;
 }
+.ordonnance--right-top{
+padding: 24px;
+}
 .ordonnance--right_img{
   width: 72px;
     height: 72px;
@@ -133,6 +136,7 @@ font-weight: 600;
 line-height: 16px; /* 133.333% */
 letter-spacing: 0.12px;
 text-transform: uppercase;
+  cursor: pointer;
 }
 
 
