@@ -1,41 +1,41 @@
 .ordonnance-heading{
-/* Heading/H1 */
-font-family: Raleway;
-font-size: 40px;
-font-style: normal;
-font-weight: 600;
-line-height: 48px; /* 120% */
-letter-spacing: 0.4px;
+  /* Heading/H1 */
+  font-family: Raleway;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px; /* 120% */
+  letter-spacing: 0.4px;
 }
 .ordonnance-head-text{
   flex: 1 0 0;
-align-self: stretch;
-/* Body/Medium/Semi */
-font-family: Raleway;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: 24px; /* 150% */
-letter-spacing: 0.16px;
+  align-self: stretch;
+  /* Body/Medium/Semi */
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.16px;
 }
 .ordonnance-head-details{
   display: flex;
-padding-bottom: 32px;
-align-items: flex-start;
-gap: 16px;
-align-self: stretch;
+  padding-bottom: 32px;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
 }
 .ordonnance-phase{
-border-top: 1px solid #DDD6D0;
-  margin-top: 24px;
+    border-top: 1px solid #DDD6D0;
+    margin-top: 24px;
 }
 .ordonnance-phase-heading{
-font-family: Raleway;
-font-size: 24px;
-font-style: normal;
-font-weight: 600;
-line-height: 32px; /* 133.333% */
-letter-spacing: 0.24px;
+    font-family: Raleway;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 133.333% */
+    letter-spacing: 0.24px;
     margin-top: 24px;
     margin-bottom: 16px;
 }
@@ -47,7 +47,19 @@ letter-spacing: 0.24px;
   border-radius: 4px;
   height: 100%;
 }
-
+.ordonnance__grid{
+  gap: 16px;
+}
+.ordonnance__content .product__title {
+    margin-top: 0px;
+    margin-bottom: 12px;
+    line-height: 24px;
+    letter-spacing: 0.16px;
+    font-size: 16px;
+}
+.ordonnance__description p{
+  display: inline;
+}
 
 
 
