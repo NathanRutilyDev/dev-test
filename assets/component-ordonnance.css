@@ -25,3 +25,9 @@ align-items: flex-start;
 gap: 16px;
 align-self: stretch;
 }
+.ordonnance__inner{
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+align-self: stretch;
+}
