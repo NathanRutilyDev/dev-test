@@ -307,13 +307,13 @@
 
       if (words.length > 17) {
         let truncatedText = words.slice(0, 17).join(" ") + "...";
-        description.innerHTML = truncatedText + ` <span class="show-more" style="color: blue; cursor: pointer;">Show More</span>`;
+        description.innerHTML = truncatedText + ` <span class="show-more" style="cursor: pointer;">Voir Plus</span>`;
 
 description.querySelector(".show-more").addEventListener("click", function () {
-  description.innerHTML = fullText + ` <span class="show-less" style="color: blue; cursor: pointer;">Show Less</span>`;
+  description.innerHTML = fullText + ` <span class="show-less" style="cursor: pointer;">Voir Moins</span>`;
 
   description.querySelector(".show-less").addEventListener("click", function () {
-    description.innerHTML = truncatedText + ` <span class="show-more" style="color: blue; cursor: pointer;">Show More</span>`;
+    description.innerHTML = truncatedText + ` <span class="show-more" style="cursor: pointer;">Voir Plus</span>`;
   });
 });
 
