@@ -304,8 +304,8 @@
     let fullText = description.innerHTML.trim(); // Get full description text
     let words = fullText.split(/\s+/); // Split into words
 
-    if (words.length > 16) {
-      let truncatedText = words.slice(0, 16).join(" ") + "..."; // Truncate after 16 words
+    if (words.length > 12) {
+      let truncatedText = words.slice(0, 12).join(" ") + "..."; // Truncate after 16 words
       let showMoreSpan = document.createElement("span"); // Create 'show more' button
       showMoreSpan.textContent = "Voir Plus";
       showMoreSpan.classList.add("show-more");
