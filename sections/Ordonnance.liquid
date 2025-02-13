@@ -299,30 +299,35 @@
     });
   });
 </script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".ordonnance__description").forEach(description => {
-    let fullText = description.innerHTML.trim(); // Get full description text
+    let fullText = description.childNodes[0].textContent.trim(); // Get only text (excluding <span>)
     let words = fullText.split(/\s+/); // Split into words
 
-    if (words.length > 17) {
-      let truncatedText = words.slice(0, 17).join(" ") + "..."; // Truncate after 17 words
-      let showMoreBtn = `<span class="show-more" style="color: blue; cursor: pointer;">Voir Plus</span>`;
+    if (words.length > 16) {
+      let truncatedText = words.slice(0, 16).join(" ") + "..."; // Truncate after 16 words
+      let showMoreSpan = description.querySelector(".show-more"); // Get the 'show-more' span
 
-      // Set initial truncated text with "Voir Plus"
-      description.innerHTML = `<span class="short-text">${truncatedText}</span> ${showMoreBtn}`;
-
-      description.querySelector(".show-more").addEventListener("click", function () {
-        description.innerHTML = `<span class="full-text">${fullText}</span> <span class="show-less" style="color: blue; cursor: pointer;">Voir Moins</span>`;
-
-        description.querySelector(".show-less").addEventListener("click", function () {
-          description.innerHTML = `<span class="short-text">${truncatedText}</span> ${showMoreBtn}`;
-          description.querySelector(".show-more").addEventListener("click", arguments.callee);
-        });
+      description.childNodes[0].textContent = truncatedText + " "; // Set truncated text
+      
+      // Handle show more click
+      showMoreSpan.addEventListener("click", function () {
+        if (this.classList.contains("show-more")) {
+          description.childNodes[0].textContent = fullText + " "; // Show full text
+          this.textContent = "Voir Moins"; // Change text
+          this.classList.replace("show-more", "show-less"); // Change class
+        } else {
+          description.childNodes[0].textContent = truncatedText + " "; // Truncate again
+          this.textContent = "Voir Plus"; // Change text back
+          this.classList.replace("show-less", "show-more"); // Change class back
+        }
       });
     }
   });
 });
 
+</script>
 
 {% schema %}
 {
