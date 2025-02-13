@@ -321,6 +321,14 @@ letter-spacing: 0.14px;
     color: #443D36;
   cursor: not-allowed;
 }
+.ordonnance-head-btn .add-all-button {
+    height: auto;
+    padding: 10px 24px;
+    min-height: auto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+}
 
 
 
