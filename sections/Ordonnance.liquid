@@ -92,7 +92,10 @@
                     
                   </h2>
           
-                <div class="ordonnance__description rte {{ section.settings.text_style }}">{{ product.description }}</div>
+                <div class="ordonnance__description rte {{ section.settings.text_style }}">
+                  {{ product.description }}
+                <span class="show-more">Voir Plus</span>
+                </div>
               <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
@@ -296,23 +299,30 @@
     });
   });
 </script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".ordonnance__description").forEach(description => {
-      let fullText = description.innerHTML.trim(); // Get full description text
-      let words = fullText.split(" "); // Split into words
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".ordonnance__description").forEach(description => {
+    let fullText = description.innerHTML.trim(); // Get full description text
+    let words = fullText.split(/\s+/); // Split into words
 
-      if (words.length > 17) {
-        let truncatedText = words.slice(0, 17).join(" ") + "...";
-        description.innerHTML = truncatedText + ` <span class="show-more">Show More</span>`;
+    if (words.length > 17) {
+      let truncatedText = words.slice(0, 17).join(" ") + "..."; // Truncate after 17 words
+      let showMoreBtn = `<span class="show-more" style="color: blue; cursor: pointer;">Voir Plus</span>`;
 
-        description.querySelector(".show-more").addEventListener("click", function () {
-          description.innerHTML = fullText; // Restore full text
+      // Set initial truncated text with "Voir Plus"
+      description.innerHTML = `<span class="short-text">${truncatedText}</span> ${showMoreBtn}`;
+
+      description.querySelector(".show-more").addEventListener("click", function () {
+        description.innerHTML = `<span class="full-text">${fullText}</span> <span class="show-less" style="color: blue; cursor: pointer;">Voir Moins</span>`;
+
+        description.querySelector(".show-less").addEventListener("click", function () {
+          description.innerHTML = `<span class="short-text">${truncatedText}</span> ${showMoreBtn}`;
+          description.querySelector(".show-more").addEventListener("click", arguments.callee);
         });
-      }
-    });
+      });
+    }
   });
-</script>
+});
+
 
 {% schema %}
 {
