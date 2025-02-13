@@ -253,6 +253,30 @@ letter-spacing: 0.14px;
     gap: 8px;
     margin-top: 16px;
 }
+.ordonnance--right-option {
+    display: flex;
+    margin-top: 32px;
+    align-items: center;
+    border-radius: 4px;
+    background: #FBEEE0;
+    overflow: hidden;
+}
+.ordonnance--right-option img {
+    width: 112px;
+    height: 112px;
+}
+.ordonnance--option-content {
+    padding: 16px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.14px;
+}
+.ordonnance--option-icon {
+    line-height: 0;
+}
+.ordonnance--option-text {
+    margin-top: 16px;
+}
 
 
 
