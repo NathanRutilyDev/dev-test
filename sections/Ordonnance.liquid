@@ -236,9 +236,9 @@
     document.querySelectorAll(".add-button").forEach(button => {
       button.addEventListener("click", function () {
         let variantId = this.dataset.variantId; // Get the variant ID
-        let productTitle = this.closest(".image-with-text__content").querySelector(".product__title").textContent;
-        let productPrice = this.closest(".image-with-text__content").querySelector("div:nth-of-type(2)").textContent;
-        let productImage = this.closest(".image-with-text").querySelector("img")?.src || '';
+        let productTitle = this.closest(".ordonnance__content").querySelector(".product__title").textContent;
+        let productPrice = this.closest(".ordonnance__content").querySelector("div:nth-of-type(2)").textContent;
+        let productImage = this.closest(".ordonnance-with-text").querySelector("img")?.src || '';
 
         // Prevent duplicates
         if (selectedProducts.some(p => p.variantId === variantId)) return;
