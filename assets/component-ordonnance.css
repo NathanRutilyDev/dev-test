@@ -138,6 +138,15 @@ letter-spacing: 0.12px;
 text-transform: uppercase;
   cursor: pointer;
 }
+.selected__products{
+margin: 12px 4px 0px 16px;
+}
+.selected-product{
+  display: flex
+;
+    align-items: flex-start;
+    gap: 12px;
+}
 
 
 
