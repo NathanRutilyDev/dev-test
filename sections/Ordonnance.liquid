@@ -317,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (selectedProducts.some(p => p.variantId === variantId)) return;
 
-        let productData = { variantId, title: productTitle, variant: productVariant, image: productImage };
+        let productData = { variantId, title: productTitle, variant: productVariant, price: productPrice, image: productImage };
         selectedProducts.push(productData);
         localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
 
