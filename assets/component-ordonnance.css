@@ -1,8 +1,6 @@
 .ordonnance-heading{
   /* Heading/H1 */
-  font-family: Raleway;
   font-size: 40px;
-  font-style: normal;
   font-weight: 600;
   line-height: 48px; /* 120% */
   letter-spacing: 0.4px;
@@ -11,9 +9,7 @@
   flex: 1 0 0;
   align-self: stretch;
   /* Body/Medium/Semi */
-  font-family: Raleway;
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
   line-height: 24px; /* 150% */
   letter-spacing: 0.16px;
@@ -33,9 +29,9 @@ margin-bottom:24px;
     margin-top: 24px;
 }
 .ordonnance-phase-heading{
-    font-family: Raleway;
+
     font-size: 24px;
-    font-style: normal;
+
     font-weight: 600;
     line-height: 32px; /* 133.333% */
     letter-spacing: 0.24px;
@@ -69,7 +65,7 @@ margin-bottom:24px;
 }
 .ordonnance__description{
   font-size: 14px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0.14px;
@@ -101,7 +97,7 @@ letter-spacing: 0.14px;
     padding: 10px 24px;
     min-height: auto;
     font-size: 14px;
-    font-style: normal;
+
     font-weight: 600;
 }
 .ordonnance--right__inner{
@@ -205,7 +201,7 @@ letter-spacing: 0.14px;
 .selected-product__info .variant{
 margin: 0;
     font-size: 12px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: 16px;
     letter-spacing: 0.12px;  
@@ -259,7 +255,7 @@ letter-spacing: 0.14px;
 }
 .ordonnance--shipping-info{
   font-size: 14px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0.14px;
@@ -307,7 +303,7 @@ letter-spacing: 0.14px;
 }
 .ordonnance--chat-title {
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 600;
     line-height: 24px;
     letter-spacing: 0.16px;
@@ -315,7 +311,7 @@ letter-spacing: 0.14px;
 }
 .ordonnance--chat-text {
     font-size: 14px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0.14px;
@@ -339,7 +335,7 @@ letter-spacing: 0.14px;
     padding: 10px 24px;
     min-height: auto;
     font-size: 14px;
-    font-style: normal;
+
     font-weight: 600;
 }
 
