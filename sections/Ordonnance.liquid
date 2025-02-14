@@ -42,24 +42,19 @@
 
 
 
-{%- assign ordonnance_entry = shop.metaobjects.ordonnance_product_list.first -%}
-
-{%- if ordonnance_entry.products.size > 0 -%}
-    <div class="ordonnance-product-list">
-        {%- for product in ordonnance_entry.products -%}
-            <div class="product-card">
-                <a href="{{ product.url }}">
-                    <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-                    <h3>{{ product.title }}</h3>
-                    <p class="price">{{ product.price | money }}</p>
-                    <button class="add-button" data-variant-id="{{ product.variants.first.id }}">Ajouter</button>
-                </a>
-            </div>
-        {%- endfor -%}
-    </div>
-{%- else -%}
-    <p>No products found in the Ordonnance list.</p>
-{%- endif -%}
+{% for ordonnance_entry in shop.metaobjects.ordonnance_product_list %}
+    {% for product in ordonnance_entry.products %}
+        <div>
+            <h3>{{ product.title }}</h3>
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <p>{{ product.price | money }}</p>
+        </div>
+    {% else %}
+        <p>No products found in this entry.</p>
+    {% endfor %}
+{% else %}
+    <p>No metaobject entries found.</p>
+{% endfor %}
 
 
 
