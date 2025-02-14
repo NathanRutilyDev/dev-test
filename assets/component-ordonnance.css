@@ -330,6 +330,25 @@ letter-spacing: 0.14px;
     font-weight: 600;
 }
 
+@media screen and (max-width: 768px) {
+ .ordonnance-head-details {
+    flex-direction: column;
+ }
+  .ordonnance-head-btn, .ordonnance-head-btn .add-all-button{
+    width: 100%;
+    display: block;
+  }
+  .ordonnance--right-block{
+        order: 1;
+  }
+  .ordonnance--left-block{
+        order: 2;
+  }
+  .ordonnance--right__inner {
+    width: 100%;
+  }
+}
+
 
 
 
