@@ -201,7 +201,8 @@ line-height: 20px; /* 142.857% */
 letter-spacing: 0.14px;
   margin-bottom: 8px;
 }
-.selected-product__info .price{
+.selected-product__info .price,
+.selected-product__info .variant{
 margin: 0;
     font-size: 12px;
     font-style: normal;
