@@ -39,6 +39,28 @@
 -%}
 
 
+
+
+
+
+
+{% for product in shop.metaobjects.ordonnance_product_list.values %}
+      <div class="product-card">
+        <a href="{{ product.ordonnance_product_list.products.url }}">
+          <img src="{{ product.ordonnance_product_list.products.image | img_url: 'medium' }}" alt="{{ product.title }}">
+          <h3>{{ product.ordonnance_product_list.products.title }}</h3>
+          <p class="price">{{ product.ordonnance_product_list.products.price }} €</p>
+        </a>
+      </div>
+    {% endfor %}
+
+
+
+
+
+
+
+
 <div class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="page-width">
     <h2 class="ordonnance-heading"> Ordonnance</h2>
