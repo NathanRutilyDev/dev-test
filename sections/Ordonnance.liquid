@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 <div class="selected-product__info">
                     <p class="title">${product.title}</p>
-                    <p class="price">${product.price}</p>
+                    <p class="Variant">${product.variant}</p>
                     <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
                 </div>
             `;
@@ -312,11 +312,12 @@ document.addEventListener("DOMContentLoaded", function () {
         let productContainer = button.closest(".ordonnance__content");
         let productTitle = productContainer.querySelector(".product__title").textContent;
         let productPrice = productContainer.querySelector(".price-item").textContent;
+        let productVariant = productContainer.querySelector(".ordonnance__product-variant").textContent;
         let productImage = productContainer.closest(".ordonnance-with-text").querySelector("img")?.src || '';
 
         if (selectedProducts.some(p => p.variantId === variantId)) return;
 
-        let productData = { variantId, title: productTitle, price: productPrice, image: productImage };
+        let productData = { variantId, title: productTitle, variant: productVariant, image: productImage };
         selectedProducts.push(productData);
         localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
 
