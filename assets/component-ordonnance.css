@@ -360,6 +360,9 @@ letter-spacing: 0.14px;
     flex: 1 0 100%;
     display: block;
   }
+  .ordonnance__check-btn button {
+    width: 100%;
+  }
 }
 
 
