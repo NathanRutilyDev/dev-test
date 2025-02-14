@@ -108,6 +108,11 @@
                       product: product,
                       price_class: 'price--large'
                     -%}
+                <div class="ordonnance__product-variant">
+                 {% for variant in product.variants %}
+               {{ variant.title }}
+                {% endfor %}
+                </div>
                   </div>
               <div class="ordonnance__check-btn">
                 <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">Ajouter</button>
@@ -168,9 +173,11 @@
                       product: product,
                       price_class: 'price--large'
                     -%}
-                {% for variant in product.variants %}
+                 <div class="ordonnance__product-variant">
+                 {% for variant in product.variants %}
                {{ variant.title }}
                 {% endfor %}
+                </div>
                   </div>
               <div class="ordonnance__check-btn">
                 <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">Ajouter</button>
