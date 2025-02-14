@@ -44,11 +44,10 @@
 
 
 
-{% for product in shop.metaobjects.ordonnance_product_list.values %}
+{% for product in shop.metaobjects.ordonnance_product_list.ordonnance-product-list-df0o2c8e.values %}
       <div class="product-card">
-        {{ product.ordonnance_product_list.products }}
+        {{ product.title }}
         <a href="{{ product.ordonnance_product_list.products.url }}">
-          <img src="{{ product.ordonnance_product_list.products.image | img_url: 'medium' }}" alt="{{ product.title }}">
           <h3>{{ product.ordonnance_product_list.products.title }}</h3>
           <p class="price">{{ product.ordonnance_product_list.products.price }}</p>
         </a>
