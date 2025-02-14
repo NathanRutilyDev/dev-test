@@ -38,34 +38,6 @@
   endunless
 -%}
 
-
-
-
-
-{%- assign ordonnance_entry = shop.metaobjects.ordonnance_product_list.first -%}
-
-{%- if ordonnance_entry and ordonnance_entry.products.size > 0 -%}
-    <div class="ordonnance-product-list">
-        {%- for product in ordonnance_entry.products -%}
-            <div class="product-card">
-                <a href="{{ product.url }}">
-                    <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-                    <h3>{{ product.title }}</h3>
-                    <p class="price">{{ product.price | money }}</p>
-                    <button class="add-button" data-variant-id="{{ product.variants.first.id }}">Ajouter</button>
-                </a>
-            </div>
-        {%- endfor -%}
-    </div>
-{%- else -%}
-    <p>No products found in the Ordonnance list.</p>
-{%- endif -%}
-
-
-
-
-
-
 <div class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="page-width">
     <h2 class="ordonnance-heading"> Ordonnance</h2>
