@@ -81,6 +81,14 @@ display: flex;
     gap: 8px;
     justify-content: space-between;
 }
+.ordonnance__product-price {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: .14px;
+    gap: 8px;
+}
 .ordonnance__product-price .price{
   font-size: 14px;
 font-style: normal;
