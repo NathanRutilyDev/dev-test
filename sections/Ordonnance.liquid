@@ -38,29 +38,6 @@
   endunless
 -%}
 
-
-
-
-
-
-
-{% for product in shop.metaobjects.ordonnance_product_list.ordonnance-product-list-df0o2c8e.value %}
-      <div class="product-card">
-        <a href="{{ product.url }}">
-          <img src="{{ product.image | img_url: 'medium' }}" alt="{{ product.title }}">
-          <h3>{{ product.title }}</h3>
-          <p class="price">{{ product.price }} €</p>
-        </a>
-      </div>
-    {% endfor %}
-
-
-
-
-
-
-
-
 <div class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="page-width">
     <h2 class="ordonnance-heading"> Ordonnance</h2>
