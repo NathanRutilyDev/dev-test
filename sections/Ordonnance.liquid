@@ -344,18 +344,24 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function updateTotalPrice() {
-        let totalPrice = selectedProducts.reduce((sum, product) => {
-            let price = parseFloat(product.price.replace(/[^\d.-]/g, "")) || 0;
-            return sum + price;
-        }, 0);
+function updateTotalPrice() {
+    let totalPrice = selectedProducts.reduce((sum, product) => {
+        let price = parseFloat(product.price.replace(/[^\d.-]/g, "")) || 0;
+        return sum + price;
+    }, 0);
 
-        document.querySelectorAll(".selected-products-total").forEach(element => {
-            element.textContent = totalPrice.toFixed(0) + "€";
-        });
+    let formattedPrice = new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2
+    }).format(totalPrice);
 
-        document.querySelector(".num-selected_products").textContent = selectedProducts.length;
-    }
+    document.querySelectorAll(".selected-products-total").forEach(element => {
+        element.textContent = formattedPrice;
+    });
+
+    document.querySelector(".num-selected_products").textContent = selectedProducts.length;
+}
 
     document.querySelectorAll(".add-button").forEach(button => {
         button.addEventListener("click", function () {
