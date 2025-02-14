@@ -352,6 +352,14 @@ letter-spacing: 0.14px;
     max-width: 100px;
     height: 130px;
 }
+  .ordonnance__product--add{
+    flex-wrap: wrap;
+  }
+  .ordonnance__check-btn{
+    width: 100%;
+    flex: 1 0 100%;
+    display: block;
+  }
 }
 
 
