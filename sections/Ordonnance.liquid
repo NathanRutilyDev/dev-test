@@ -46,7 +46,7 @@
 
 {% for product in shop.metaobjects.ordonnance_product_list.values %}
       <div class="product-card">
-        <a href="{{ product.ordonnance_product_list.url }}">
+        <a href="{{ product.ordonnance_product_list.products.url }}">
           <img src="{{ product.image | img_url: 'medium' }}" alt="{{ product.title }}">
           <h3>{{ product.title }}</h3>
           <p class="price">{{ product.price }} €</p>
