@@ -274,7 +274,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     let selectedProductsContainer = document.querySelector(".selected__products");
     let addToCartButton = document.querySelector(".dev__product-form__submit");
-    let addAllButton = document.querySelector(".add-all-button");
     let selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
 
     function renderSelectedProducts() {
@@ -369,11 +368,18 @@ function updateTotalPrice() {
         });
     });
 
-    addAllButton.addEventListener("click", function () {
-        document.querySelectorAll(".add-button").forEach(button => {
-            addProductToSelection(button);
+ 
+document.querySelectorAll(".add-all-button").forEach(button => {
+    button.addEventListener("click", function () {
+        document.querySelectorAll(".add-button").forEach(addButton => {
+            addProductToSelection(addButton);
         });
     });
+});
+
+
+
+  
 
     addToCartButton.addEventListener("click", function () {
         if (selectedProducts.length === 0) {
