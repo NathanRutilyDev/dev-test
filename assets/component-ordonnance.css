@@ -45,9 +45,10 @@ margin-bottom:24px;
 .ordonnance-phase .ordonnance__media-item{
     max-width: 140px;
     height: 180px;
+    border-radius: 4px;
+  overflow:hidden;
 }
 .ordonnance-phase .ordonnance__media{
-  border-radius: 4px;
   height: 100%;
 }
 .ordonnance-with-text .ordonnance__grid{
@@ -347,6 +348,10 @@ letter-spacing: 0.14px;
   .ordonnance--right__inner {
     width: 100%;
   }
+  .ordonnance-phase .ordonnance__media-item {
+    max-width: 100px;
+    height: 130px;
+}
 }
 
 
