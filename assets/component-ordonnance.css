@@ -375,6 +375,10 @@ letter-spacing: 0.14px;
   .ordonnance__check-btn button {
     width: 100%;
   }
+  .ordonnance__product-price {
+    justify-content: space-between;
+    width: 100%;
+  }
 }
 
 
