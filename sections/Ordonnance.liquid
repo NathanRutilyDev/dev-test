@@ -347,14 +347,13 @@ document.addEventListener("DOMContentLoaded", function () {
 function updateTotalPrice() {
     let totalPrice = selectedProducts.reduce((sum, product) => {
         let price = parseFloat(product.price.replace(/[^\d.-]/g, "")) || 0;
-        return sum + price;
+        return sum + price / 100;  // Divide by 100 to convert cents to euros
     }, 0);
 
     let formattedPrice = new Intl.NumberFormat("fr-FR", {
-        style: "currency",
-        currency: "EUR",
-        minimumFractionDigits: 2
-    }).format(totalPrice);
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(totalPrice) + "€";  // Append € manually
 
     document.querySelectorAll(".selected-products-total").forEach(element => {
         element.textContent = formattedPrice;
@@ -362,6 +361,7 @@ function updateTotalPrice() {
 
     document.querySelector(".num-selected_products").textContent = selectedProducts.length;
 }
+
 
     document.querySelectorAll(".add-button").forEach(button => {
         button.addEventListener("click", function () {
