@@ -38,29 +38,6 @@
   endunless
 -%}
 
-
-
-
-
-{%- assign entries = shop.metaobjects.phase_1.values -%}
-
-
-        {%- for entry in entries -%}
-            <div class="product-card">
-                <a href="{{ entry.url }}">
-                    <img src="{{ entry.product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-                    <h3>{{ entry.title }}</h3>
-                    <p class="price">{{ entry.product.price | money }}</p>
-                </a>
-            </div>
-        {%- endfor -%}
-
-
-
-
-
-
-
 <div class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="page-width">
     <h2 class="ordonnance-heading"> Ordonnance</h2>
