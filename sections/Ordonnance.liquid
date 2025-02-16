@@ -1,0 +1,548 @@
+{{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
+{{ 'component-ordonnance.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+
+  if section.settings.row_color_scheme == section.settings.section_color_scheme
+    assign no_content_background = true
+  endif
+
+  if settings.text_boxes_shadow_opacity == 0 and settings.text_boxes_border_thickness == 0 or settings.text_boxes_border_opacity == 0
+    assign no_content_styles = true
+  endif
+
+  if settings.text_boxes_border_thickness > 0 and settings.text_boxes_border_opacity > 0 and settings.media_border_thickness > 0 and settings.media_border_opacity > 0
+    assign borders_class = ' collapse-borders'
+  endif
+
+  if no_content_background and no_content_styles
+    assign padding_class = ' collapse-padding'
+  endif
+
+  unless no_content_background and no_content_styles
+    assign corners_class = ' collapse-corners'
+  endunless
+-%}
+
+<div class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
+  <div class="page-width">
+    <h2 class="ordonnance-heading"> Ordonnance</h2>
+    <div class="ordonnance-header medium-hide large-up-hide">
+         <div class="ordonnance-head-details">
+           <div class="ordonnance-head-text">Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.</div>
+           <div class="ordonnance-head-btn">
+             <button type="button" class="add-all-button button button--secondary">Tout ajouter</button>
+           </div>
+         </div>
+       </div> 
+    <div class="ordonnance__inner grid grid--1-col-tablet-down">
+     <div class="ordonnance--left-block grid__item">
+       <div class="ordonnance-header small-hide">
+         <div class="ordonnance-head-details">
+           <div class="ordonnance-head-text">Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.</div>
+           <div class="ordonnance-head-btn">
+             <button type="button" class="add-all-button button button--secondary">Tout ajouter</button>
+           </div>
+         </div>
+       </div>    
+       <div class="ordonnance-phase phase_1">
+      <h3 class="ordonnance-phase-heading">Phase 1</h3>
+    {%- for block in section.blocks -%}
+      {% if block.type == 'phase_1' %}
+   {%- liquid
+  assign product = block.settings.product
+-%}   
+     <div
+        class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet-down">
+          <div class="ordonnance__media-item grid__item">
+            <div
+              class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
+            >
+              {%- if product.featured_image != blank -%}
+                {%- capture sizes -%}
+                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                  (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                {%- endcapture -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 1500
+                  | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+                }}
+              {%- else -%}
+                {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+
+              
+            </div>
+          </div>
+          <div class="ordonnance__text-item grid__item">
+            <div class="ordonnance__content">
+              <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  
+                      {{ product.title | escape }}
+                    
+                  </h2>
+          
+                <div class="ordonnance__description rte {{ section.settings.text_style }}">{{ product.description }}</div>
+             <div class="ordonnance__product--add">
+              <div id="price-{{ section.id }}" class="ordonnance__product-price" role="status" {{ block.shopify_attributes }}>
+                    {%- render 'price',
+                      product: product,
+                      price_class: 'price--large'
+                    -%}
+                <div class="ordonnance__product-variant">
+                 {% for variant in product.variants %}
+               {{ variant.title }}
+                {% endfor %}
+                </div>
+                  </div>
+              <div class="ordonnance__check-btn">
+                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">Ajouter</button>
+              </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        {% endif %}
+    {%- endfor -%}
+    </div>
+       <div class="ordonnance-phase phase_2">
+      <h3 class="ordonnance-phase-heading">Phase 2</h3>
+    {%- for block in section.blocks -%}
+      {% if block.type == 'phase_2' %}
+   {%- liquid
+  assign product = block.settings.product
+-%}   
+      <div
+        class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet-down">
+          <div class="ordonnance__media-item grid__item">
+            <div
+              class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
+            >
+              {%- if product.featured_image != blank -%}
+                {%- capture sizes -%}
+                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                  (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                {%- endcapture -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 1500
+                  | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+                }}
+              {%- else -%}
+                {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+
+              
+            </div>
+          </div>
+          <div class="ordonnance__text-item grid__item">
+            <div class="ordonnance__content">
+              <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  
+                      {{ product.title | escape }}
+                    
+                  </h2>
+          
+                <div class="ordonnance__description rte {{ section.settings.text_style }}">{{ product.description }}</div>
+             <div class="ordonnance__product--add">
+              <div id="price-{{ section.id }}" class="ordonnance__product-price" role="status" {{ block.shopify_attributes }}>
+                    {%- render 'price',
+                      product: product,
+                      price_class: 'price--large'
+                    -%}
+                 <div class="ordonnance__product-variant">
+                 {% for variant in product.variants %}
+               {{ variant.title }}
+                {% endfor %}
+                </div>
+                  </div>
+              <div class="ordonnance__check-btn">
+                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">Ajouter</button>
+              </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        {% endif %}
+    {%- endfor -%}
+    </div>    
+     </div>
+     <div class="ordonnance--right-block grid__item">
+       <div class="ordonnance--right__inner">
+         <div class="ordonnance--right-top">
+           <div class="ordonnance--right_head">
+             <div class="ordonnance--right_img">
+               <img src="https://cdn.shopify.com/s/files/1/0942/1242/4018/files/image_14.png?v=1739463299" width="100%" height="auto" />
+             </div>
+             <div class="ordonnance--right_headings">
+               <h4>Ordonnance</h4>
+               <div class="selected-products-title"><span class="num-selected_products"></span>produits ajoutés <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 10L8 6L4 10" stroke="#443D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+             </div>
+           </div>
+           <div class="selected__products"></div>
+         </div>
+         <div class="ordonnance--right-bottom">
+           <div class="ordonnance--bottom-total">
+             <h5>Ordonnance</h5>
+             <div class="selected-products-total">0€</div>
+           </div>
+           <div class="ordonnance--bottom-delivery">
+             <div class="ordonnance--delivery-head">Livraison</div>
+             <div class="ordonnance--delivery">Gratuite</div>
+           </div>
+           <div class="ordonnance--bottom-info">Votre routine AE(+) a été réalisée selon une méthodologie approuvée par des dermatologues.</div>
+           <button type="submit" name="add" class="dev__product-form__submit button button--full-width button--primary" >
+             Ajouter au panier
+             <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none"><circle cx="2" cy="2" r="2" fill="white"/></svg>
+             <span class="selected-products-total">0€</span>
+           </button>
+           <div class="ordonnance--shipping-info">
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+             <path d="M14.1667 16.6666C15.0871 16.6666 15.8333 15.9204 15.8333 14.9999C15.8333 14.0794 15.0871 13.3333 14.1667 13.3333C13.2462 13.3333 12.5 14.0794 12.5 14.9999C12.5 15.9204 13.2462 16.6666 14.1667 16.6666Z" stroke="#443D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+             <path d="M5.83329 16.6666C6.75377 16.6666 7.49996 15.9204 7.49996 14.9999C7.49996 14.0794 6.75377 13.3333 5.83329 13.3333C4.91282 13.3333 4.16663 14.0794 4.16663 14.9999C4.16663 15.9204 4.91282 16.6666 5.83329 16.6666Z" stroke="#443D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+             <path d="M4.16663 14.9766C3.25246 14.9316 2.68329 14.7958 2.27663 14.3899C1.86996 13.9841 1.73496 13.4141 1.68996 12.4999M7.49996 14.9999H12.5M15.8333 14.9766C16.7475 14.9316 17.3166 14.7958 17.7233 14.3899C18.3333 13.7791 18.3333 12.7974 18.3333 10.8333V9.16659H14.4166C13.7958 9.16659 13.4858 9.16659 13.235 9.08492C12.9848 9.00364 12.7575 8.86432 12.5715 8.67835C12.3856 8.49238 12.2462 8.26504 12.165 8.01492C12.0833 7.76409 12.0833 7.45409 12.0833 6.83325C12.0833 5.90242 12.0833 5.43742 11.9608 5.06075C11.8389 4.68556 11.6299 4.34456 11.3509 4.0656C11.072 3.78665 10.731 3.57767 10.3558 3.45575C9.97913 3.33325 9.51413 3.33325 8.58329 3.33325H1.66663M1.66663 6.66659H6.66663M1.66663 9.16659H4.99996" stroke="#443D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+             <path d="M12.0833 5H13.6008C14.8141 5 15.4199 5 15.9133 5.295C16.4074 5.58917 16.6949 6.12333 17.2699 7.19167L18.3333 9.16667" stroke="#443D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+             </svg>
+             <div class="ordonnance--shipping-text">Expédié sous 2 jours</div>
+    
+           </div>
+         </div>
+         <div class="ordonnance--right-option">
+           <img src="https://cdn.shopify.com/s/files/1/0942/1242/4018/files/icon_1.png?v=1739476238" width="100%" height="auto"/>
+           <div class="ordonnance--option-content">
+             <div class="ordonnance--option-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 11V15C4 18.3 4 19.95 5.025 20.975C6.05 22 7.7 22 11 22H13C16.3 22 17.95 22 18.975 20.975C20 19.95 20 18.3 20 15V11M12 5.857C12 4.83406 11.5936 3.85302 10.8703 3.12969C10.147 2.40636 9.16594 2 8.143 2H7.786C6.8 2 6 2.799 6 3.786C6 4.63841 6.33862 5.4559 6.94136 6.05864C7.5441 6.66138 8.36159 7 9.214 7H12M12 5.857V7M12 5.857C12 4.83406 12.4064 3.85302 13.1297 3.12969C13.853 2.40636 14.8341 2 15.857 2H16.214C17.2 2 18 2.799 18 3.786C18 4.20807 17.9169 4.626 17.7553 5.01594C17.5938 5.40588 17.3571 5.76019 17.0586 6.05864C16.7602 6.35709 16.4059 6.59383 16.0159 6.75535C15.626 6.91687 15.2081 7 14.786 7H12M12 11V22M3 9C3 8.252 3 7.878 3.201 7.6C3.34356 7.40899 3.53253 7.25754 3.75 7.16C4.098 7 4.565 7 5.5 7H18.5C19.435 7 19.902 7 20.25 7.16C20.478 7.266 20.667 7.418 20.799 7.6C21 7.878 21 8.252 21 9C21 9.748 21 10.121 20.799 10.4C20.6564 10.591 20.4675 10.7425 20.25 10.84C19.902 11 19.435 11 18.5 11H5.5C4.565 11 4.098 11 3.75 10.84C3.53253 10.7425 3.34356 10.591 3.201 10.4C3 10.121 3 9.748 3 9Z" stroke="#443D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+             </div>
+             <div class="ordonnance--option-text">Un cadeau de votre choix offert pour l'achat de cette routine en ligne</div>
+           </div>
+         </div>
+         <div class="ordonnance--right-chat">
+           <img src="https://cdn.shopify.com/s/files/1/0942/1242/4018/files/image_15.png?v=1739476238" width="100%" height="auto"/>
+           <div class="ordonnance--chat-content">
+             <div class="ordonnance--chat-title">Chat avec Christine !</div>
+             <div class="ordonnance--chat-text">Nous sommes en ligne de 9h à 17h du lundi au vendredi.</div>
+           </div>
+           <div class="ordonnance--chat-icon">
+             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6.66663 16.0001H25.3333M25.3333 16.0001L16 6.66675M25.3333 16.0001L16 25.3334" stroke="#443D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+           </div>
+         </div>
+
+
+
+
+
+         
+         
+       </div>
+     </div> 
+   </div>
+  </div>
+</div>
+
+
+<style>
+  .remove-button{
+    display: none;
+  }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let selectedProductsContainer = document.querySelector(".selected__products");
+    let addToCartButton = document.querySelector(".dev__product-form__submit");
+    let selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
+
+    function renderSelectedProducts() {
+        selectedProductsContainer.innerHTML = "";
+        selectedProducts.forEach(product => {
+            let productElement = document.createElement("div");
+            productElement.classList.add("selected-product");
+            productElement.innerHTML = `
+                <div class="selected-product__image">
+                    <img src="${product.image}" alt="${product.title}" width="50">
+                </div>
+                <div class="selected-product__info">
+                    <p class="title">${product.title}</p>
+                    <p class="variant">${product.variant}</p>
+                    <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
+                </div>
+            `;
+
+            productElement.querySelector(".remove-button").addEventListener("click", function () {
+                selectedProducts = selectedProducts.filter(p => p.variantId !== product.variantId);
+                localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+                renderSelectedProducts();
+                updateTotalPrice();
+                updateButtonStates();
+            });
+
+            selectedProductsContainer.appendChild(productElement);
+        });
+
+        updateButtonStates();
+    }
+
+    function addProductToSelection(button) {
+        let variantId = button.dataset.variantId;
+        let productContainer = button.closest(".ordonnance__content");
+        let productTitle = productContainer.querySelector(".product__title").textContent;
+        let productPrice = productContainer.querySelector(".price-item").textContent;
+        let productVariant = productContainer.querySelector(".ordonnance__product-variant").textContent;
+        let productImage = productContainer.closest(".ordonnance-with-text").querySelector("img")?.src || '';
+
+        if (selectedProducts.some(p => p.variantId === variantId)) return;
+
+        let productData = { variantId, title: productTitle, variant: productVariant, price: productPrice, image: productImage };
+        selectedProducts.push(productData);
+        localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+
+        renderSelectedProducts();
+        updateTotalPrice();
+        updateButtonStates();
+    }
+
+    function updateButtonStates() {
+        document.querySelectorAll(".add-button").forEach(button => {
+            let variantId = button.dataset.variantId;
+            if (selectedProducts.some(p => p.variantId === variantId)) {
+                button.classList.add("added");
+                button.innerHTML = `<span class="added-checked">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3.33337 9.33325L5.66671 11.6666L12.6667 4.33325" stroke="#443D36" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    Ajouté`; 
+            } else {
+                button.classList.remove("added");
+                button.innerHTML = "Ajouter";
+            }
+        });
+    }
+
+function updateTotalPrice() {
+    let totalPrice = selectedProducts.reduce((sum, product) => {
+        let price = parseFloat(product.price.replace(/[^\d.-]/g, "")) || 0;
+        return sum + price / 100;  // Divide by 100 to convert cents to euros
+    }, 0);
+
+    let formattedPrice = new Intl.NumberFormat("fr-FR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(totalPrice) + "€";  // Append € manually
+
+    document.querySelectorAll(".selected-products-total").forEach(element => {
+        element.textContent = formattedPrice;
+    });
+
+    document.querySelector(".num-selected_products").textContent = selectedProducts.length;
+}
+
+
+    document.querySelectorAll(".add-button").forEach(button => {
+        button.addEventListener("click", function () {
+            addProductToSelection(this);
+        });
+    });
+
+ 
+document.querySelectorAll(".add-all-button").forEach(button => {
+    button.addEventListener("click", function () {
+        document.querySelectorAll(".add-button").forEach(addButton => {
+            addProductToSelection(addButton);
+        });
+    });
+});
+
+
+
+  
+
+    addToCartButton.addEventListener("click", function () {
+        if (selectedProducts.length === 0) {
+            alert("No products selected!");
+            return;
+        }
+
+        let cartData = { 
+            items: selectedProducts.map(product => ({
+                id: Number(product.variantId),
+                quantity: 1
+            }))
+        };
+
+        fetch("/cart/add.js", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(cartData)
+        })
+        .then(response => response.json().then(data => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+            if (status >= 400) {
+                alert("Failed to add products to cart: " + (body.message || "Unknown error"));
+                return;
+            }
+
+            localStorage.removeItem("selectedProducts");
+            selectedProducts = [];
+            renderSelectedProducts();
+            updateTotalPrice();
+            window.location.href = "/cart";
+        })
+        .catch(error => {
+            alert("Failed to add products to cart. Please try again.");
+        });
+    });
+
+    renderSelectedProducts();
+    updateTotalPrice();
+});
+
+
+
+</script>
+
+
+                 
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".ordonnance__description").forEach(description => {
+    let fullText = description.innerHTML.trim(); // Get full description text
+    let words = fullText.split(/\s+/); // Split into words
+
+    if (words.length > 12) {
+      let truncatedText = words.slice(0, 12).join(" ") + "..."; // Truncate after 16 words
+      let showMoreSpan = document.createElement("span"); // Create 'show more' button
+      showMoreSpan.textContent = "Voir Plus";
+      showMoreSpan.classList.add("show-more");
+      showMoreSpan.style.cursor = "pointer";
+      showMoreSpan.style.textDecoration = "underline";
+
+      description.innerHTML = truncatedText + " "; // Set truncated text
+      description.appendChild(showMoreSpan); // Add "Voir Plus" button
+
+      // Toggle show more/less
+      showMoreSpan.addEventListener("click", function () {
+        if (this.classList.contains("show-more")) {
+          description.innerHTML = fullText + " ";
+          this.textContent = "Voir Moins"; // Change text
+          this.classList.replace("show-more", "show-less"); // Change class
+          description.appendChild(this); // Keep the button inside
+        } else {
+          description.innerHTML = truncatedText + " ";
+          this.textContent = "Voir Plus"; // Change text back
+          this.classList.replace("show-less", "show-more"); // Change class back
+          description.appendChild(this); // Keep the button inside
+        }
+      });
+    }
+  });
+});
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let selectedProductsContainer = document.querySelector(".selected__products");
+        let toggleButton = document.querySelector(".selected-products-title");
+
+        toggleButton.addEventListener("click", function () {
+            selectedProductsContainer.classList.toggle("show");
+        });
+    });
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.ordonnance.name",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+
+    {
+      "type": "color_scheme",
+      "id": "section_color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "row_color_scheme",
+      "label": "t:sections.ordonnance.settings.container_color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "phase_1",
+      "name": "t:sections.ordonnance.blocks.phase_1.name",
+      "settings": [
+        {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.ordonnance.blocks.phase_1.settings.product.label"
+    }
+      ]
+    },
+        {
+      "type": "phase_2",
+      "name": "t:sections.ordonnance.blocks.phase_2.name",
+      "settings": [
+        {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.ordonnance.blocks.phase_2.settings.product.label"
+    }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.ordonnance.presets.name",
+    }
+  ]
+}
+{% endschema %}
