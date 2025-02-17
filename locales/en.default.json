@@ -387,6 +387,7 @@
         "text": "Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.",
         "button": "Tout ajouter"
         }, 
+       "add": "Ajouter",
        "selected-products": "produits ajoutés",
        "shipping": "Livraison",
        "shipping-free": "Gratuite",
