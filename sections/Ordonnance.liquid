@@ -231,37 +231,29 @@
            </div>
          </div>
          <div class="ordonnance--right-option">
-           <img src="https://cdn.shopify.com/s/files/1/0942/1242/4018/files/icon_1.png?v=1739476238" width="100%" height="auto"/>
+           <img src="{{ section.settings.present_image | image_url }}" width="100%" height="auto"/>
            <div class="ordonnance--option-content">
              <div class="ordonnance--option-icon small-hide">
                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 11V15C4 18.3 4 19.95 5.025 20.975C6.05 22 7.7 22 11 22H13C16.3 22 17.95 22 18.975 20.975C20 19.95 20 18.3 20 15V11M12 5.857C12 4.83406 11.5936 3.85302 10.8703 3.12969C10.147 2.40636 9.16594 2 8.143 2H7.786C6.8 2 6 2.799 6 3.786C6 4.63841 6.33862 5.4559 6.94136 6.05864C7.5441 6.66138 8.36159 7 9.214 7H12M12 5.857V7M12 5.857C12 4.83406 12.4064 3.85302 13.1297 3.12969C13.853 2.40636 14.8341 2 15.857 2H16.214C17.2 2 18 2.799 18 3.786C18 4.20807 17.9169 4.626 17.7553 5.01594C17.5938 5.40588 17.3571 5.76019 17.0586 6.05864C16.7602 6.35709 16.4059 6.59383 16.0159 6.75535C15.626 6.91687 15.2081 7 14.786 7H12M12 11V22M3 9C3 8.252 3 7.878 3.201 7.6C3.34356 7.40899 3.53253 7.25754 3.75 7.16C4.098 7 4.565 7 5.5 7H18.5C19.435 7 19.902 7 20.25 7.16C20.478 7.266 20.667 7.418 20.799 7.6C21 7.878 21 8.252 21 9C21 9.748 21 10.121 20.799 10.4C20.6564 10.591 20.4675 10.7425 20.25 10.84C19.902 11 19.435 11 18.5 11H5.5C4.565 11 4.098 11 3.75 10.84C3.53253 10.7425 3.34356 10.591 3.201 10.4C3 10.121 3 9.748 3 9Z" stroke="#443D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
              </div>
-             <div class="ordonnance--option-text">Un cadeau de votre choix offert pour l'achat de cette routine en ligne</div>
+             <div class="ordonnance--option-text">{{ section.settings.present_text }}</div>
            </div>
          </div>
          <div class="ordonnance--right-chat">
-           <img src="https://cdn.shopify.com/s/files/1/0942/1242/4018/files/image_15.png?v=1739476238" width="100%" height="auto"/>
+           <img src="{{ section.settings.chat_image | image_url }}" width="100%" height="auto"/>
            <div class="ordonnance--chat-content">
-             <div class="ordonnance--chat-title">Chat avec Christine !</div>
-             <div class="ordonnance--chat-text">Nous sommes en ligne de 9h à 17h du lundi au vendredi.</div>
+             <div class="ordonnance--chat-title">{{ section.settings.chat_title }}</div>
+             <div class="ordonnance--chat-text">{{ section.settings.chat_text }}</div>
            </div>
            <div class="ordonnance--chat-icon">
              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6.66663 16.0001H25.3333M25.3333 16.0001L16 6.66675M25.3333 16.0001L16 25.3334" stroke="#443D36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
            </div>
-         </div>
-
-
-
-
-
-         
-         
+         </div>      
        </div>
      </div> 
    </div>
   </div>
 </div>
-
 
 <style>
   .remove-button{
@@ -481,7 +473,39 @@ document.querySelectorAll(".add-all-button").forEach(button => {
     "groups": ["header", "footer"]
   },
   "settings": [
-
+     {
+      "type": "header",
+      "content": "Colonne droite - Cadeau"
+    },
+    {
+      "type": "image_picker",
+      "id": "present_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "present_text",
+      "label": "Texte"
+    },
+    {
+      "type": "header",
+      "content": "Colonne droite - Chat"
+    },
+    {
+      "type": "image_picker",
+      "id": "chat_image",
+      "label": "Image"
+    },
+               {
+      "type": "richtext",
+      "id": "chat_title",
+      "label": "Titre"
+    },
+    {
+      "type": "richtext",
+      "id": "chat_text",
+      "label": "Texte"
+    },
     {
       "type": "color_scheme",
       "id": "section_color_scheme",
