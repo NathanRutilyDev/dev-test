@@ -9,9 +9,12 @@
  */
 {
   "sections": {
-    "ordonnance_fLBQBe": {
-      "type": "Ordonnance",
+    "main_diagnostic_ordonnance_yU9Xwb": {
+      "type": "main-diagnostic-ordonnance",
       "settings": {
+        "present_text": "",
+        "chat_title": "",
+        "chat_text": "",
         "section_color_scheme": "",
         "row_color_scheme": "",
         "padding_top": 36,
@@ -20,6 +23,6 @@
     }
   },
   "order": [
-    "ordonnance_fLBQBe"
+    "main_diagnostic_ordonnance_yU9Xwb"
   ]
 }
