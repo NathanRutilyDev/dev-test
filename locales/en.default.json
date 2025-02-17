@@ -534,7 +534,7 @@
       "send_on_label": "Send on (optional)"
     }
   },
-    "main-diagnostic-ordonnance" : {
+  "main-diagnostic-ordonnance" : {
       "ordonnance-info": "Your routine {{ ordinaten_code}} has been carried out using a methodology approved by dermatologists."
   } 
 }
