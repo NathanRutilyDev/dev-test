@@ -410,6 +410,8 @@ margin-top: 16px;
 @media screen and (max-width: 768px) {
 .ordonnance--right-chat {
     margin-top: 16px;
+      gap: 12px;
+  padding: 12px;
 }
 }
 .ordonnance--right-chat img {
