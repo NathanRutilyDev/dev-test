@@ -44,6 +44,11 @@
         "phase_2_RWbmed"
       ],
       "settings": {
+        "present_image": "shopify://shop_images/icon_1.png",
+        "present_text": "<p>Un cadeau de votre choix offert pour l'achat de cette routine en ligne</p>",
+        "chat_image": "shopify://shop_images/image_15.png",
+        "chat_title": "<p>Chat avec Christine !</p>",
+        "chat_text": "<p>Nous sommes en ligne de 9h à 17h du lundi au vendredi.</p>",
         "section_color_scheme": "",
         "row_color_scheme": "",
         "padding_top": 36,
