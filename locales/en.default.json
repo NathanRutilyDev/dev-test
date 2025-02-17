@@ -382,6 +382,11 @@
       "step_error": "You can only add this item in increments of {{ step }}"
     },
      "main-diagnostic-ordonnance" : {
+      "header": {
+        "title": "Ordonnance",
+        "text": "Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.",
+        "button": "Tout ajouter"
+        }, 
       "ordonnance-info": "Your routine {{ ordonnacen_code }} has been carried out using a methodology approved by dermatologists."
   }
   },
