@@ -267,11 +267,13 @@
     connectedCallback() {
       this.selectedProductsContainer = this.querySelector(".selected__products");
       this.addToCartButton = this.querySelector(".dev__product-form__submit");
+      this.toggleButton = this.querySelector(".selected-products-title");
 
       this.renderSelectedProducts();
       this.updateTotalPrice();
       this.setupEventListeners();
       this.initDescriptionTruncation();
+      this.setupToggleSelectedProducts();
     }
 
     setupEventListeners() {
@@ -286,6 +288,14 @@
       });
 
       this.addToCartButton.addEventListener("click", () => this.addToCart());
+    }
+
+    setupToggleSelectedProducts() {
+      if (this.toggleButton && this.selectedProductsContainer) {
+        this.toggleButton.addEventListener("click", () => {
+          this.selectedProductsContainer.classList.toggle("show");
+        });
+      }
     }
 
     renderSelectedProducts() {
@@ -449,17 +459,6 @@
 
 
 
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let selectedProductsContainer = document.querySelector(".selected__products");
-        let toggleButton = document.querySelector(".selected-products-title");
-
-        toggleButton.addEventListener("click", function () {
-            selectedProductsContainer.classList.toggle("show");
-        });
-    });
-</script>
 
 {% schema %}
 {
