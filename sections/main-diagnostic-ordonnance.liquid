@@ -114,7 +114,7 @@
                 </div>
                   </div>
               <div class="ordonnance__check-btn">
-                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">Ajouter</button>
+                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">{{ 'sections.main-diagnostic-ordonnance.add' | t }}</button>
               </div>
              </div>
             </div>
@@ -179,7 +179,7 @@
                 </div>
                   </div>
               <div class="ordonnance__check-btn">
-                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">Ajouter</button>
+                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">{{ 'sections.main-diagnostic-ordonnance.add' | t }}</button>
               </div>
              </div>
             </div>
@@ -199,7 +199,7 @@
              </div>
              <div class="ordonnance--right_headings">
                <h4>{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h4>
-               <div class="selected-products-title"><span class="num-selected_products"></span>produits ajoutés <span>{{ 'icon-caret-new.svg' | inline_asset_content }}</span></div>
+               <div class="selected-products-title"><span class="num-selected_products"></span>{{ 'sections.main-diagnostic-ordonnance.selected-products' | t }}<span>{{ 'icon-caret-new.svg' | inline_asset_content }}</span></div>
              </div>
            </div>
            <div class="selected__products"></div>
@@ -210,19 +210,19 @@
              <div class="selected-products-total">0€</div>
            </div>
            <div class="ordonnance--bottom-delivery">
-             <div class="ordonnance--delivery-head">Livraison</div>
-             <div class="ordonnance--delivery">Gratuite</div>
+             <div class="ordonnance--delivery-head">{{ 'sections.main-diagnostic-ordonnance.shipping' | t }}</div>
+             <div class="ordonnance--delivery">{{ 'sections.main-diagnostic-ordonnance.shipping-free' | t }}</div>
            </div>
 
            <div class="ordonnance--bottom-info">{{ 'sections.main-diagnostic-ordonnance.ordonnance-info' | t: ordonnacen_code: metaobject.ordonnance_code }}</div>
            <button type="submit" name="add" class="dev__product-form__submit button button--full-width button--primary" >
-             Ajouter au panier
+             {{ 'sections.main-diagnostic-ordonnance.add-to-cart' | t }}
              <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none"><circle cx="2" cy="2" r="2" fill="white"/></svg>
              <span class="selected-products-total">0€</span>
            </button>
            <div class="ordonnance--shipping-info">
              {{ 'icon-shipping.svg' | inline_asset_content }}
-             <div class="ordonnance--shipping-text">Expédié sous 2 jours</div>
+             <div class="ordonnance--shipping-text">{{ 'sections.main-diagnostic-ordonnance.delivery-date' | t }}</div>
     
            </div>
          </div>
