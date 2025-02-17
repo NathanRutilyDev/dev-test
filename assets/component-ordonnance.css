@@ -340,7 +340,6 @@ letter-spacing: 0.14px;
 }
 .ordonnance--shipping-info{
   font-size: 14px;
-
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0.14px;
@@ -348,6 +347,11 @@ letter-spacing: 0.14px;
     justify-content: center;
     gap: 8px;
     margin-top: 16px;
+}
+@media screen and (max-width: 768px) {
+.ordonnance--shipping-info{
+margin-top: 12px;
+}
 }
 .ordonnance--right-option {
     display: flex;
@@ -360,6 +364,12 @@ letter-spacing: 0.14px;
 .ordonnance--right-option img {
     width: 112px;
     height: 112px;
+}
+@media screen and (max-width: 768px) {
+.ordonnance--right-option img {
+    width: 84px;
+    height: auto;
+}
 }
 .ordonnance--option-content {
     padding: 16px;
