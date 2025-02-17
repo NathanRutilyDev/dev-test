@@ -271,6 +271,7 @@
       this.renderSelectedProducts();
       this.updateTotalPrice();
       this.setupEventListeners();
+      this.initDescriptionTruncation();
     }
 
     setupEventListeners() {
@@ -407,6 +408,40 @@
         alert("Failed to add products to cart. Please try again.");
       });
     }
+
+    // Truncate descriptions
+    initDescriptionTruncation() {
+      this.querySelectorAll(".ordonnance__description").forEach(description => {
+        let fullText = description.innerHTML.trim(); 
+        let words = fullText.split(/\s+/); 
+
+        if (words.length > 12) {
+          let truncatedText = words.slice(0, 12).join(" ") + "..."; 
+          let showMoreSpan = document.createElement("span"); 
+          showMoreSpan.textContent = "Voir Plus";
+          showMoreSpan.classList.add("show-more");
+          showMoreSpan.style.cursor = "pointer";
+          showMoreSpan.style.textDecoration = "underline";
+
+          description.innerHTML = truncatedText + " "; 
+          description.appendChild(showMoreSpan); 
+
+          showMoreSpan.addEventListener("click", function () {
+            if (this.classList.contains("show-more")) {
+              description.innerHTML = fullText + " ";
+              this.textContent = "Voir Moins"; 
+              this.classList.replace("show-more", "show-less"); 
+              description.appendChild(this);
+            } else {
+              description.innerHTML = truncatedText + " ";
+              this.textContent = "Voir Plus"; 
+              this.classList.replace("show-less", "show-more"); 
+              description.appendChild(this);
+            }
+          });
+        }
+      });
+    }
   }
 
   customElements.define("ordonnance-product-list", OrdonnanceProductList);
@@ -414,43 +449,7 @@
 
 
 
-                 
-<script>
- document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll(".ordonnance__description").forEach(description => {
-    let fullText = description.innerHTML.trim(); // Get full description text
-    let words = fullText.split(/\s+/); // Split into words
 
-    if (words.length > 12) {
-      let truncatedText = words.slice(0, 12).join(" ") + "..."; // Truncate after 16 words
-      let showMoreSpan = document.createElement("span"); // Create 'show more' button
-      showMoreSpan.textContent = "Voir Plus";
-      showMoreSpan.classList.add("show-more");
-      showMoreSpan.style.cursor = "pointer";
-      showMoreSpan.style.textDecoration = "underline";
-
-      description.innerHTML = truncatedText + " "; // Set truncated text
-      description.appendChild(showMoreSpan); // Add "Voir Plus" button
-
-      // Toggle show more/less
-      showMoreSpan.addEventListener("click", function () {
-        if (this.classList.contains("show-more")) {
-          description.innerHTML = fullText + " ";
-          this.textContent = "Voir Moins"; // Change text
-          this.classList.replace("show-more", "show-less"); // Change class
-          description.appendChild(this); // Keep the button inside
-        } else {
-          description.innerHTML = truncatedText + " ";
-          this.textContent = "Voir Plus"; // Change text back
-          this.classList.replace("show-less", "show-more"); // Change class back
-          description.appendChild(this); // Keep the button inside
-        }
-      });
-    }
-  });
-});
-
-</script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         let selectedProductsContainer = document.querySelector(".selected__products");
