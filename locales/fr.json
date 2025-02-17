@@ -418,7 +418,10 @@
       "min_error": "Cet article a un minimum de {{ min }}",
       "max_error": "Cet article a un maximum de {{ max }}",
       "step_error": "Vous pouvez ajouter cet article uniquement par incréments de {{ step }}"
-    }
+    },
+        "main-diagnostic-ordonnance" : {
+      "ordonnance-info": "Votre routine {{ ordonnacen_code }} a été réalisée selon une méthodologie approuvée par des dermatologues."
+  }
   },
   "localization": {
     "country_label": "Pays\/région",
@@ -571,8 +574,5 @@
       "expanded": "Formulaire de destinataire de carte-cadeau agrandi",
       "collapsed": "Formulaire de destinataire de carte-cadeau réduit"
     }
-  },
-    "main-diagnostic-ordonnance" : {
-      "ordonnance-info": "Votre routine {{ ordonnacen_code }} a été réalisée selon une méthodologie approuvée par des dermatologues."
   }
 }
