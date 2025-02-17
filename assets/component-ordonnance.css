@@ -447,11 +447,13 @@ margin-top: 16px;
 }
 .ordonnance--chat-text {
     font-size: 14px;
-
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0.14px;
     margin-top: 4px;
+}
+.ordonnance--chat-text p{
+  margin: 0px;
 }
 .ordonnance__check-btn .added-checked{
   display:none;
