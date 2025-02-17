@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -524,5 +533,8 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
     }
-  }
+  },
+    "main-diagnostic-ordonnance" : {
+      "ordonnance-info": "Your routine {{ ordinaten_code}} has been carried out using a methodology approved by dermatologists."
+  } 
 }
