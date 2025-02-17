@@ -8,6 +8,21 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "main_diagnostic_ordonnance_T9BhBA": {
+      "type": "main-diagnostic-ordonnance",
+      "settings": {
+        "present_text": "",
+        "chat_title": "",
+        "chat_text": "",
+        "section_color_scheme": "",
+        "row_color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main_diagnostic_ordonnance_T9BhBA"
+  ]
 }
