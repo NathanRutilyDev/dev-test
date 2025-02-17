@@ -387,7 +387,7 @@
         "text": "Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.",
         "button": "Tout ajouter"
         }, 
-      "ordonnance-info": "Your routine {{ ordonnacen_code }} has been carried out using a methodology approved by dermatologists."
+      "ordonnance-info": "Votre routine {{ ordonnacen_code }} a été réalisée selon une méthodologie approuvée par des dermatologues."
   }
   },
   "localization": {
