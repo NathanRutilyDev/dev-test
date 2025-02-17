@@ -382,7 +382,7 @@
       "step_error": "You can only add this item in increments of {{ step }}"
     },
      "main-diagnostic-ordonnance" : {
-      "ordonnance-info": "Your routine {{ ordinaten_code}} has been carried out using a methodology approved by dermatologists."
+      "ordonnance-info": "Your routine {{ ordinaten_code }} has been carried out using a methodology approved by dermatologists."
   }
   },
   "localization": {
