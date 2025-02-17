@@ -9,28 +9,28 @@
  */
 {
   "sections": {
-    "ordonnance_CQkryU": {
-      "type": "Ordonnance",
+    "main_diagnostic_ordonnance_nfzDpG": {
+      "type": "main-diagnostic-ordonnance",
       "blocks": {
-        "phase_1_aqmRUm": {
+        "phase_1_rFGzL7": {
           "type": "phase_1",
           "settings": {
             "product": "serum-microkystes-imperfections-roll-on"
           }
         },
-        "phase_1_FkH4qN": {
+        "phase_1_PWndnU": {
           "type": "phase_1",
           "settings": {
             "product": "gel-aloe-vera"
           }
         },
-        "phase_2_FdkFC4": {
+        "phase_2_jzehJ4": {
           "type": "phase_2",
           "settings": {
             "product": "cernes-et-poches-sous-les-yeux-oleo-fluide-n-2"
           }
         },
-        "phase_2_RWbmed": {
+        "phase_2_Edf3TB": {
           "type": "phase_2",
           "settings": {
             "product": "anti-rides-oleo-premium-n-2"
@@ -38,17 +38,15 @@
         }
       },
       "block_order": [
-        "phase_1_aqmRUm",
-        "phase_1_FkH4qN",
-        "phase_2_FdkFC4",
-        "phase_2_RWbmed"
+        "phase_1_rFGzL7",
+        "phase_1_PWndnU",
+        "phase_2_jzehJ4",
+        "phase_2_Edf3TB"
       ],
       "settings": {
-        "present_image": "shopify://shop_images/icon_1.png",
-        "present_text": "<p>Un cadeau de votre choix offert pour l'achat de cette routine en ligne</p>",
-        "chat_image": "shopify://shop_images/image_15.png",
-        "chat_title": "Chat avec Christine !",
-        "chat_text": "<p>Nous sommes en ligne de 9h à 17h du lundi au vendredi.</p>",
+        "present_text": "",
+        "chat_title": "",
+        "chat_text": "",
         "section_color_scheme": "",
         "row_color_scheme": "",
         "padding_top": 36,
@@ -57,6 +55,6 @@
     }
   },
   "order": [
-    "ordonnance_CQkryU"
+    "main_diagnostic_ordonnance_nfzDpG"
   ]
 }
