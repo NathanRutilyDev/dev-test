@@ -9,7 +9,7 @@
  */
 {
   "sections": {
-    "main_diagnostic_ordonnance_yU9Xwb": {
+    "main_diagnostic_ordonnance_T9BhBA": {
       "type": "main-diagnostic-ordonnance",
       "settings": {
         "present_text": "",
@@ -23,6 +23,6 @@
     }
   },
   "order": [
-    "main_diagnostic_ordonnance_yU9Xwb"
+    "main_diagnostic_ordonnance_T9BhBA"
   ]
 }
