@@ -213,7 +213,8 @@
              <div class="ordonnance--delivery-head">Livraison</div>
              <div class="ordonnance--delivery">Gratuite</div>
            </div>
-           <div class="ordonnance--bottom-info">{{ 'sections.main-diagnostic-ordonnance.ordonnance-info' | t: ordonnacen_code: 'CODE' }}</div>
+           {% assign code = section.settings.present_text %}
+           <div class="ordonnance--bottom-info">{{ 'sections.main-diagnostic-ordonnance.ordonnance-info' | t: ordonnacen_code: code }}</div>
            <button type="submit" name="add" class="dev__product-form__submit button button--full-width button--primary" >
              Ajouter au panier
              <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none"><circle cx="2" cy="2" r="2" fill="white"/></svg>
