@@ -258,159 +258,160 @@
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    let selectedProductsContainer = document.querySelector(".selected__products");
-    let addToCartButton = document.querySelector(".dev__product-form__submit");
-    let selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
-
-    function renderSelectedProducts() {
-        selectedProductsContainer.innerHTML = "";
-        selectedProducts.forEach(product => {
-            let productElement = document.createElement("div");
-            productElement.classList.add("selected-product");
-            productElement.innerHTML = `
-                <div class="selected-product__image">
-                    <img src="${product.image}" alt="${product.title}" width="50">
-                </div>
-                <div class="selected-product__info">
-                    <p class="title">${product.title}</p>
-                    <p class="variant">${product.variant}</p>
-                    <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
-                </div>
-            `;
-
-            productElement.querySelector(".remove-button").addEventListener("click", function () {
-                selectedProducts = selectedProducts.filter(p => p.variantId !== product.variantId);
-                localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
-                renderSelectedProducts();
-                updateTotalPrice();
-                updateButtonStates();
-            });
-
-            selectedProductsContainer.appendChild(productElement);
-        });
-
-        updateButtonStates();
+  class OrdonnanceProductList extends HTMLElement {
+    constructor() {
+      super();
+      this.selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
     }
 
-    function addProductToSelection(button) {
+    connectedCallback() {
+      this.selectedProductsContainer = this.querySelector(".selected__products");
+      this.addToCartButton = this.querySelector(".dev__product-form__submit");
+
+      this.renderSelectedProducts();
+      this.updateTotalPrice();
+      this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+      this.querySelectorAll(".add-button").forEach(button => {
+        button.addEventListener("click", () => this.addProductToSelection(button));
+      });
+
+      this.querySelectorAll(".add-all-button").forEach(button => {
+        button.addEventListener("click", () => {
+          this.querySelectorAll(".add-button").forEach(addButton => this.addProductToSelection(addButton));
+        });
+      });
+
+      this.addToCartButton.addEventListener("click", () => this.addToCart());
+    }
+
+    renderSelectedProducts() {
+      this.selectedProductsContainer.innerHTML = "";
+      this.selectedProducts.forEach(product => {
+        let productElement = document.createElement("div");
+        productElement.classList.add("selected-product");
+        productElement.innerHTML = `
+          <div class="selected-product__image">
+              <img src="${product.image}" alt="${product.title}" width="50">
+          </div>
+          <div class="selected-product__info">
+              <p class="title">${product.title}</p>
+              <p class="variant">${product.variant}</p>
+              <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
+          </div>
+        `;
+
+        productElement.querySelector(".remove-button").addEventListener("click", () => {
+          this.selectedProducts = this.selectedProducts.filter(p => p.variantId !== product.variantId);
+          localStorage.setItem("selectedProducts", JSON.stringify(this.selectedProducts));
+          this.renderSelectedProducts();
+          this.updateTotalPrice();
+          this.updateButtonStates();
+        });
+
+        this.selectedProductsContainer.appendChild(productElement);
+      });
+
+      this.updateButtonStates();
+    }
+
+    addProductToSelection(button) {
+      let variantId = button.dataset.variantId;
+      let productContainer = button.closest(".ordonnance__content");
+      let productTitle = productContainer.querySelector(".product__title").textContent;
+      let productPrice = productContainer.querySelector(".price-item").textContent;
+      let productVariant = productContainer.querySelector(".ordonnance__product-variant").textContent;
+      let productImage = productContainer.closest(".ordonnance-with-text").querySelector("img")?.src || '';
+
+      if (this.selectedProducts.some(p => p.variantId === variantId)) return;
+
+      let productData = { variantId, title: productTitle, variant: productVariant, price: productPrice, image: productImage };
+      this.selectedProducts.push(productData);
+      localStorage.setItem("selectedProducts", JSON.stringify(this.selectedProducts));
+
+      this.renderSelectedProducts();
+      this.updateTotalPrice();
+      this.updateButtonStates();
+    }
+
+    updateButtonStates() {
+      this.querySelectorAll(".add-button").forEach(button => {
         let variantId = button.dataset.variantId;
-        let productContainer = button.closest(".ordonnance__content");
-        let productTitle = productContainer.querySelector(".product__title").textContent;
-        let productPrice = productContainer.querySelector(".price-item").textContent;
-        let productVariant = productContainer.querySelector(".ordonnance__product-variant").textContent;
-        let productImage = productContainer.closest(".ordonnance-with-text").querySelector("img")?.src || '';
-
-        if (selectedProducts.some(p => p.variantId === variantId)) return;
-
-        let productData = { variantId, title: productTitle, variant: productVariant, price: productPrice, image: productImage };
-        selectedProducts.push(productData);
-        localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
-
-        renderSelectedProducts();
-        updateTotalPrice();
-        updateButtonStates();
+        if (this.selectedProducts.some(p => p.variantId === variantId)) {
+          button.classList.add("added");
+          button.innerHTML = `<span class="added-checked">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M3.33337 9.33325L5.66671 11.6666L12.6667 4.33325" stroke="#443D36" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                  </svg>
+              </span>
+              Ajouté`; 
+        } else {
+          button.classList.remove("added");
+          button.innerHTML = "Ajouter";
+        }
+      });
     }
 
-    function updateButtonStates() {
-        document.querySelectorAll(".add-button").forEach(button => {
-            let variantId = button.dataset.variantId;
-            if (selectedProducts.some(p => p.variantId === variantId)) {
-                button.classList.add("added");
-                button.innerHTML = `<span class="added-checked">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M3.33337 9.33325L5.66671 11.6666L12.6667 4.33325" stroke="#443D36" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
-                    Ajouté`; 
-            } else {
-                button.classList.remove("added");
-                button.innerHTML = "Ajouter";
-            }
-        });
-    }
-
-function updateTotalPrice() {
-    let totalPrice = selectedProducts.reduce((sum, product) => {
+    updateTotalPrice() {
+      let totalPrice = this.selectedProducts.reduce((sum, product) => {
         let price = parseFloat(product.price.replace(/[^\d.-]/g, "")) || 0;
-        return sum + price / 100;  // Divide by 100 to convert cents to euros
-    }, 0);
+        return sum + price / 100;  // Convert cents to euros
+      }, 0);
 
-    let formattedPrice = new Intl.NumberFormat("fr-FR", {
+      let formattedPrice = new Intl.NumberFormat("fr-FR", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
-    }).format(totalPrice) + "€";  // Append € manually
+      }).format(totalPrice) + "€"; 
 
-    document.querySelectorAll(".selected-products-total").forEach(element => {
+      this.querySelectorAll(".selected-products-total").forEach(element => {
         element.textContent = formattedPrice;
-    });
+      });
 
-    document.querySelector(".num-selected_products").textContent = selectedProducts.length;
-}
+      this.querySelector(".num-selected_products").textContent = this.selectedProducts.length;
+    }
 
+    addToCart() {
+      if (this.selectedProducts.length === 0) {
+        alert("No products selected!");
+        return;
+      }
 
-    document.querySelectorAll(".add-button").forEach(button => {
-        button.addEventListener("click", function () {
-            addProductToSelection(this);
-        });
-    });
+      let cartData = { 
+        items: this.selectedProducts.map(product => ({
+          id: Number(product.variantId),
+          quantity: 1
+        }))
+      };
 
- 
-document.querySelectorAll(".add-all-button").forEach(button => {
-    button.addEventListener("click", function () {
-        document.querySelectorAll(".add-button").forEach(addButton => {
-            addProductToSelection(addButton);
-        });
-    });
-});
-
-
-
-  
-
-    addToCartButton.addEventListener("click", function () {
-        if (selectedProducts.length === 0) {
-            alert("No products selected!");
-            return;
+      fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cartData)
+      })
+      .then(response => response.json().then(data => ({ status: response.status, body: data })))
+      .then(({ status, body }) => {
+        if (status >= 400) {
+          alert("Failed to add products to cart: " + (body.message || "Unknown error"));
+          return;
         }
 
-        let cartData = { 
-            items: selectedProducts.map(product => ({
-                id: Number(product.variantId),
-                quantity: 1
-            }))
-        };
+        localStorage.removeItem("selectedProducts");
+        this.selectedProducts = [];
+        this.renderSelectedProducts();
+        this.updateTotalPrice();
+        window.location.href = "/cart";
+      })
+      .catch(error => {
+        alert("Failed to add products to cart. Please try again.");
+      });
+    }
+  }
 
-        fetch("/cart/add.js", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(cartData)
-        })
-        .then(response => response.json().then(data => ({ status: response.status, body: data })))
-        .then(({ status, body }) => {
-            if (status >= 400) {
-                alert("Failed to add products to cart: " + (body.message || "Unknown error"));
-                return;
-            }
-
-            localStorage.removeItem("selectedProducts");
-            selectedProducts = [];
-            renderSelectedProducts();
-            updateTotalPrice();
-            window.location.href = "/cart";
-        })
-        .catch(error => {
-            alert("Failed to add products to cart. Please try again.");
-        });
-    });
-
-    renderSelectedProducts();
-    updateTotalPrice();
-});
-
-
-
+  customElements.define("ordonnance-product-list", OrdonnanceProductList);
 </script>
+
 
 
                  
