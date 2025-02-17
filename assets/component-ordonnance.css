@@ -303,6 +303,12 @@ letter-spacing: 0.16px;
     margin-bottom: 16px;
   font-size: 16px;
 }
+@media screen and (max-width: 768px) {
+.ordonnance--bottom-delivery{
+ margin-top: 6px;
+    margin-bottom: 12px;
+} 
+}
 .ordonnance--delivery{
   font-weight: 600;
 }
@@ -317,6 +323,13 @@ font-weight: 400;
 line-height: 20px; /* 142.857% */
 letter-spacing: 0.14px;
 }
+@media screen and (max-width: 768px) {
+ .ordonnance--bottom-info{
+  font-size: 12px;
+   margin-bottom: 16px;
+ }
+}
+
 .ordonnance--shipping-info{
   font-size: 14px;
 
