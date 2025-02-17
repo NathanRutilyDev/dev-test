@@ -417,6 +417,9 @@ margin-top: 16px;
     margin-top: 0;
 }
 }
+.ordonnance--option-text p{
+  margin:0px;
+}
 .ordonnance--right-chat {
     display: flex;
     margin-top: 32px;
