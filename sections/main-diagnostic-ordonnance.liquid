@@ -16,6 +16,9 @@
 {%- endstyle -%}
 
 {%- liquid
+  if settings.animations_reveal_on_scroll
+    assign animation_index = 1
+  endif
 
   if section.settings.row_color_scheme == section.settings.section_color_scheme
     assign no_content_background = true
@@ -40,219 +43,332 @@
 
 <ordonnance-product-list class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="page-width">
-    <h2 class="ordonnance-heading">{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h2>
+    <h2 class="ordonnance-heading h1">{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h2>
     <div class="ordonnance-header medium-hide large-up-hide">
-         <div class="ordonnance-head-details">
-           <div class="ordonnance-head-text">{{ 'sections.main-diagnostic-ordonnance.header.text' | t }}</div>
-           <div class="ordonnance-head-btn">
-             <button type="button" class="add-all-button button button--secondary">{{ 'sections.main-diagnostic-ordonnance.header.button' | t }}</button>
-           </div>
-         </div>
-       </div> 
-    <div class="ordonnance__inner grid grid--1-col-tablet-down">
-     <div class="ordonnance--left-block grid__item">
-       <div class="ordonnance-header small-hide">
-         <div class="ordonnance-head-details">
-           <div class="ordonnance-head-text">{{ 'sections.main-diagnostic-ordonnance.header.text' | t }}</div>
-           <div class="ordonnance-head-btn">
-             <button type="button" class="add-all-button button button--secondary">{{ 'sections.main-diagnostic-ordonnance.header.button' | t }}</button>
-           </div>
-         </div>
-       </div>    
-       <div class="ordonnance-phase phase_1">
-      <h3 class="ordonnance-phase-heading">Phase 1</h3>
-    {%- for block in section.blocks -%}
-      {% if block.type == 'phase_1' %}
-   {%- liquid
-  assign product = block.settings.product
--%}   
-     <div
-        class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-        {{ block.shopify_attributes }}
-      >
-        <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet-down">
-          <div class="ordonnance__media-item grid__item">
-            <div
-              class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-            >
-              {%- if product.featured_image != blank -%}
-                {%- capture sizes -%}
-                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
-                  (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
-                {%- endcapture -%}
-                {{
-                  product.featured_image
-                  | image_url: width: 1500
-                  | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
-                }}
-              {%- else -%}
-                {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-              {%- endif -%}
-
-              
-            </div>
-          </div>
-          <div class="ordonnance__text-item grid__item">
-            <div class="ordonnance__content">
-              <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
-                  
-                      {{ product.title | escape }}
-                    
-                  </h2>
-          
-                <div class="ordonnance__description rte {{ section.settings.text_style }}">{{ product.description }}</div>
-             <div class="ordonnance__product--add">
-              <div id="price-{{ section.id }}" class="ordonnance__product-price" role="status" {{ block.shopify_attributes }}>
-                    {%- render 'price',
-                      product: product,
-                      price_class: 'price--large'
-                    -%}
-                <div class="ordonnance__product-variant">
-                 {% for variant in product.variants %}
-               {{ variant.title }}
-                {% endfor %}
-                </div>
-                  </div>
-              <div class="ordonnance__check-btn">
-                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">{{ 'sections.main-diagnostic-ordonnance.add' | t }}</button>
-              </div>
-             </div>
-            </div>
-          </div>
+      <div class="ordonnance-head-details">
+        <div class="ordonnance-head-text">{{ 'sections.main-diagnostic-ordonnance.header.text' | t }}</div>
+        <div class="ordonnance-head-btn">
+          <button type="button" class="add-all-button button button--secondary">
+            {{ 'sections.main-diagnostic-ordonnance.header.button' | t }}
+          </button>
         </div>
       </div>
-        {% endif %}
-    {%- endfor -%}
     </div>
-       <div class="ordonnance-phase phase_2">
-      <h3 class="ordonnance-phase-heading">Phase 2</h3>
-    {%- for block in section.blocks -%}
-      {% if block.type == 'phase_2' %}
-   {%- liquid
-  assign product = block.settings.product
--%}   
-      <div
-        class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-        {{ block.shopify_attributes }}
-      >
-        <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet-down">
-          <div class="ordonnance__media-item grid__item">
-            <div
-              class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-            >
-              {%- if product.featured_image != blank -%}
-                {%- capture sizes -%}
-                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
-                  (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
-                {%- endcapture -%}
-                {{
-                  product.featured_image
-                  | image_url: width: 1500
-                  | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
-                }}
-              {%- else -%}
-                {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-              {%- endif -%}
-
-              
+    <div class="ordonnance__inner grid grid--1-col-tablet-down">
+      <div class="ordonnance--left-block grid__item">
+        <div class="ordonnance-header small-hide">
+          <div class="ordonnance-head-details">
+            <div class="ordonnance-head-text">{{ 'sections.main-diagnostic-ordonnance.header.text' | t }}</div>
+            <div class="ordonnance-head-btn">
+              <button type="button" class="add-all-button button button--secondary">
+                {{ 'sections.main-diagnostic-ordonnance.header.button' | t }}
+              </button>
             </div>
           </div>
-          <div class="ordonnance__text-item grid__item">
-            <div class="ordonnance__content">
-              <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
-                  
-                      {{ product.title | escape }}
-                    
-                  </h2>
-          
-                <div class="ordonnance__description rte {{ section.settings.text_style }}">{{ product.description }}</div>
-             <div class="ordonnance__product--add">
-              <div id="price-{{ section.id }}" class="ordonnance__product-price" role="status" {{ block.shopify_attributes }}>
-                    {%- render 'price',
-                      product: product,
-                      price_class: 'price--large'
-                    -%}
-                 <div class="ordonnance__product-variant">
-                 {% for variant in product.variants %}
-               {{ variant.title }}
-                {% endfor %}
+        </div>
+        {% assign metaobject = section.settings.metaobject %}
+        {% if metaobject %}
+          {% for i in (1..5) %}
+            {% liquid
+              assign phase_path = 'phase_' | append: i
+              assign phase_products = metaobject[phase_path].value
+            %}
+
+            {% if phase_products %}
+              <div class="ordonnance-phase">
+                <h3 class="ordonnance-phase__heading">
+                  {{ 'sections.diagnostic-ordonnance.phase_label' | t: index: i }}
+                </h3>
+
+                <div class="ordonnance-phase__products-container">
+                  {% for product in phase_products %}
+                    <div
+                      class="ordonnance-phase__product{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                      {% if settings.animations_reveal_on_scroll %}
+                        data-cascade
+                        style="--animation-order: {{ animation_index }};"
+                        {% assign animation_index = animation_index | plus: 1 %}
+                      {% endif %}
+                    >
+                      {%- if product.featured_image != blank -%}
+                        {%- capture sizes -%}
+                          (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                          (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                        {%- endcapture -%}
+                        {{
+                          product.featured_image
+                          | image_url: width: 1500
+                          | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+                        }}
+                      {%- else -%}
+                        {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- endif -%}
+                      <div class="ordonnance-phase__text-container">
+                        <div class="ordonnance__content">
+                          <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                            {{ product.title | escape }}
+                          </h2>
+
+                          <div class="ordonnance__description rte {{ section.settings.text_style }}">
+                            {{ product.description }}
+                          </div>
+                          <div class="ordonnance__product--add">
+                            <div
+                              id="price-{{ section.id }}"
+                              class="ordonnance__product-price"
+                              role="status"
+                            >
+                              {%- render 'price', product: product, price_class: 'price--large' -%}
+                              <div class="ordonnance__product-variant">
+                                {% for variant in product.variants %}
+                                  {{ variant.title }}
+                                {% endfor %}
+                              </div>
+                            </div>
+                            <div class="ordonnance__check-btn">
+                              <button
+                                type="button"
+                                data-variant-id="{{ product.variants.first.id }}"
+                                class="add-button button button-primary"
+                              >
+                                {{ 'sections.main-diagnostic-ordonnance.add' | t }}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
                 </div>
-                  </div>
-              <div class="ordonnance__check-btn">
-                <button type="button" data-variant-id="{{ product.variants.first.id }}" class="add-button button button-primary">{{ 'sections.main-diagnostic-ordonnance.add' | t }}</button>
               </div>
-             </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% comment %}
+          <div class="ordonnance-phase phase_1">
+            <h3 class="ordonnance-phase-heading">Phase 1</h3>
+            {%- for block in section.blocks -%}
+              {% if block.type == 'phase_1' %}
+                {%- liquid
+                  assign product = block.settings.product
+                -%}
+                <div
+                  class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                  {{ block.shopify_attributes }}
+                >
+                  <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet-down">
+                    <div class="ordonnance__media-item grid__item">
+                      <div
+                        class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
+                      >
+                        {%- if product.featured_image != blank -%}
+                          {%- capture sizes -%}
+                    (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                    (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                  {%- endcapture -%}
+                          {{
+                            product.featured_image
+                            | image_url: width: 1500
+                            | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+                          }}
+                        {%- else -%}
+                          {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                        {%- endif -%}
+                      </div>
+                    </div>
+                    <div class="ordonnance__text-item grid__item">
+                      <div class="ordonnance__content">
+                        <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                          {{ product.title | escape }}
+                        </h2>
+
+                        <div class="ordonnance__description rte {{ section.settings.text_style }}">
+                          {{ product.description }}
+                        </div>
+                        <div class="ordonnance__product--add">
+                          <div
+                            id="price-{{ section.id }}"
+                            class="ordonnance__product-price"
+                            role="status"
+                            {{ block.shopify_attributes }}
+                          >
+                            {%- render 'price', product: product, price_class: 'price--large' -%}
+                            <div class="ordonnance__product-variant">
+                              {% for variant in product.variants %}
+                                {{ variant.title }}
+                              {% endfor %}
+                            </div>
+                          </div>
+                          <div class="ordonnance__check-btn">
+                            <button
+                              type="button"
+                              data-variant-id="{{ product.variants.first.id }}"
+                              class="add-button button button-primary"
+                            >
+                              {{ 'sections.main-diagnostic-ordonnance.add' | t }}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {%- endfor -%}
+          </div>
+          <div class="ordonnance-phase phase_2">
+            <h3 class="ordonnance-phase-heading">Phase 2</h3>
+            {%- for block in section.blocks -%}
+              {% if block.type == 'phase_2' %}
+                {%- liquid
+                  assign product = block.settings.product
+                -%}
+                <div
+                  class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                  {{ block.shopify_attributes }}
+                >
+                  <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet-down">
+                    <div class="ordonnance__media-item grid__item">
+                      <div
+                        class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
+                      >
+                        {%- if product.featured_image != blank -%}
+                          {%- capture sizes -%}
+                    (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                    (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                  {%- endcapture -%}
+                          {{
+                            product.featured_image
+                            | image_url: width: 1500
+                            | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+                          }}
+                        {%- else -%}
+                          {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                        {%- endif -%}
+                      </div>
+                    </div>
+                    <div class="ordonnance__text-item grid__item">
+                      <div class="ordonnance__content">
+                        <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                          {{ product.title | escape }}
+                        </h2>
+
+                        <div class="ordonnance__description rte {{ section.settings.text_style }}">
+                          {{ product.description }}
+                        </div>
+                        <div class="ordonnance__product--add">
+                          <div
+                            id="price-{{ section.id }}"
+                            class="ordonnance__product-price"
+                            role="status"
+                            {{ block.shopify_attributes }}
+                          >
+                            {%- render 'price', product: product, price_class: 'price--large' -%}
+                            <div class="ordonnance__product-variant">
+                              {% for variant in product.variants %}
+                                {{ variant.title }}
+                              {% endfor %}
+                            </div>
+                          </div>
+                          <div class="ordonnance__check-btn">
+                            <button
+                              type="button"
+                              data-variant-id="{{ product.variants.first.id }}"
+                              class="add-button button button-primary"
+                            >
+                              {{ 'sections.main-diagnostic-ordonnance.add' | t }}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {%- endfor -%}
+          </div>
+        {% endcomment %}
+      </div>
+      <div class="ordonnance--right-block grid__item">
+        <div class="ordonnance--right__inner">
+          <div class="ordonnance--right-top">
+            <div class="ordonnance--right_head">
+              <div class="ordonnance--right_img">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0942/1242/4018/files/image_14.png?v=1739463299"
+                  width="100%"
+                  height="auto"
+                >
+              </div>
+              <div class="ordonnance--right_headings">
+                <h4>{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h4>
+                <div class="selected-products-title">
+                  <span class="num-selected_products"></span>
+                  {{- 'sections.main-diagnostic-ordonnance.selected-products' | t -}}
+                  <span>{{ 'icon-caret-new.svg' | inline_asset_content }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="selected__products"></div>
+          </div>
+          <div class="ordonnance--right-bottom">
+            <div class="ordonnance--bottom-total">
+              <h5>{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h5>
+              <div class="selected-products-total">0€</div>
+            </div>
+            <div class="ordonnance--bottom-delivery">
+              <div class="ordonnance--delivery-head">{{ 'sections.main-diagnostic-ordonnance.shipping' | t }}</div>
+              <div class="ordonnance--delivery">{{ 'sections.main-diagnostic-ordonnance.shipping-free' | t }}</div>
+            </div>
+
+            <div class="ordonnance--bottom-info">
+              {{
+                'sections.main-diagnostic-ordonnance.ordonnance-info'
+                | t: ordonnacen_code: metaobject.ordonnance_code
+              }}
+            </div>
+            <button
+              type="submit"
+              name="add"
+              class="dev__product-form__submit button button--full-width button--primary"
+            >
+              {{ 'sections.main-diagnostic-ordonnance.add-to-cart' | t }}
+              {{ 'icon-dot.svg' | inline_asset_content }}
+              <span class="selected-products-total">0€</span>
+            </button>
+            <div class="ordonnance--shipping-info">
+              {{ 'icon-shipping.svg' | inline_asset_content }}
+              <div class="ordonnance--shipping-text">{{ 'sections.main-diagnostic-ordonnance.delivery-date' | t }}</div>
+            </div>
+          </div>
+          <div class="ordonnance--right-option">
+            <img src="{{ section.settings.present_image | image_url }}" width="100%" height="auto">
+            <div class="ordonnance--option-content">
+              <div class="ordonnance--option-icon small-hide">
+                {{ 'icon-present.svg' | inline_asset_content }}
+              </div>
+              <div class="ordonnance--option-text">{{ section.settings.present_text }}</div>
+            </div>
+          </div>
+          <div class="ordonnance--right-chat">
+            <img src="{{ section.settings.chat_image | image_url }}" width="100%" height="auto">
+            <div class="ordonnance--chat-content">
+              <div class="ordonnance--chat-title">{{ section.settings.chat_title }}</div>
+              <div class="ordonnance--chat-text">{{ section.settings.chat_text }}</div>
+            </div>
+            <div class="ordonnance--chat-icon">
+              {{ 'icon-arrow-new.svg' | inline_asset_content }}
             </div>
           </div>
         </div>
       </div>
-        {% endif %}
-    {%- endfor -%}
-    </div>    
-     </div>
-     <div class="ordonnance--right-block grid__item">
-       <div class="ordonnance--right__inner">
-         <div class="ordonnance--right-top">
-           <div class="ordonnance--right_head">
-             <div class="ordonnance--right_img">
-               <img src="https://cdn.shopify.com/s/files/1/0942/1242/4018/files/image_14.png?v=1739463299" width="100%" height="auto" />
-             </div>
-             <div class="ordonnance--right_headings">
-               <h4>{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h4>
-               <div class="selected-products-title"><span class="num-selected_products"></span>{{ 'sections.main-diagnostic-ordonnance.selected-products' | t }}<span>{{ 'icon-caret-new.svg' | inline_asset_content }}</span></div>
-             </div>
-           </div>
-           <div class="selected__products"></div>
-         </div>
-         <div class="ordonnance--right-bottom">
-           <div class="ordonnance--bottom-total">
-             <h5>{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h5>
-             <div class="selected-products-total">0€</div>
-           </div>
-           <div class="ordonnance--bottom-delivery">
-             <div class="ordonnance--delivery-head">{{ 'sections.main-diagnostic-ordonnance.shipping' | t }}</div>
-             <div class="ordonnance--delivery">{{ 'sections.main-diagnostic-ordonnance.shipping-free' | t }}</div>
-           </div>
-
-           <div class="ordonnance--bottom-info">{{ 'sections.main-diagnostic-ordonnance.ordonnance-info' | t: ordonnacen_code: metaobject.ordonnance_code }}</div>
-           <button type="submit" name="add" class="dev__product-form__submit button button--full-width button--primary" >
-             {{ 'sections.main-diagnostic-ordonnance.add-to-cart' | t }}
-             {{ 'icon-dot.svg' | inline_asset_content }}
-             <span class="selected-products-total">0€</span>
-           </button>
-           <div class="ordonnance--shipping-info">
-             {{ 'icon-shipping.svg' | inline_asset_content }}
-             <div class="ordonnance--shipping-text">{{ 'sections.main-diagnostic-ordonnance.delivery-date' | t }}</div>
-    
-           </div>
-         </div>
-         <div class="ordonnance--right-option">
-           <img src="{{ section.settings.present_image | image_url }}" width="100%" height="auto"/>
-           <div class="ordonnance--option-content">
-             <div class="ordonnance--option-icon small-hide">
-              {{ 'icon-present.svg' | inline_asset_content }}
-             </div>
-             <div class="ordonnance--option-text">{{ section.settings.present_text }}</div>
-           </div>
-         </div>
-         <div class="ordonnance--right-chat">
-           <img src="{{ section.settings.chat_image | image_url }}" width="100%" height="auto"/>
-           <div class="ordonnance--chat-content">
-             <div class="ordonnance--chat-title">{{ section.settings.chat_title }}</div>
-             <div class="ordonnance--chat-text">{{ section.settings.chat_text }}</div>
-           </div>
-           <div class="ordonnance--chat-icon">
-             {{ 'icon-arrow-new.svg' | inline_asset_content }}
-           </div>
-         </div>      
-       </div>
-     </div> 
-   </div>
+    </div>
   </div>
 </ordonnance-product-list>
 
 <style>
-  .remove-button{
+  .remove-button {
     display: none;
   }
 </style>
@@ -261,13 +377,13 @@
   class OrdonnanceProductList extends HTMLElement {
     constructor() {
       super();
-      this.selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
+      this.selectedProducts = JSON.parse(localStorage.getItem('selectedProducts')) || [];
     }
 
     connectedCallback() {
-      this.selectedProductsContainer = this.querySelector(".selected__products");
-      this.addToCartButton = this.querySelector(".dev__product-form__submit");
-      this.toggleButton = this.querySelector(".selected-products-title");
+      this.selectedProductsContainer = this.querySelector('.selected__products');
+      this.addToCartButton = this.querySelector('.dev__product-form__submit');
+      this.toggleButton = this.querySelector('.selected-products-title');
 
       this.renderSelectedProducts();
       this.updateTotalPrice();
@@ -277,32 +393,32 @@
     }
 
     setupEventListeners() {
-      this.querySelectorAll(".add-button").forEach(button => {
-        button.addEventListener("click", () => this.addProductToSelection(button));
+      this.querySelectorAll('.add-button').forEach((button) => {
+        button.addEventListener('click', () => this.addProductToSelection(button));
       });
 
-      this.querySelectorAll(".add-all-button").forEach(button => {
-        button.addEventListener("click", () => {
-          this.querySelectorAll(".add-button").forEach(addButton => this.addProductToSelection(addButton));
+      this.querySelectorAll('.add-all-button').forEach((button) => {
+        button.addEventListener('click', () => {
+          this.querySelectorAll('.add-button').forEach((addButton) => this.addProductToSelection(addButton));
         });
       });
 
-      this.addToCartButton.addEventListener("click", () => this.addToCart());
+      this.addToCartButton.addEventListener('click', () => this.addToCart());
     }
 
     setupToggleSelectedProducts() {
       if (this.toggleButton && this.selectedProductsContainer) {
-        this.toggleButton.addEventListener("click", () => {
-          this.selectedProductsContainer.classList.toggle("show");
+        this.toggleButton.addEventListener('click', () => {
+          this.selectedProductsContainer.classList.toggle('show');
         });
       }
     }
 
     renderSelectedProducts() {
-      this.selectedProductsContainer.innerHTML = "";
-      this.selectedProducts.forEach(product => {
-        let productElement = document.createElement("div");
-        productElement.classList.add("selected-product");
+      this.selectedProductsContainer.innerHTML = '';
+      this.selectedProducts.forEach((product) => {
+        let productElement = document.createElement('div');
+        productElement.classList.add('selected-product');
         productElement.innerHTML = `
           <div class="selected-product__image">
               <img src="${product.image}" alt="${product.title}" width="50">
@@ -314,9 +430,9 @@
           </div>
         `;
 
-        productElement.querySelector(".remove-button").addEventListener("click", () => {
-          this.selectedProducts = this.selectedProducts.filter(p => p.variantId !== product.variantId);
-          localStorage.setItem("selectedProducts", JSON.stringify(this.selectedProducts));
+        productElement.querySelector('.remove-button').addEventListener('click', () => {
+          this.selectedProducts = this.selectedProducts.filter((p) => p.variantId !== product.variantId);
+          localStorage.setItem('selectedProducts', JSON.stringify(this.selectedProducts));
           this.renderSelectedProducts();
           this.updateTotalPrice();
           this.updateButtonStates();
@@ -330,17 +446,23 @@
 
     addProductToSelection(button) {
       let variantId = button.dataset.variantId;
-      let productContainer = button.closest(".ordonnance__content");
-      let productTitle = productContainer.querySelector(".product__title").textContent;
-      let productPrice = productContainer.querySelector(".price-item").textContent;
-      let productVariant = productContainer.querySelector(".ordonnance__product-variant").textContent;
-      let productImage = productContainer.closest(".ordonnance-with-text").querySelector("img")?.src || '';
+      let productContainer = button.closest('.ordonnance__content');
+      let productTitle = productContainer.querySelector('.product__title').textContent;
+      let productPrice = productContainer.querySelector('.price-item').textContent;
+      let productVariant = productContainer.querySelector('.ordonnance__product-variant').textContent;
+      let productImage = productContainer.closest('.ordonnance-with-text').querySelector('img')?.src || '';
 
-      if (this.selectedProducts.some(p => p.variantId === variantId)) return;
+      if (this.selectedProducts.some((p) => p.variantId === variantId)) return;
 
-      let productData = { variantId, title: productTitle, variant: productVariant, price: productPrice, image: productImage };
+      let productData = {
+        variantId,
+        title: productTitle,
+        variant: productVariant,
+        price: productPrice,
+        image: productImage,
+      };
       this.selectedProducts.push(productData);
-      localStorage.setItem("selectedProducts", JSON.stringify(this.selectedProducts));
+      localStorage.setItem('selectedProducts', JSON.stringify(this.selectedProducts));
 
       this.renderSelectedProducts();
       this.updateTotalPrice();
@@ -348,104 +470,105 @@
     }
 
     updateButtonStates() {
-      this.querySelectorAll(".add-button").forEach(button => {
+      this.querySelectorAll('.add-button').forEach((button) => {
         let variantId = button.dataset.variantId;
-        if (this.selectedProducts.some(p => p.variantId === variantId)) {
-          button.classList.add("added");
+        if (this.selectedProducts.some((p) => p.variantId === variantId)) {
+          button.classList.add('added');
           button.innerHTML = `<span class="added-checked">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M3.33337 9.33325L5.66671 11.6666L12.6667 4.33325" stroke="#443D36" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
                   </svg>
               </span>
-              Ajouté`; 
+              Ajouté`;
         } else {
-          button.classList.remove("added");
-          button.innerHTML = "Ajouter";
+          button.classList.remove('added');
+          button.innerHTML = 'Ajouter';
         }
       });
     }
 
     updateTotalPrice() {
       let totalPrice = this.selectedProducts.reduce((sum, product) => {
-        let price = parseFloat(product.price.replace(/[^\d.-]/g, "")) || 0;
-        return sum + price / 100;  // Convert cents to euros
+        let price = parseFloat(product.price.replace(/[^\d.-]/g, '')) || 0;
+        return sum + price / 100; // Convert cents to euros
       }, 0);
 
-      let formattedPrice = new Intl.NumberFormat("fr-FR", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      }).format(totalPrice) + "€"; 
+      let formattedPrice =
+        new Intl.NumberFormat('fr-FR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(totalPrice) + '€';
 
-      this.querySelectorAll(".selected-products-total").forEach(element => {
+      this.querySelectorAll('.selected-products-total').forEach((element) => {
         element.textContent = formattedPrice;
       });
 
-      this.querySelector(".num-selected_products").textContent = this.selectedProducts.length;
+      this.querySelector('.num-selected_products').textContent = this.selectedProducts.length;
     }
 
     addToCart() {
       if (this.selectedProducts.length === 0) {
-        alert("No products selected!");
+        alert('No products selected!');
         return;
       }
 
-      let cartData = { 
-        items: this.selectedProducts.map(product => ({
+      let cartData = {
+        items: this.selectedProducts.map((product) => ({
           id: Number(product.variantId),
-          quantity: 1
-        }))
+          quantity: 1,
+        })),
       };
 
-      fetch("/cart/add.js", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cartData)
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cartData),
       })
-      .then(response => response.json().then(data => ({ status: response.status, body: data })))
-      .then(({ status, body }) => {
-        if (status >= 400) {
-          alert("Failed to add products to cart: " + (body.message || "Unknown error"));
-          return;
-        }
+        .then((response) => response.json().then((data) => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+          if (status >= 400) {
+            alert('Failed to add products to cart: ' + (body.message || 'Unknown error'));
+            return;
+          }
 
-        localStorage.removeItem("selectedProducts");
-        this.selectedProducts = [];
-        this.renderSelectedProducts();
-        this.updateTotalPrice();
-        window.location.href = "/cart";
-      })
-      .catch(error => {
-        alert("Failed to add products to cart. Please try again.");
-      });
+          localStorage.removeItem('selectedProducts');
+          this.selectedProducts = [];
+          this.renderSelectedProducts();
+          this.updateTotalPrice();
+          window.location.href = '/cart';
+        })
+        .catch((error) => {
+          alert('Failed to add products to cart. Please try again.');
+        });
     }
 
     // Truncate descriptions
     initDescriptionTruncation() {
-      this.querySelectorAll(".ordonnance__description").forEach(description => {
-        let fullText = description.innerHTML.trim(); 
-        let words = fullText.split(/\s+/); 
+      this.querySelectorAll('.ordonnance__description').forEach((description) => {
+        let fullText = description.innerHTML.trim();
+        let words = fullText.split(/\s+/);
 
         if (words.length > 12) {
-          let truncatedText = words.slice(0, 12).join(" ") + "..."; 
-          let showMoreSpan = document.createElement("span"); 
-          showMoreSpan.textContent = "Voir Plus";
-          showMoreSpan.classList.add("show-more");
-          showMoreSpan.style.cursor = "pointer";
-          showMoreSpan.style.textDecoration = "underline";
+          let truncatedText = words.slice(0, 12).join(' ') + '...';
+          let showMoreSpan = document.createElement('span');
+          showMoreSpan.textContent = 'Voir Plus';
+          showMoreSpan.classList.add('show-more');
+          showMoreSpan.style.cursor = 'pointer';
+          showMoreSpan.style.textDecoration = 'underline';
 
-          description.innerHTML = truncatedText + " "; 
-          description.appendChild(showMoreSpan); 
+          description.innerHTML = truncatedText + ' ';
+          description.appendChild(showMoreSpan);
 
-          showMoreSpan.addEventListener("click", function () {
-            if (this.classList.contains("show-more")) {
-              description.innerHTML = fullText + " ";
-              this.textContent = "Voir Moins"; 
-              this.classList.replace("show-more", "show-less"); 
+          showMoreSpan.addEventListener('click', function () {
+            if (this.classList.contains('show-more')) {
+              description.innerHTML = fullText + ' ';
+              this.textContent = 'Voir Moins';
+              this.classList.replace('show-more', 'show-less');
               description.appendChild(this);
             } else {
-              description.innerHTML = truncatedText + " ";
-              this.textContent = "Voir Plus"; 
-              this.classList.replace("show-less", "show-more"); 
+              description.innerHTML = truncatedText + ' ';
+              this.textContent = 'Voir Plus';
+              this.classList.replace('show-less', 'show-more');
               description.appendChild(this);
             }
           });
@@ -454,11 +577,8 @@
     }
   }
 
-  customElements.define("ordonnance-product-list", OrdonnanceProductList);
+  customElements.define('ordonnance-product-list', OrdonnanceProductList);
 </script>
-
-
-
 
 {% schema %}
 {
@@ -468,7 +588,13 @@
     "groups": ["header", "footer"]
   },
   "settings": [
-     {
+    {
+      "type": "metaobject",
+      "id": "metaobject",
+      "label": "Ordonnance metaobject",
+      "metaobject_type": "ordonnance"
+    },
+    {
       "type": "header",
       "content": "Colonne droite - Cadeau"
     },
@@ -491,7 +617,7 @@
       "id": "chat_image",
       "label": "Image"
     },
-               {
+    {
       "type": "text",
       "id": "chat_title",
       "label": "Titre"
@@ -540,27 +666,27 @@
       "name": "t:sections.ordonnance.blocks.phase_1.name",
       "settings": [
         {
-      "type": "product",
-      "id": "product",
-      "label": "t:sections.ordonnance.blocks.phase_1.settings.product.label"
-    }
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.ordonnance.blocks.phase_1.settings.product.label"
+        }
       ]
     },
-        {
+    {
       "type": "phase_2",
       "name": "t:sections.ordonnance.blocks.phase_2.name",
       "settings": [
         {
-      "type": "product",
-      "id": "product",
-      "label": "t:sections.ordonnance.blocks.phase_2.settings.product.label"
-    }
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.ordonnance.blocks.phase_2.settings.product.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "t:sections.ordonnance.presets.name",
+      "name": "t:sections.ordonnance.presets.name"
     }
   ]
 }

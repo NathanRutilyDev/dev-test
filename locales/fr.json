@@ -309,6 +309,9 @@
     }
   },
   "sections": {
+    "diagnostic-ordonnance": {
+      "phase_label": "Phase {{ index }}"
+    },
     "header": {
       "announcement": "Annonce",
       "menu": "Menu",
