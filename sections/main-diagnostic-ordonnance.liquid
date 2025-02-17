@@ -38,7 +38,7 @@
   endunless
 -%}
 
-<div class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
+<ordonnance-product-list class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
   <div class="page-width">
     <h2 class="ordonnance-heading">{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h2>
     <div class="ordonnance-header medium-hide large-up-hide">
@@ -249,7 +249,7 @@
      </div> 
    </div>
   </div>
-</div>
+</ordonnance-product-list>
 
 <style>
   .remove-button{
