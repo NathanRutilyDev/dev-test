@@ -387,7 +387,12 @@
         "text": "Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.",
         "button": "Tout ajouter"
         }, 
-      "ordonnance-info": "Votre routine {{ ordonnacen_code }} a été réalisée selon une méthodologie approuvée par des dermatologues."
+       "selected-products": "produits ajoutés",
+       "shipping": "Livraison",
+       "shipping-free": "Gratuite",
+       "ordonnance-info": "Votre routine {{ ordonnacen_code }} a été réalisée selon une méthodologie approuvée par des dermatologues.",
+       "add-to-cart": "Ajouter au panier",
+       "delivery-date": "Expédié sous 2 jours"
   }
   },
   "localization": {
