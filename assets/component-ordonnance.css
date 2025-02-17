@@ -313,7 +313,7 @@ letter-spacing: 0.16px;
   font-weight: 600;
 }
 .ordonnance--right-bottom button svg{
-  margin: 0px 10px;
+  margin: 0px 8px;
 }
 .ordonnance--bottom-info{
   margin-bottom: 24px;
@@ -329,7 +329,14 @@ letter-spacing: 0.14px;
    margin-bottom: 16px;
  }
 }
-
+.dev__product-form__submit{
+  font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.16px;
+    text-transform: uppercase;
+}
 .ordonnance--shipping-info{
   font-size: 14px;
 
