@@ -336,6 +336,7 @@ letter-spacing: 0.14px;
     line-height: 24px;
     letter-spacing: 0.16px;
     text-transform: uppercase;
+  padding: 16px 24px;
 }
 .ordonnance--shipping-info{
   font-size: 14px;
