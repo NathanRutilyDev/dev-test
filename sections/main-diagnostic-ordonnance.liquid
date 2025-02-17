@@ -450,7 +450,7 @@
       let productTitle = productContainer.querySelector('.product__title').textContent;
       let productPrice = productContainer.querySelector('.price-item').textContent;
       let productVariant = productContainer.querySelector('.ordonnance__product-variant').textContent;
-      let productImage = productContainer.closest('.ordonnance-with-text').querySelector('img')?.src || '';
+      let productImage = productContainer.closest('.ordonnance-phase__products-container').querySelector('img')?.src || '';
 
       if (this.selectedProducts.some((p) => p.variantId === variantId)) return;
 
