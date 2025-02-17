@@ -361,6 +361,11 @@ margin-top: 12px;
     background: #FBEEE0;
     overflow: hidden;
 }
+@media screen and (max-width: 768px) {
+.ordonnance--right-option {
+margin-top: 16px;
+}
+}
 .ordonnance--right-option img {
     width: 112px;
     height: 112px;
@@ -401,6 +406,11 @@ margin-top: 12px;
     overflow: hidden;
     padding: 16px;
     gap: 16px;
+}
+@media screen and (max-width: 768px) {
+.ordonnance--right-chat {
+    margin-top: 16px;
+}
 }
 .ordonnance--right-chat img {
     width: 48px;
