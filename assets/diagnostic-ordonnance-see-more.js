@@ -23,7 +23,8 @@ if (!customElements.get('quick-add-modal')) {
       show(opener) {
         opener.setAttribute('aria-disabled', true);
         opener.classList.add('loading');
-        
+        opener.querySelector('.loading__spinner').classList.remove('hidden');
+
         fetch(opener.getAttribute('data-product-url'))
           .then((response) => response.text())
           .then((responseText) => {
@@ -43,6 +44,7 @@ if (!customElements.get('quick-add-modal')) {
           .finally(() => {
             opener.removeAttribute('aria-disabled');
             opener.classList.remove('loading');
+            opener.querySelector('.loading__spinner').classList.add('hidden');
           });
       }
 
