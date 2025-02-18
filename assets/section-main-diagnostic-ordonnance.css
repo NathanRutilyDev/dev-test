@@ -110,7 +110,12 @@
   }
 }
 .ordonnance__description p {
-  display: inline;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    flex: 1 0 0;
+    overflow: hidden;
+    margin-bottom: 0;
 }
 
 .ordonnance__description {
@@ -701,4 +706,19 @@
   -webkit-box-flex: 1;
       -ms-flex: 1 0 0px;
           flex: 1 0 0;
+}
+
+.ordonnance__view-more .show-more{
+    display: block;
+    /* font-size: 12px; */
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: .14px;
+    margin-bottom: 36px;
+    background: transparent;
+    border: 0;
+    color: inherit;
 }

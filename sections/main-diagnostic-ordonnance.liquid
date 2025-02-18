@@ -1,6 +1,10 @@
 {{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
 {{ 'section-main-diagnostic-ordonnance.css' | asset_url | stylesheet_tag }}
 
+
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -77,7 +81,7 @@
             {% if phase_products %}
               <div class="ordonnance-phase">
                 <h3 class="ordonnance-phase__heading">
-                  {{ 'sections.diagnostic-ordonnance.phase_label' | t: index: i }}
+                  {{ 'sections.main-diagnostic-ordonnance.phase_label' | t: index: i }}
                 </h3>
 
                 <div class="ordonnance-phase__products-container">
@@ -105,13 +109,50 @@
                       {%- endif -%}
                       <div class="ordonnance-phase__text-container">
                         <div class="ordonnance__content">
-                          <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                          <h2 class="product__title">
                             {{ product.title | escape }}
                           </h2>
 
                           <div class="ordonnance__description rte {{ section.settings.text_style }}">
                             {{ product.description }}
-                          </div>
+                              {% assign section_id= section.id %}
+ {% assign product_form_id = 'quick-add-' | append: section_id | append: product.id %}
+ <span class="ordonnance__view-more quick-add no-js-hidden">
+                <modal-opener data-modal="#QuickAdd-{{ product.id }}">
+                <button
+                  id="{{ product_form_id }}-submit"
+                  type="submit"
+                  name="add"
+                  class="show-more"
+                  aria-haspopup="dialog"
+                  aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+                  data-product-url="{{ product.url }}"
+                >
+                 Voir Plus
+                </button>
+              </modal-opener>
+              <quick-add-modal id="QuickAdd-{{ product.id }}" class="quick-add-modal">
+                <div
+                  role="dialog"
+                  aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}"
+                  aria-modal="true"
+                  class="quick-add-modal__content global-settings-popup"
+                  tabindex="-1"
+                >
+                  <button
+                    id="ModalClose-{{ product.id }}"
+                    type="button"
+                    class="quick-add-modal__toggle"
+                    aria-label="{{ 'accessibility.close' | t }}"
+                  >
+                    {{- 'icon-close.svg' | inline_asset_content -}}
+                  </button>
+                  <div id="QuickAddInfo-{{ product.id }}" class="quick-add-modal__content-info"></div>
+                </div>
+              </quick-add-modal>
+          
+          </span>
+                          </div>                         
                           <div class="ordonnance__product--add">
                             <div
                               id="price-{{ section.id }}"
@@ -143,152 +184,7 @@
               </div>
             {% endif %}
           {% endfor %}
-        {% endif %}
-
-        {% comment %}
-          <div class="ordonnance-phase phase_1">
-            <h3 class="ordonnance-phase-heading">Phase 1</h3>
-            {%- for block in section.blocks -%}
-              {% if block.type == 'phase_1' %}
-                {%- liquid
-                  assign product = block.settings.product
-                -%}
-                <div
-                  class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                  {{ block.shopify_attributes }}
-                >
-                  <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet-down">
-                    <div class="ordonnance__media-item grid__item">
-                      <div
-                        class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-                      >
-                        {%- if product.featured_image != blank -%}
-                          {%- capture sizes -%}
-                    (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
-                    (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
-                  {%- endcapture -%}
-                          {{
-                            product.featured_image
-                            | image_url: width: 1500
-                            | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
-                          }}
-                        {%- else -%}
-                          {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                        {%- endif -%}
-                      </div>
-                    </div>
-                    <div class="ordonnance__text-item grid__item">
-                      <div class="ordonnance__content">
-                        <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
-                          {{ product.title | escape }}
-                        </h2>
-
-                        <div class="ordonnance__description rte {{ section.settings.text_style }}">
-                          {{ product.description }}
-                        </div>
-                        <div class="ordonnance__product--add">
-                          <div
-                            id="price-{{ section.id }}"
-                            class="ordonnance__product-price"
-                            role="status"
-                            {{ block.shopify_attributes }}
-                          >
-                            {%- render 'price', product: product, price_class: 'price--large' -%}
-                            <div class="ordonnance__product-variant">
-                              {% for variant in product.variants %}
-                                {{ variant.title }}
-                              {% endfor %}
-                            </div>
-                          </div>
-                          <div class="ordonnance__check-btn">
-                            <button
-                              type="button"
-                              data-variant-id="{{ product.variants.first.id }}"
-                              class="add-button button button-primary"
-                            >
-                              {{ 'sections.main-diagnostic-ordonnance.add' | t }}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              {% endif %}
-            {%- endfor -%}
-          </div>
-          <div class="ordonnance-phase phase_2">
-            <h3 class="ordonnance-phase-heading">Phase 2</h3>
-            {%- for block in section.blocks -%}
-              {% if block.type == 'phase_2' %}
-                {%- liquid
-                  assign product = block.settings.product
-                -%}
-                <div
-                  class="ordonnance-with-text isolate{{ borders_class }}{{ corners_class }}{{ padding_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                  {{ block.shopify_attributes }}
-                >
-                  <div class="ordonnance__grid grid grid--gapless grid--1-col grid--2-col-tablet-down">
-                    <div class="ordonnance__media-item grid__item">
-                      <div
-                        class="ordonnance__media gradient color-{{ section.settings.row_color_scheme }} global-media-settings{% if product.featured_image != blank %} media{% else %} image-with-text__media--placeholder placeholder{% endif %}"
-                      >
-                        {%- if product.featured_image != blank -%}
-                          {%- capture sizes -%}
-                    (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
-                    (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
-                  {%- endcapture -%}
-                          {{
-                            product.featured_image
-                            | image_url: width: 1500
-                            | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
-                          }}
-                        {%- else -%}
-                          {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                        {%- endif -%}
-                      </div>
-                    </div>
-                    <div class="ordonnance__text-item grid__item">
-                      <div class="ordonnance__content">
-                        <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
-                          {{ product.title | escape }}
-                        </h2>
-
-                        <div class="ordonnance__description rte {{ section.settings.text_style }}">
-                          {{ product.description }}
-                        </div>
-                        <div class="ordonnance__product--add">
-                          <div
-                            id="price-{{ section.id }}"
-                            class="ordonnance__product-price"
-                            role="status"
-                            {{ block.shopify_attributes }}
-                          >
-                            {%- render 'price', product: product, price_class: 'price--large' -%}
-                            <div class="ordonnance__product-variant">
-                              {% for variant in product.variants %}
-                                {{ variant.title }}
-                              {% endfor %}
-                            </div>
-                          </div>
-                          <div class="ordonnance__check-btn">
-                            <button
-                              type="button"
-                              data-variant-id="{{ product.variants.first.id }}"
-                              class="add-button button button-primary"
-                            >
-                              {{ 'sections.main-diagnostic-ordonnance.add' | t }}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              {% endif %}
-            {%- endfor -%}
-          </div>
-        {% endcomment %}
+        {% endif %}    
       </div>
       <div class="ordonnance--right-block grid__item">
         <div class="ordonnance--right__inner">
@@ -388,7 +284,6 @@
       this.renderSelectedProducts();
       this.updateTotalPrice();
       this.setupEventListeners();
-      this.initDescriptionTruncation();
       this.setupToggleSelectedProducts();
     }
 
@@ -542,39 +437,6 @@
         });
     }
 
-    // Truncate descriptions
-    initDescriptionTruncation() {
-      this.querySelectorAll('.ordonnance__description').forEach((description) => {
-        let fullText = description.innerHTML.trim();
-        let words = fullText.split(/\s+/);
-
-        if (words.length > 12) {
-          let truncatedText = words.slice(0, 12).join(' ') + '...';
-          let showMoreSpan = document.createElement('span');
-          showMoreSpan.textContent = 'Voir Plus';
-          showMoreSpan.classList.add('show-more');
-          showMoreSpan.style.cursor = 'pointer';
-          showMoreSpan.style.textDecoration = 'underline';
-
-          description.innerHTML = truncatedText + ' ';
-          description.appendChild(showMoreSpan);
-
-          showMoreSpan.addEventListener('click', function () {
-            if (this.classList.contains('show-more')) {
-              description.innerHTML = fullText + ' ';
-              this.textContent = 'Voir Moins';
-              this.classList.replace('show-more', 'show-less');
-              description.appendChild(this);
-            } else {
-              description.innerHTML = truncatedText + ' ';
-              this.textContent = 'Voir Plus';
-              this.classList.replace('show-less', 'show-more');
-              description.appendChild(this);
-            }
-          });
-        }
-      });
-    }
   }
 
   customElements.define('ordonnance-product-list', OrdonnanceProductList);
@@ -658,30 +520,6 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
-    }
-  ],
-  "blocks": [
-    {
-      "type": "phase_1",
-      "name": "t:sections.ordonnance.blocks.phase_1.name",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "t:sections.ordonnance.blocks.phase_1.settings.product.label"
-        }
-      ]
-    },
-    {
-      "type": "phase_2",
-      "name": "t:sections.ordonnance.blocks.phase_2.name",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "t:sections.ordonnance.blocks.phase_2.settings.product.label"
-        }
-      ]
     }
   ],
   "presets": [
