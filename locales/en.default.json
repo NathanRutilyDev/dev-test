@@ -274,9 +274,6 @@
     }
   },
   "sections": {
-    "diagnostic-ordonnance": {
-      "phase_label": "Phase {{ index }}"
-    },
     "announcements": {
       "previous_announcement": "Previous announcement",
       "next_announcement": "Next announcement",
@@ -390,6 +387,7 @@
         "text": "Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.",
         "button": "Tout ajouter"
         }, 
+      "phase_label": "Phase {{ index }}",
        "add": "Ajouter",
        "selected-products": "produits ajoutés",
        "shipping": "Livraison",

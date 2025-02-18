@@ -44,6 +44,7 @@
         "phase_2_Edf3TB"
       ],
       "settings": {
+        "metaobject": "test",
         "present_image": "shopify://shop_images/icon_1.png",
         "present_text": "<p>Un cadeau de votre choix offert pour l'achat de cette routine en ligne</p>",
         "chat_image": "shopify://shop_images/image_15.png",
