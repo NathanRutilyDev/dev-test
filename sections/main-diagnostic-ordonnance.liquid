@@ -116,49 +116,7 @@
                           <div class="ordonnance__description rte {{ section.settings.text_style }}">
                             {{ product.description }}                            
                           </div>  
-
-
-
-{% assign section_id= section.id %}
- {% assign product_form_id = 'quick-add-' | append: section_id | append: product.id %}
- <span class="ordonnance__view-more quick-add no-js-hidden">
-                <modal-opener data-modal="#QuickAdd-{{ product.id }}">
-                <button
-                  id="{{ product_form_id }}-submit"
-                  type="submit"
-                  name="add"
-                  class="show-more"
-                  aria-haspopup="dialog"
-                  aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
-                  data-product-url="{{ product.url }}"
-                >
-                 Voir Plus
-                </button>
-              </modal-opener>
-              <quick-add-modal id="QuickAdd-{{ product.id }}" class="quick-add-modal">
-                <div
-                  role="dialog"
-                  aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}"
-                  aria-modal="true"
-                  class="quick-add-modal__content global-settings-popup"
-                  tabindex="-1"
-                >
-                  <button
-                    id="ModalClose-{{ product.id }}"
-                    type="button"
-                    class="quick-add-modal__toggle"
-                    aria-label="{{ 'accessibility.close' | t }}"
-                  >
-                    {{- 'icon-close.svg' | inline_asset_content -}}
-                  </button>
-                  <div id="QuickAddInfo-{{ product.id }}" class="quick-add-modal__content-info"></div>
-                </div>
-              </quick-add-modal>
-          
-          </span>
-
-
-                          
+                          {%- render 'ordonnance-see-more', product: product -%} 
                           <div class="ordonnance__product--add">
                             <div
                               id="price-{{ section.id }}"
