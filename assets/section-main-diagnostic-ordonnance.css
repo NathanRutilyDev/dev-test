@@ -110,6 +110,9 @@
   }
 }
 .ordonnance__description p {
+display: inline-block;
+}
+.ordonnance__description {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
