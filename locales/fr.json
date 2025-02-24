@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -300,6 +309,9 @@
     }
   },
   "sections": {
+    "diagnostic-ordonnance": {
+      "phase_label": "Phase {{ index }}"
+    },
     "header": {
       "announcement": "Annonce",
       "menu": "Menu",
@@ -409,7 +421,21 @@
       "min_error": "Cet article a un minimum de {{ min }}",
       "max_error": "Cet article a un maximum de {{ max }}",
       "step_error": "Vous pouvez ajouter cet article uniquement par incréments de {{ step }}"
-    }
+    },
+     "main-diagnostic-ordonnance" : {
+      "header": {
+        "title": "Ordonnance",
+        "text": "Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.",
+        "button": "Tout ajouter"
+        }, 
+       "add": "Ajouter",
+       "selected-products": "produits ajoutés",
+       "shipping": "Livraison",
+       "shipping-free": "Gratuite",
+       "ordonnance-info": "Votre routine {{ ordonnacen_code }} a été réalisée selon une méthodologie approuvée par des dermatologues.",
+       "add-to-cart": "Ajouter au panier",
+       "delivery-date": "Expédié sous 2 jours"
+  }
   },
   "localization": {
     "country_label": "Pays\/région",

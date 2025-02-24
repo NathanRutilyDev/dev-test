@@ -1,0 +1,517 @@
+{{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-diagnostic-ordonnance.css' | asset_url | stylesheet_tag }}
+
+
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'diagnostic-ordonnance-see-more.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  if settings.animations_reveal_on_scroll
+    assign animation_index = 1
+  endif
+
+  if section.settings.row_color_scheme == section.settings.section_color_scheme
+    assign no_content_background = true
+  endif
+
+  if settings.text_boxes_shadow_opacity == 0 and settings.text_boxes_border_thickness == 0 or settings.text_boxes_border_opacity == 0
+    assign no_content_styles = true
+  endif
+
+  if settings.text_boxes_border_thickness > 0 and settings.text_boxes_border_opacity > 0 and settings.media_border_thickness > 0 and settings.media_border_opacity > 0
+    assign borders_class = ' collapse-borders'
+  endif
+
+  if no_content_background and no_content_styles
+    assign padding_class = ' collapse-padding'
+  endif
+
+  unless no_content_background and no_content_styles
+    assign corners_class = ' collapse-corners'
+  endunless
+-%}
+
+<ordonnance-product-list class="ordonnance section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
+  <div class="page-width">
+    <h2 class="ordonnance-heading h1">{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h2>
+    <div class="ordonnance-header medium-hide large-up-hide">
+      <div class="ordonnance-head-details">
+        <div class="ordonnance-head-text">{{ 'sections.main-diagnostic-ordonnance.header.text' | t }}</div>
+        <div class="ordonnance-head-btn">
+          <button type="button" class="add-all-button button button--secondary">
+            {{ 'sections.main-diagnostic-ordonnance.header.button' | t }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="ordonnance__inner grid grid--1-col-tablet-down">
+      <div class="ordonnance--left-block grid__item">
+        <div class="ordonnance-header small-hide">
+          <div class="ordonnance-head-details">
+            <div class="ordonnance-head-text">{{ 'sections.main-diagnostic-ordonnance.header.text' | t }}</div>
+            <div class="ordonnance-head-btn">
+              <button type="button" class="add-all-button button button--secondary">
+                {{ 'sections.main-diagnostic-ordonnance.header.button' | t }}
+              </button>
+            </div>
+          </div>
+        </div>
+        {% assign metaobject = section.settings.metaobject %}
+        {% if metaobject %}
+          {% for i in (1..5) %}
+            {% liquid
+              assign phase_path = 'phase_' | append: i
+              assign phase_products = metaobject[phase_path].value
+            %}
+
+            {% if phase_products %}
+              <div class="ordonnance-phase">
+                <h3 class="ordonnance-phase__heading">
+                  {{ 'sections.main-diagnostic-ordonnance.phase_label' | t: index: i }}
+                </h3>
+
+                <div class="ordonnance-phase__products-container">
+                  {% for product in phase_products %}
+                    <div
+                      class="ordonnance-phase__product{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                      {% if settings.animations_reveal_on_scroll %}
+                        data-cascade
+                        style="--animation-order: {{ animation_index }};"
+                        {% assign animation_index = animation_index | plus: 1 %}
+                      {% endif %}
+                    >
+                      {%- if product.featured_image != blank -%}
+                        {%- capture sizes -%}
+                          (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                          (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                        {%- endcapture -%}
+                        {{
+                          product.featured_image
+                          | image_url: width: 1500
+                          | image_tag: sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+                        }}
+                      {%- else -%}
+                        {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- endif -%}
+                      <div class="ordonnance-phase__text-container">
+                        <div class="ordonnance__content">
+                          <h2 class="product__title">
+                            {{ product.title | escape }}
+                          </h2>
+
+                          <div class="ordonnance__description rte {{ section.settings.text_style }}">
+                            {{ product.description }}  
+                          </div>
+                          {%- render 'ordonnance-see-more', product: product -%}  
+                          <div class="ordonnance__product--add">
+                            <div
+                              id="price-{{ section.id }}"
+                              class="ordonnance__product-price"
+                              role="status"
+                            >
+                              {%- render 'price', product: product, price_class: 'price--large' -%}
+                              {% if product.metafields.ordonnance.contenance %}
+                              <div class="ordonnance__product-capacity">
+                               {{ product.metafields.ordonnance.contenance }}
+                              </div>
+                              {% endif %}
+                            </div>
+                            <div class="ordonnance__check-btn">
+                              <button
+                                type="button"
+                                data-variant-id="{{ product.variants.first.id }}"
+                                class="add-button button button-primary"
+                                {% unless product.available %}
+                                disabled
+                                {% endunless %}
+                              >
+                                  {{ 'sections.main-diagnostic-ordonnance.add' | t }}  
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}    
+      </div>
+      <div class="ordonnance--right-block grid__item">
+        <div class="ordonnance--right__inner">
+          <div class="ordonnance--right-top">
+            <div class="ordonnance--right_head">
+              <div class="ordonnance--right_img">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0942/1242/4018/files/image_14.png?v=1739463299"
+                  width="100%"
+                  height="auto"
+                >
+              </div>
+              <div class="ordonnance--right_headings">
+                <h4>{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h4>
+                <div class="selected-products-title">
+                  <span class="num-selected_products"></span>
+                  {{- 'sections.main-diagnostic-ordonnance.selected-products' | t -}}
+                  <span>{{ 'icon-caret-new.svg' | inline_asset_content }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="selected__products"></div>
+          </div>
+          <div class="ordonnance--right-bottom">
+            <div class="ordonnance--bottom-total">
+              <h5>{{ 'sections.main-diagnostic-ordonnance.header.title' | t }}</h5>
+              <div class="selected-products-total">0€</div>
+            </div>
+            <div class="ordonnance--bottom-delivery">
+              <div class="ordonnance--delivery-head">{{ 'sections.main-diagnostic-ordonnance.shipping' | t }}</div>
+              <div class="ordonnance--delivery">{{ 'sections.main-diagnostic-ordonnance.shipping-free' | t }}</div>
+            </div>
+
+            <div class="ordonnance--bottom-info">
+              {{
+                'sections.main-diagnostic-ordonnance.ordonnance-info'
+                | t: ordonnacen_code: metaobject.ordonnance_code
+              }}
+            </div>
+            <button
+              type="submit"
+              name="add"
+              class="dev__product-form__submit button button--full-width button--primary"
+            >
+              {{ 'sections.main-diagnostic-ordonnance.add-to-cart' | t }}
+              {{ 'icon-dot.svg' | inline_asset_content }}
+              <span class="selected-products-total">0€</span>
+            </button>
+            <div class="ordonnance--shipping-info">
+              {{ 'icon-shipping.svg' | inline_asset_content }}
+              <div class="ordonnance--shipping-text">{{ 'sections.main-diagnostic-ordonnance.delivery-date' | t }}</div>
+            </div>
+          </div>
+          <div class="ordonnance--right-option">
+            <img src="{{ section.settings.present_image | image_url }}" width="100%" height="auto">
+            <div class="ordonnance--option-content">
+              <div class="ordonnance--option-icon small-hide">
+                {{ 'icon-present.svg' | inline_asset_content }}
+              </div>
+              <div class="ordonnance--option-text">{{ section.settings.present_text }}</div>
+            </div>
+          </div>
+          <div class="ordonnance--right-chat">
+            <img src="{{ section.settings.chat_image | image_url }}" width="100%" height="auto">
+            <div class="ordonnance--chat-content">
+              <div class="ordonnance--chat-title">{{ section.settings.chat_title }}</div>
+              <div class="ordonnance--chat-text">{{ section.settings.chat_text }}</div>
+            </div>
+            <div class="ordonnance--chat-icon">
+              {{ 'icon-arrow-new.svg' | inline_asset_content }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ordonnance-product-list>
+
+<style>
+  .remove-button {
+  display:none;
+  }
+</style>
+
+<script>
+  class OrdonnanceProductList extends HTMLElement {
+    constructor() {
+      super();
+      this.selectedProducts = JSON.parse(localStorage.getItem('selectedProducts')) || [];
+    }
+
+    connectedCallback() {
+      this.selectedProductsContainer = this.querySelector('.selected__products');
+      this.addToCartButton = this.querySelector('.dev__product-form__submit');
+      this.toggleButton = this.querySelector('.selected-products-title');
+
+      this.renderSelectedProducts();
+      this.updateTotalPrice();
+      this.setupEventListeners();
+      this.setupToggleSelectedProducts();
+    }
+
+setupEventListeners() {
+  this.querySelectorAll('.add-button').forEach((button) => {
+    button.addEventListener('click', () => this.addProductToSelection(button));
+  });
+
+  this.querySelectorAll('.add-all-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      this.querySelectorAll('.add-button').forEach((addButton) => {
+        if (!addButton.hasAttribute('disabled')) { // Check if the product is available
+          this.addProductToSelection(addButton);
+        }
+      });
+    });
+  });
+
+  this.addToCartButton.addEventListener('click', () => this.addToCart());
+}
+
+
+    setupToggleSelectedProducts() {
+      if (this.toggleButton && this.selectedProductsContainer) {
+        this.toggleButton.addEventListener('click', () => {
+          this.selectedProductsContainer.classList.toggle('show');
+        });
+      }
+    }
+
+renderSelectedProducts() {
+  this.selectedProductsContainer.innerHTML = '';
+  this.selectedProducts.forEach((product) => {
+    let productElement = document.createElement('div');
+    productElement.classList.add('selected-product');
+    productElement.innerHTML = `
+      <div class="selected-product__image">
+          <img src="${product.image}" alt="${product.title}" width="50">
+      </div>
+      <div class="selected-product__info">
+          <p class="title">${product.title}</p>
+          <p class="variant">${product.variant}</p>
+          <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
+      </div>
+    `;
+
+    productElement.querySelector('.remove-button').addEventListener('click', () => {
+      this.selectedProducts = this.selectedProducts.filter((p) => p.variantId !== product.variantId);
+      localStorage.setItem('selectedProducts', JSON.stringify(this.selectedProducts));
+      this.renderSelectedProducts();
+      this.updateTotalPrice();
+      this.updateButtonStates();
+      this.updateSelectedProductsTitleVisibility(); // Hide title if no products
+    });
+
+    this.selectedProductsContainer.appendChild(productElement);
+  });
+
+  this.updateButtonStates();
+  this.updateSelectedProductsTitleVisibility(); // Ensure visibility updates
+}
+
+
+addProductToSelection(button) {
+  let variantId = button.dataset.variantId;
+  let productContainer = button.closest('.ordonnance__content');
+  let productTitle = productContainer.querySelector('.product__title')?.textContent || 'Unknown Product';
+  let productPrice = productContainer.querySelector('.price-item')?.textContent || '0€';
+  let productVariantElement = productContainer.querySelector('.ordonnance__product-capacity');
+  let productVariant = productVariantElement ? productVariantElement.textContent.trim() : ' ';
+  let productImage = productContainer.closest('.ordonnance-phase__products-container')?.querySelector('img')?.src || '';
+
+  if (this.selectedProducts.some((p) => p.variantId === variantId)) return;
+
+  let productData = {
+    variantId,
+    title: productTitle,
+    variant: productVariant,
+    price: productPrice,
+    image: productImage,
+  };
+  this.selectedProducts.push(productData);
+  localStorage.setItem('selectedProducts', JSON.stringify(this.selectedProducts));
+
+  this.renderSelectedProducts();
+  this.updateTotalPrice();
+  this.updateButtonStates();
+  this.updateSelectedProductsTitleVisibility(); // Ensure title is visible if products exist
+}
+
+
+
+    updateButtonStates() {
+      this.querySelectorAll('.add-button').forEach((button) => {
+        let variantId = button.dataset.variantId;
+        if (this.selectedProducts.some((p) => p.variantId === variantId)) {
+          button.classList.add('added');
+          button.innerHTML = `<span class="added-checked">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M3.33337 9.33325L5.66671 11.6666L12.6667 4.33325" stroke="#443D36" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                  </svg>
+              </span>
+              Ajouté`;
+        } else {
+          button.classList.remove('added');
+          button.innerHTML = 'Ajouter';
+        }
+      });
+    }
+
+    updateTotalPrice() {
+      let totalPrice = this.selectedProducts.reduce((sum, product) => {
+        let price = parseFloat(product.price.replace(/[^\d.-]/g, '')) || 0;
+        return sum + price / 100; // Convert cents to euros
+      }, 0);
+
+      let formattedPrice =
+        new Intl.NumberFormat('fr-FR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(totalPrice) + '€';
+
+      this.querySelectorAll('.selected-products-total').forEach((element) => {
+        element.textContent = formattedPrice;
+      });
+
+      this.querySelector('.num-selected_products').textContent = this.selectedProducts.length;
+    }
+    updateSelectedProductsTitleVisibility() {
+  const selectedProductsTitle = this.querySelector('.selected-products-title');
+  if (selectedProductsTitle) {
+    selectedProductsTitle.style.display = this.selectedProducts.length > 0 ? 'block' : 'none';
+  }
+}
+
+
+    addToCart() {
+      if (this.selectedProducts.length === 0) {
+        alert('No products selected!');
+        return;
+      }
+
+      let cartData = {
+        items: this.selectedProducts.map((product) => ({
+          id: Number(product.variantId),
+          quantity: 1,
+        })),
+      };
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cartData),
+      })
+        .then((response) => response.json().then((data) => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+          if (status >= 400) {
+            alert('Failed to add products to cart: ' + (body.message || 'Unknown error'));
+            return;
+          }
+
+          localStorage.removeItem('selectedProducts');
+          this.selectedProducts = [];
+          this.renderSelectedProducts();
+          this.updateTotalPrice();
+          window.location.href = '/cart';
+        })
+        .catch((error) => {
+          alert('Failed to add products to cart. Please try again.');
+        });
+    }
+
+  }
+
+  customElements.define('ordonnance-product-list', OrdonnanceProductList);
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.ordonnance.name",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "metaobject",
+      "id": "metaobject",
+      "label": "Ordonnance metaobject",
+      "metaobject_type": "ordonnance"
+    },
+    {
+      "type": "header",
+      "content": "Colonne droite - Cadeau"
+    },
+    {
+      "type": "image_picker",
+      "id": "present_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "present_text",
+      "label": "Texte"
+    },
+    {
+      "type": "header",
+      "content": "Colonne droite - Chat"
+    },
+    {
+      "type": "image_picker",
+      "id": "chat_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "chat_title",
+      "label": "Titre"
+    },
+    {
+      "type": "richtext",
+      "id": "chat_text",
+      "label": "Texte"
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "row_color_scheme",
+      "label": "t:sections.ordonnance.settings.container_color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.ordonnance.presets.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,4 +1,2 @@
-shopify theme pull -s oleassence
-shopify theme dev -s oleassence
-
-Dev : 177165140312
+shopify theme pull -s nowmade-test-dev1
+shopify theme dev -s nowmade-test-dev1
