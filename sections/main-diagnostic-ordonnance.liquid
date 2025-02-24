@@ -114,9 +114,9 @@
                           </h2>
 
                           <div class="ordonnance__description rte {{ section.settings.text_style }}">
-                            {{ product.description }}                            
-                          </div>  
-                          {%- render 'ordonnance-see-more', product: product -%} 
+                            {{ product.description }}  
+                          </div>
+                          {%- render 'ordonnance-see-more', product: product -%}  
                           <div class="ordonnance__product--add">
                             <div
                               id="price-{{ section.id }}"
@@ -135,8 +135,11 @@
                                 type="button"
                                 data-variant-id="{{ product.variants.first.id }}"
                                 class="add-button button button-primary"
+                                {% unless product.available %}
+                                disabled
+                                {% endunless %}
                               >
-                                {{ 'sections.main-diagnostic-ordonnance.add' | t }}
+                                  {{ 'sections.main-diagnostic-ordonnance.add' | t }}  
                               </button>
                             </div>
                           </div>
@@ -229,7 +232,7 @@
 
 <style>
   .remove-button {
-    display: none;
+  
   }
 </style>
 
@@ -251,19 +254,24 @@
       this.setupToggleSelectedProducts();
     }
 
-    setupEventListeners() {
-      this.querySelectorAll('.add-button').forEach((button) => {
-        button.addEventListener('click', () => this.addProductToSelection(button));
-      });
+setupEventListeners() {
+  this.querySelectorAll('.add-button').forEach((button) => {
+    button.addEventListener('click', () => this.addProductToSelection(button));
+  });
 
-      this.querySelectorAll('.add-all-button').forEach((button) => {
-        button.addEventListener('click', () => {
-          this.querySelectorAll('.add-button').forEach((addButton) => this.addProductToSelection(addButton));
-        });
+  this.querySelectorAll('.add-all-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      this.querySelectorAll('.add-button').forEach((addButton) => {
+        if (!addButton.hasAttribute('disabled')) { // Check if the product is available
+          this.addProductToSelection(addButton);
+        }
       });
+    });
+  });
 
-      this.addToCartButton.addEventListener('click', () => this.addToCart());
-    }
+  this.addToCartButton.addEventListener('click', () => this.addToCart());
+}
+
 
     setupToggleSelectedProducts() {
       if (this.toggleButton && this.selectedProductsContainer) {
@@ -273,60 +281,67 @@
       }
     }
 
-    renderSelectedProducts() {
-      this.selectedProductsContainer.innerHTML = '';
-      this.selectedProducts.forEach((product) => {
-        let productElement = document.createElement('div');
-        productElement.classList.add('selected-product');
-        productElement.innerHTML = `
-          <div class="selected-product__image">
-              <img src="${product.image}" alt="${product.title}" width="50">
-          </div>
-          <div class="selected-product__info">
-              <p class="title">${product.title}</p>
-              <p class="variant">${product.variant}</p>
-              <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
-          </div>
-        `;
+renderSelectedProducts() {
+  this.selectedProductsContainer.innerHTML = '';
+  this.selectedProducts.forEach((product) => {
+    let productElement = document.createElement('div');
+    productElement.classList.add('selected-product');
+    productElement.innerHTML = `
+      <div class="selected-product__image">
+          <img src="${product.image}" alt="${product.title}" width="50">
+      </div>
+      <div class="selected-product__info">
+          <p class="title">${product.title}</p>
+          <p class="variant">${product.variant}</p>
+          <button class="remove-button" data-variant-id="${product.variantId}">Remove</button>
+      </div>
+    `;
 
-        productElement.querySelector('.remove-button').addEventListener('click', () => {
-          this.selectedProducts = this.selectedProducts.filter((p) => p.variantId !== product.variantId);
-          localStorage.setItem('selectedProducts', JSON.stringify(this.selectedProducts));
-          this.renderSelectedProducts();
-          this.updateTotalPrice();
-          this.updateButtonStates();
-        });
-
-        this.selectedProductsContainer.appendChild(productElement);
-      });
-
-      this.updateButtonStates();
-    }
-
-    addProductToSelection(button) {
-      let variantId = button.dataset.variantId;
-      let productContainer = button.closest('.ordonnance__content');
-      let productTitle = productContainer.querySelector('.product__title').textContent;
-      let productPrice = productContainer.querySelector('.price-item').textContent;
-      let productVariant = productContainer.querySelector('.ordonnance__product-variant').textContent;
-      let productImage = productContainer.closest('.ordonnance-phase__products-container').querySelector('img')?.src || '';
-
-      if (this.selectedProducts.some((p) => p.variantId === variantId)) return;
-
-      let productData = {
-        variantId,
-        title: productTitle,
-        variant: productVariant,
-        price: productPrice,
-        image: productImage,
-      };
-      this.selectedProducts.push(productData);
+    productElement.querySelector('.remove-button').addEventListener('click', () => {
+      this.selectedProducts = this.selectedProducts.filter((p) => p.variantId !== product.variantId);
       localStorage.setItem('selectedProducts', JSON.stringify(this.selectedProducts));
-
       this.renderSelectedProducts();
       this.updateTotalPrice();
       this.updateButtonStates();
-    }
+      this.updateSelectedProductsTitleVisibility(); // Hide title if no products
+    });
+
+    this.selectedProductsContainer.appendChild(productElement);
+  });
+
+  this.updateButtonStates();
+  this.updateSelectedProductsTitleVisibility(); // Ensure visibility updates
+}
+
+
+addProductToSelection(button) {
+  let variantId = button.dataset.variantId;
+  let productContainer = button.closest('.ordonnance__content');
+  let productTitle = productContainer.querySelector('.product__title')?.textContent || 'Unknown Product';
+  let productPrice = productContainer.querySelector('.price-item')?.textContent || '0€';
+  let productVariantElement = productContainer.querySelector('.ordonnance__product-capacity');
+  let productVariant = productVariantElement ? productVariantElement.textContent.trim() : ' ';
+  let productImage = productContainer.closest('.ordonnance-phase__products-container')?.querySelector('img')?.src || '';
+
+  if (this.selectedProducts.some((p) => p.variantId === variantId)) return;
+
+  let productData = {
+    variantId,
+    title: productTitle,
+    variant: productVariant,
+    price: productPrice,
+    image: productImage,
+  };
+  this.selectedProducts.push(productData);
+  localStorage.setItem('selectedProducts', JSON.stringify(this.selectedProducts));
+
+  this.renderSelectedProducts();
+  this.updateTotalPrice();
+  this.updateButtonStates();
+  this.updateSelectedProductsTitleVisibility(); // Ensure title is visible if products exist
+}
+
+
 
     updateButtonStates() {
       this.querySelectorAll('.add-button').forEach((button) => {
@@ -364,6 +379,13 @@
 
       this.querySelector('.num-selected_products').textContent = this.selectedProducts.length;
     }
+    updateSelectedProductsTitleVisibility() {
+  const selectedProductsTitle = this.querySelector('.selected-products-title');
+  if (selectedProductsTitle) {
+    selectedProductsTitle.style.display = this.selectedProducts.length > 0 ? 'block' : 'none';
+  }
+}
+
 
     addToCart() {
       if (this.selectedProducts.length === 0) {
