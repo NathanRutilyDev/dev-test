@@ -1,5 +1,6 @@
 .ordonnance-heading {
   margin-bottom: 12px;
+  color:blue;
 }
 @media (min-width: 768px) {
   .ordonnance-heading {
