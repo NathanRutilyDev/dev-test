@@ -309,9 +309,6 @@
     }
   },
   "sections": {
-    "diagnostic-ordonnance": {
-      "phase_label": "Phase {{ index }}"
-    },
     "header": {
       "announcement": "Annonce",
       "menu": "Menu",
@@ -422,20 +419,27 @@
       "max_error": "Cet article a un maximum de {{ max }}",
       "step_error": "Vous pouvez ajouter cet article uniquement par incréments de {{ step }}"
     },
-     "main-diagnostic-ordonnance" : {
+    "main-diagnostic-ordonnance": {
+      "ordonnance_name": "Ordonnance",
       "header": {
         "title": "Ordonnance",
-        "text": "Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations.",
-        "button": "Tout ajouter"
-        }, 
-       "add": "Ajouter",
-       "selected-products": "produits ajoutés",
-       "shipping": "Livraison",
-       "shipping-free": "Gratuite",
-       "ordonnance-info": "Votre routine {{ ordonnacen_code }} a été réalisée selon une méthodologie approuvée par des dermatologues.",
-       "add-to-cart": "Ajouter au panier",
-       "delivery-date": "Expédié sous 2 jours"
-  }
+        "text": "Cette prescription est spécifiquement conçue pour votre typologie de peau et vos préoccupations."
+      },
+      "typology": "Votre typologie de peau est : {{ typology }}",
+      "phase_label": "Phase {{ index }}",
+      "see_more": "Voir plus",
+      "add": "Ajouter",
+      "added": "Ajouté",
+      "selected-products": "produits ajoutés",
+      "shipping": "Livraison",
+      "shipping-free": "Gratuite",
+      "ordonnance-info": "Votre routine {{ ordonnacen_code }} a été réalisée selon une méthodologie approuvée par des dermatologues.",
+      "add-to-cart": "Ajouter au panier",
+      "delivery-date": "Expédié sous 2 jours",
+      "empty": "Aucun produit ajouté",
+      "add_all": "Tout ajouter",
+      "clean_all": "Tout retirer"
+    }
   },
   "localization": {
     "country_label": "Pays\/région",
